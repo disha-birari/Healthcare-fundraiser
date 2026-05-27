@@ -6,13 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "deploy": "next build && firebase deploy",
-    "deploy:hosting": "next build && firebase deploy --only hosting"
+    "lint": "eslint"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
-    "@dataconnect/generated": "file:src/dataconnect-generated",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.16.0",
