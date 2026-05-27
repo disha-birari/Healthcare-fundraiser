@@ -1,802 +1,347 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+'use client';
 
-/* ------------------------------------------------------------------ */
-/*  Icon components (inline SVGs so we don't need extra dependencies)  */
-/* ------------------------------------------------------------------ */
+import React, { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
-function HeartPulseIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-      <path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+export default function MediTrustLanding() {
+  const [activeTab, setActiveTab] = useState<'home' | 'campaigns' | 'tech' | 'trust' | 'about' | 'blog'>('home');
+
+  // Custom SVGs for Trust Badges
+  const VerifiedDocIcon = () => (
+    <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9z" />
     </svg>
   );
-}
 
-function StethoscopeIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M11 2v2" />
-      <path d="M5 2v2" />
-      <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" />
-      <path d="M8 15a6 6 0 0 0 12 0v-3" />
-      <circle cx="20" cy="10" r="2" />
+  const AuditFinIcon = () => (
+    <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.03 0 1.9.693 2.166 1.638m-7.377 12.408a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zM12 18.75a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
     </svg>
   );
-}
 
-function ShieldCheckIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-      <path d="m9 12 2 2 4-4" />
+  const ShieldIcon = () => (
+    <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
     </svg>
   );
-}
 
-function ClockIcon({ className }: { className?: string }) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
-  );
-}
+    <div className="relative min-h-screen bg-[#040608] text-zinc-100 flex flex-col justify-between overflow-hidden bg-grid-medical">
+      
+      {/* Glow Effects in Background */}
+      <div className="absolute top-[-15%] left-[-15%] w-[800px] h-[800px] rounded-full bg-cyan-950/20 blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-[-15%] right-[-15%] w-[800px] h-[800px] rounded-full bg-teal-950/15 blur-[140px] pointer-events-none" />
 
-function UsersIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
-  );
-}
-
-function PhoneIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-    </svg>
-  );
-}
-
-function MapPinIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
-  );
-}
-
-function MailIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <rect width="20" height="16" x="2" y="4" rx="2" />
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-    </svg>
-  );
-}
-
-function BrainIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" />
-      <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" />
-      <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4" />
-      <path d="M17.599 6.5a3 3 0 0 0 .399-1.375" />
-      <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" />
-      <path d="M3.477 10.896a4 4 0 0 1 .585-.396" />
-      <path d="M19.938 10.5a4 4 0 0 1 .585.396" />
-      <path d="M6 18a4 4 0 0 1-1.967-.516" />
-      <path d="M19.967 17.484A4 4 0 0 1 18 18" />
-    </svg>
-  );
-}
-
-function BabyIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M9 12h.01" />
-      <path d="M15 12h.01" />
-      <path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" />
-      <path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1" />
-    </svg>
-  );
-}
-
-function BoneIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z" />
-    </svg>
-  );
-}
-
-function EyeIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
-  );
-}
-
-function StarIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={className}
-    >
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-  );
-}
-
-function ArrowRightIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M5 12h14" />
-      <path d="m12 5 7 7-7 7" />
-    </svg>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Data                                                               */
-/* ------------------------------------------------------------------ */
-
-const departments = [
-  {
-    icon: HeartPulseIcon,
-    title: "Cardiology",
-    description:
-      "Advanced cardiac care with state-of-the-art catheterization labs and expert heart surgeons.",
-    color: "from-rose-500 to-pink-600",
-    bgLight: "bg-rose-50",
-    textColor: "text-rose-600",
-  },
-  {
-    icon: BrainIcon,
-    title: "Neurology",
-    description:
-      "Comprehensive brain and nervous system care featuring cutting-edge neuroimaging technology.",
-    color: "from-violet-500 to-purple-600",
-    bgLight: "bg-violet-50",
-    textColor: "text-violet-600",
-  },
-  {
-    icon: BoneIcon,
-    title: "Orthopedics",
-    description:
-      "Expert musculoskeletal care with minimally invasive surgical techniques and rapid rehabilitation.",
-    color: "from-amber-500 to-orange-600",
-    bgLight: "bg-amber-50",
-    textColor: "text-amber-600",
-  },
-  {
-    icon: BabyIcon,
-    title: "Pediatrics",
-    description:
-      "Compassionate child healthcare in a friendly, family-centered environment.",
-    color: "from-sky-500 to-cyan-600",
-    bgLight: "bg-sky-50",
-    textColor: "text-sky-600",
-  },
-  {
-    icon: EyeIcon,
-    title: "Ophthalmology",
-    description:
-      "Complete eye care from routine check-ups to advanced laser surgery and vision correction.",
-    color: "from-emerald-500 to-teal-600",
-    bgLight: "bg-emerald-50",
-    textColor: "text-emerald-600",
-  },
-  {
-    icon: StethoscopeIcon,
-    title: "General Medicine",
-    description:
-      "Holistic primary care with focus on preventive health, diagnostics, and wellness programs.",
-    color: "from-blue-500 to-indigo-600",
-    bgLight: "bg-blue-50",
-    textColor: "text-blue-600",
-  },
-];
-
-const stats = [
-  { value: "50+", label: "Expert Doctors" },
-  { value: "10K+", label: "Happy Patients" },
-  { value: "25+", label: "Years Experience" },
-  { value: "24/7", label: "Emergency Care" },
-];
-
-const testimonials = [
-  {
-    name: "Priya Sharma",
-    role: "Cardiac Patient",
-    quote:
-      "The cardiology team at MedCare saved my life. Their professionalism and compassion during my bypass surgery was remarkable. I'm forever grateful.",
-    rating: 5,
-  },
-  {
-    name: "Rahul Mehta",
-    role: "Orthopedic Patient",
-    quote:
-      "After my knee replacement surgery, the rehab team had me walking within days. The entire experience exceeded my expectations.",
-    rating: 5,
-  },
-  {
-    name: "Anita Desai",
-    role: "Parent of Pediatric Patient",
-    quote:
-      "The pediatric department is incredible. They made my daughter feel so comfortable and at ease. The doctors truly care about their young patients.",
-    rating: 5,
-  },
-];
-
-/* ------------------------------------------------------------------ */
-/*  Page                                                               */
-/* ------------------------------------------------------------------ */
-
-export default function Home() {
-  return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-zinc-950">
-      {/* ===== Navigation ===== */}
-      <header
-        id="site-header"
-        className="sticky top-0 z-50 border-b border-zinc-100 bg-white/80 backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/80"
-      >
-        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <a href="#" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-teal-500 to-cyan-600 text-white">
-              <HeartPulseIcon className="size-5" />
+      {/* Header / Navigation */}
+      <header className="sticky top-0 w-full z-50 bg-[#040608]/40 border-b border-white/[0.02] backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3">
+            <div className="text-cyan-400">
+              <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h2.25l1.35-3.83 2.7 8.66 2.7-11.83 2.7 8.66 1.35-3.83h2.25" />
+              </svg>
             </div>
-            <span className="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-              Med<span className="text-teal-600">Care</span>
+            <span className="text-lg font-black tracking-wider bg-gradient-to-r from-white via-zinc-200 to-cyan-400 bg-clip-text text-transparent">
+              MediTrust AI
             </span>
-          </a>
-          <div className="hidden items-center gap-8 md:flex">
-            {["About", "Departments", "Doctors", "Testimonials", "Contact"].map(
-              (item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-sm font-medium text-zinc-600 transition-colors hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400"
-                >
-                  {item}
-                </a>
-              )
-            )}
-          </div>
-          <Button
-            size="lg"
-            className="hidden bg-gradient-to-r from-teal-500 to-cyan-600 text-white hover:from-teal-600 hover:to-cyan-700 md:inline-flex"
+          </Link>
+          
+          <nav className="flex space-x-1.5 p-1 bg-zinc-950/80 rounded-full border border-white/[0.04]">
+            {([
+              { id: 'home', label: 'Home' },
+              { id: 'campaigns', label: 'Campaigns' },
+              { id: 'tech', label: 'Technology' },
+              { id: 'trust', label: 'Trust' },
+              { id: 'about', label: 'About' },
+              { id: 'blog', label: 'Blog' }
+            ] as const).map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`py-2.5 px-4.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                  activeTab === tab.id
+                    ? 'bg-zinc-800 text-white shadow-sm'
+                    : 'text-zinc-500 hover:text-zinc-300'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </nav>
+
+          <Link 
+            href="/login" 
+            className="px-6 py-3 rounded-full bg-cyan-400 hover:bg-cyan-300 text-[#040608] text-xs font-black tracking-wider uppercase transition-all shadow-lg shadow-cyan-400/20"
           >
-            Book Appointment
-          </Button>
-        </nav>
+            Access Platform
+          </Link>
+        </div>
       </header>
 
-      {/* ===== Hero Section ===== */}
-      <section
-        id="hero"
-        className="relative overflow-hidden bg-gradient-to-br from-teal-50 via-cyan-50 to-sky-50 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950"
-      >
-        {/* Decorative blobs */}
-        <div className="pointer-events-none absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-teal-200/40 to-cyan-200/30 blur-3xl dark:from-teal-900/20 dark:to-cyan-900/10" />
-        <div className="pointer-events-none absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-sky-200/40 to-teal-200/30 blur-3xl dark:from-sky-900/20 dark:to-teal-900/10" />
-
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
-          <div className="mx-auto max-w-3xl text-center">
-            <Badge
-              variant="outline"
-              className="mb-6 border-teal-200 bg-teal-50 px-4 py-1 text-teal-700 dark:border-teal-800 dark:bg-teal-950 dark:text-teal-300"
-            >
-              🏥 Trusted by 10,000+ patients
-            </Badge>
-            <h1 className="text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl lg:text-6xl dark:text-zinc-50">
-              Your Health, Our{" "}
-              <span className="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">
-                Priority
-              </span>
+      {/* Main SaaS Showcase */}
+      <main className="flex-1 w-full max-w-6xl mx-auto px-6 py-12 md:py-16 z-10 space-y-16">
+        
+        {/* HERO SECTION */}
+        <section className="flex flex-col lg:flex-row items-center gap-12">
+          
+          {/* Hero Left */}
+          <div className="w-full lg:w-1/2 space-y-7 text-center lg:text-left">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] text-white">
+              Accelerate Healthcare Access with Transparent Crowdfunding.
             </h1>
-            <p className="mt-6 text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-              Experience world-class healthcare with compassionate doctors,
-              cutting-edge technology, and personalized treatment plans. Your
-              journey to wellness starts here.
+            <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-lg mx-auto lg:mx-0">
+              Leverage AI-driven accountability for trustworthy medical support. Join a global community empowering patients.
             </p>
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button
-                size="lg"
-                className="h-12 rounded-full bg-gradient-to-r from-teal-500 to-cyan-600 px-8 text-base text-white shadow-lg shadow-teal-500/25 transition-all hover:from-teal-600 hover:to-cyan-700 hover:shadow-xl hover:shadow-teal-500/30"
+            <div className="pt-2">
+              <Link 
+                href="/login" 
+                className="px-8 py-4.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-[#040608] font-black text-sm tracking-wider uppercase shadow-lg shadow-cyan-400/25 active:scale-[0.99] transition-all cursor-pointer inline-block"
               >
-                Book Appointment
-                <ArrowRightIcon className="ml-1 size-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="h-12 rounded-full px-8 text-base"
-              >
-                <PhoneIcon className="mr-1 size-4" />
-                Emergency: 108
-              </Button>
+                Explore Campaigns
+              </Link>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ===== Stats Bar ===== */}
-      <section
-        id="about"
-        className="relative -mt-8 z-10 mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8"
-      >
-        <div className="grid grid-cols-2 gap-4 rounded-2xl border border-zinc-100 bg-white p-6 shadow-xl shadow-zinc-200/50 sm:grid-cols-4 sm:gap-8 sm:p-8 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-zinc-950/50">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="text-3xl font-bold bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent sm:text-4xl">
-                {stat.value}
-              </p>
-              <p className="mt-1 text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ===== Departments ===== */}
-      <section id="departments" className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <Badge
-              variant="outline"
-              className="mb-4 border-teal-200 bg-teal-50 px-3 text-teal-700 dark:border-teal-800 dark:bg-teal-950 dark:text-teal-300"
-            >
-              Our Specialties
-            </Badge>
-            <h2 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-50">
-              Departments of Excellence
-            </h2>
-            <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
-              Our specialized departments are equipped with the latest medical
-              technology and staffed by world-renowned physicians.
-            </p>
-          </div>
-
-          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {departments.map((dept) => (
-              <Card
-                key={dept.title}
-                className="group relative overflow-hidden border-0 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-zinc-900"
-              >
-                <CardHeader>
-                  <div
-                    className={`mb-2 flex h-12 w-12 items-center justify-center rounded-xl ${dept.bgLight} ${dept.textColor} transition-transform duration-300 group-hover:scale-110`}
-                  >
-                    <dept.icon className="size-6" />
-                  </div>
-                  <CardTitle className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
-                    {dept.title}
-                  </CardTitle>
-                  <CardDescription className="text-zinc-500 dark:text-zinc-400">
-                    {dept.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <a
-                    href="#"
-                    className={`inline-flex items-center gap-1 text-sm font-medium ${dept.textColor} transition-all hover:gap-2`}
-                  >
-                    Learn more
-                    <ArrowRightIcon className="size-3.5" />
-                  </a>
-                </CardContent>
-                {/* Gradient accent bar at top */}
-                <div
-                  className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${dept.color} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
+          {/* Hero Right: Hologram human */}
+          <div className="w-full lg:w-1/2 flex justify-center relative">
+            <div className="relative w-full max-w-md h-[400px] flex items-center justify-center">
+              {/* Central Hologram Asset */}
+              <div className="w-80 h-80 relative select-none animate-float">
+                <Image 
+                  src="/hologram.png"
+                  alt="MediTrust Hologram"
+                  fill
+                  className="object-contain"
+                  priority
                 />
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== Why Choose Us ===== */}
-      <section
-        id="doctors"
-        className="bg-gradient-to-b from-zinc-50 to-white py-24 sm:py-32 dark:from-zinc-900 dark:to-zinc-950"
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <Badge
-              variant="outline"
-              className="mb-4 border-teal-200 bg-teal-50 px-3 text-teal-700 dark:border-teal-800 dark:bg-teal-950 dark:text-teal-300"
-            >
-              Why MedCare?
-            </Badge>
-            <h2 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-50">
-              What Sets Us Apart
-            </h2>
-            <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
-              We combine medical expertise with compassionate care to deliver
-              exceptional healthcare experiences.
-            </p>
-          </div>
-
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                icon: ShieldCheckIcon,
-                title: "Board Certified",
-                description:
-                  "All our physicians are board-certified with years of specialized experience.",
-                gradient: "from-teal-500 to-emerald-600",
-              },
-              {
-                icon: ClockIcon,
-                title: "24/7 Emergency",
-                description:
-                  "Round-the-clock emergency services with rapid response teams ready to assist.",
-                gradient: "from-cyan-500 to-blue-600",
-              },
-              {
-                icon: UsersIcon,
-                title: "Patient-Centric",
-                description:
-                  "Personalized care plans tailored to each patient&apos;s unique health needs.",
-                gradient: "from-violet-500 to-purple-600",
-              },
-              {
-                icon: HeartPulseIcon,
-                title: "Latest Technology",
-                description:
-                  "State-of-the-art equipment and innovative treatment methodologies.",
-                gradient: "from-rose-500 to-pink-600",
-              },
-            ].map((feature) => (
-              <div key={feature.title} className="text-center">
-                <div
-                  className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.gradient} text-white shadow-lg`}
-                >
-                  <feature.icon className="size-6" />
-                </div>
-                <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
-                  {feature.title}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-                  {feature.description}
-                </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              
+              {/* Overlay absolute telemetry screens to mirror the visual design */}
+              <div className="absolute top-2 left-0 p-3 rounded-xl bg-zinc-950/70 border border-white/[0.04] text-[9px] font-mono text-cyan-300/80 space-y-1 max-w-[110px] backdrop-blur-sm">
+                <div className="font-bold border-b border-zinc-800 pb-0.5">BRAIN_SCAN</div>
+                <div>FREQ: 9.8 Hz</div>
+                <div>STATE: ACTIVE</div>
+              </div>
 
-      {/* ===== Testimonials ===== */}
-      <section id="testimonials" className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <Badge
-              variant="outline"
-              className="mb-4 border-teal-200 bg-teal-50 px-3 text-teal-700 dark:border-teal-800 dark:bg-teal-950 dark:text-teal-300"
-            >
-              Testimonials
-            </Badge>
-            <h2 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-50">
-              What Our Patients Say
+              <div className="absolute bottom-6 right-2 p-3 rounded-xl bg-zinc-950/70 border border-white/[0.04] text-[9px] font-mono text-cyan-300/80 space-y-1 max-w-[115px] backdrop-blur-sm">
+                <div className="font-bold border-b border-zinc-800 pb-0.5">TELEMETRY_LOG</div>
+                <div>PULSE: 74 BPM</div>
+                <div>SYNC: 100%</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* BOTTOM HALF MATRIX */}
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Active Patient Statistics Grid (Left 2 Columns) */}
+          <div className="lg:col-span-2 space-y-6">
+            <h2 className="text-xs font-black text-zinc-500 uppercase tracking-widest leading-none">
+              Active Patient Statistics
             </h2>
-            <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
-              Real stories from real patients who trust us with their health.
-            </p>
-          </div>
-
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {testimonials.map((t) => (
-              <Card
-                key={t.name}
-                className="border-0 bg-gradient-to-br from-white to-zinc-50 shadow-md dark:from-zinc-900 dark:to-zinc-900/50"
-              >
-                <CardHeader>
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: t.rating }).map((_, i) => (
-                      <StarIcon
-                        key={i}
-                        className="size-4 text-amber-400"
-                      />
-                    ))}
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-zinc-600 italic leading-relaxed dark:text-zinc-400">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                  <Separator className="my-4" />
-                  <div>
-                    <p className="font-semibold text-zinc-900 dark:text-zinc-50">
-                      {t.name}
-                    </p>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                      {t.role}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== CTA Section ===== */}
-      <section className="bg-gradient-to-r from-teal-600 via-cyan-600 to-sky-600 py-20">
-        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Ready to Take the First Step?
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-teal-100">
-            Book your appointment today and let our expert medical team take
-            care of your health. Your well-being is just a click away.
-          </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button
-              size="lg"
-              className="h-12 rounded-full bg-white px-8 text-base font-semibold text-teal-700 shadow-lg transition-all hover:bg-zinc-100 hover:shadow-xl"
-            >
-              Book Appointment Now
-              <ArrowRightIcon className="ml-1 size-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="h-12 rounded-full border-white/30 px-8 text-base text-white backdrop-blur-sm hover:bg-white/10"
-            >
-              <PhoneIcon className="mr-1 size-4" />
-              Call Us: +91 1800-123-4567
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== Contact / Footer ===== */}
-      <footer
-        id="contact"
-        className="border-t border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900"
-      >
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-            {/* Brand */}
-            <div className="sm:col-span-2 lg:col-span-1">
-              <a href="#" className="flex items-center gap-2">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-teal-500 to-cyan-600 text-white">
-                  <HeartPulseIcon className="size-5" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              {/* Card 1: Total Funded */}
+              <div className="p-6 rounded-2xl bg-zinc-950/40 border border-white/[0.03] flex flex-col justify-between min-h-[190px] relative overflow-hidden">
+                <div className="flex justify-between items-center z-10">
+                  <span className="text-xs font-bold text-zinc-400">Total Funded</span>
+                  <span className="text-[10px] font-black text-cyan-300 bg-cyan-950/50 border border-cyan-500/20 px-2 py-0.5 rounded-full">$4.8M</span>
                 </div>
-                <span className="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-                  Med<span className="text-teal-600">Care</span>
-                </span>
-              </a>
-              <p className="mt-4 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-                Providing exceptional healthcare with compassion and innovation
-                since 2001.
-              </p>
-            </div>
+                <div className="my-2 z-10">
+                  <div className="text-3xl font-extrabold text-white">$4.8M</div>
+                </div>
+                {/* SVG Spline Wave Chart */}
+                <div className="h-16 w-full relative z-0">
+                  <svg className="w-full h-full text-cyan-400 opacity-80" viewBox="0 0 200 60" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="gradient-wave" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.25" />
+                        <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.0" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,45 Q30,20 60,40 T120,15 T180,30 L200,10 L200,60 L0,60 Z" fill="url(#gradient-wave)" />
+                    <path d="M0,45 Q30,20 60,40 T120,15 T180,30 L200,10" fill="none" stroke="#06b6d4" strokeWidth="2.5" strokeLinecap="round" />
+                    <circle cx="200" cy="10" r="3.5" fill="#22d3ee" className="animate-ping" />
+                    <circle cx="200" cy="10" r="2.5" fill="#22d3ee" />
+                  </svg>
+                </div>
+                <div className="flex justify-between text-[9px] text-zinc-500 font-bold z-10 mt-1">
+                  <span>12,500+ Donors</span>
+                  <span>12,500+ Donors</span>
+                </div>
+              </div>
 
-            {/* Quick Links */}
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-zinc-900 dark:text-zinc-50">
-                Quick Links
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {["About Us", "Our Departments", "Find a Doctor", "Careers"].map(
-                  (link) => (
-                    <li key={link}>
-                      <a
-                        href="#"
-                        className="text-sm text-zinc-600 transition-colors hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400"
-                      >
-                        {link}
-                      </a>
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
+              {/* Card 2: Success Rate */}
+              <div className="p-6 rounded-2xl bg-zinc-950/40 border border-white/[0.03] flex flex-col justify-between min-h-[190px]">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs font-bold text-zinc-400">Success Rate</span>
+                  <span className="text-cyan-400">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12" />
+                    </svg>
+                  </span>
+                </div>
+                <div className="my-2">
+                  <div className="text-3xl font-extrabold text-white">91%</div>
+                </div>
+                {/* SVG Coordinates line graph */}
+                <div className="h-16 w-full relative">
+                  <svg className="w-full h-full text-zinc-800" viewBox="0 0 200 60" preserveAspectRatio="none">
+                    {/* Grid lines */}
+                    <line x1="0" y1="15" x2="200" y2="15" stroke="currentColor" strokeWidth="0.5" strokeDasharray="3,3" />
+                    <line x1="0" y1="30" x2="200" y2="30" stroke="currentColor" strokeWidth="0.5" strokeDasharray="3,3" />
+                    <line x1="0" y1="45" x2="200" y2="45" stroke="currentColor" strokeWidth="0.5" strokeDasharray="3,3" />
+                    
+                    {/* Axis Labels are printed as text in HTML, graph spline here */}
+                    <path d="M0,50 L40,42 L80,35 L120,18 L160,25 L200,15" fill="none" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round" />
+                    <circle cx="200" cy="15" r="3" fill="#34d399" />
+                  </svg>
+                </div>
+                <div className="flex justify-between text-[8px] text-zinc-500 font-mono mt-1">
+                  <span>0</span>
+                  <span>20</span>
+                  <span>40</span>
+                  <span>60</span>
+                  <span>80</span>
+                  <span>100</span>
+                </div>
+              </div>
 
-            {/* Services */}
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-zinc-900 dark:text-zinc-50">
-                Services
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {[
-                  "Emergency Care",
-                  "Lab & Diagnostics",
-                  "Surgery",
-                  "Health Check-ups",
-                ].map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-sm text-zinc-600 transition-colors hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              {/* Card 3: Active Patients */}
+              <div className="p-6 rounded-2xl bg-zinc-950/40 border border-white/[0.03] flex flex-col justify-between min-h-[190px]">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs font-bold text-zinc-400">Active Patients</span>
+                  <span className="text-[10px] font-black text-cyan-300 bg-cyan-950/50 border border-cyan-500/20 px-2 py-0.5 rounded-full">1,420</span>
+                </div>
+                <div className="my-2">
+                  <div className="text-3xl font-extrabold text-white">1,420</div>
+                </div>
+                {/* stylized SVG mini world map */}
+                <div className="h-16 w-full flex items-center justify-center opacity-70">
+                  <svg className="w-full h-full text-cyan-500/30" viewBox="0 0 240 70" fill="currentColor">
+                    {/* Stylized Americas */}
+                    <path d="M30,10 Q25,25 35,40 T30,60 L20,60 L20,30 Z" />
+                    <path d="M45,35 Q50,45 42,60 T35,70 L30,55 Z" />
+                    {/* Stylized Eurasia/Africa */}
+                    <path d="M120,8 Q140,5 160,12 T180,25 T150,40 T130,15 Z" />
+                    <path d="M130,30 Q145,45 138,55 T120,60 Z" />
+                    {/* Stylized Oceania */}
+                    <circle cx="195" cy="48" r="7" />
+                    <circle cx="210" cy="55" r="4" />
+                    {/* Glowing active dots */}
+                    <circle cx="35" cy="28" r="2.5" fill="#22d3ee" className="animate-pulse" />
+                    <circle cx="145" cy="18" r="2.5" fill="#22d3ee" className="animate-pulse" />
+                    <circle cx="195" cy="48" r="2" fill="#22d3ee" className="animate-pulse" />
+                  </svg>
+                </div>
+              </div>
 
-            {/* Contact Info */}
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-zinc-900 dark:text-zinc-50">
-                Contact
-              </h3>
-              <ul className="mt-4 space-y-3">
-                <li className="flex items-start gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-                  <MapPinIcon className="mt-0.5 size-4 shrink-0 text-teal-600" />
-                  123 Medical Center Drive, Healthcare City, HC 56001
-                </li>
-                <li className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-                  <PhoneIcon className="size-4 shrink-0 text-teal-600" />
-                  +91 1800-123-4567
-                </li>
-                <li className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-                  <MailIcon className="size-4 shrink-0 text-teal-600" />
-                  info@medcarehospital.com
-                </li>
-              </ul>
+              {/* Card 4: Funded Treatments */}
+              <div className="p-6 rounded-2xl bg-zinc-950/40 border border-white/[0.03] flex flex-col justify-between min-h-[190px]">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs font-bold text-zinc-400">Funded Treatments</span>
+                  <span className="text-cyan-400">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25a2.25 2.25 0 01-2.25 2.25h-2.25a2.25 2.25 0 01-2.25-2.25V6z" />
+                    </svg>
+                  </span>
+                </div>
+                <div className="my-2">
+                  <div className="text-3xl font-extrabold text-white">8,310</div>
+                </div>
+                {/* SVG Vertical bar chart */}
+                <div className="h-16 w-full relative">
+                  <svg className="w-full h-full text-zinc-800" viewBox="0 0 200 60" preserveAspectRatio="none">
+                    {/* Columns representing months */}
+                    <rect x="5" y="40" width="10" height="20" rx="2" fill="#06b6d4" />
+                    <rect x="29" y="32" width="10" height="28" rx="2" fill="#06b6d4" />
+                    <rect x="53" y="24" width="10" height="36" rx="2" fill="#06b6d4" />
+                    <rect x="77" y="38" width="10" height="22" rx="2" fill="#06b6d4" />
+                    <rect x="101" y="16" width="10" height="44" rx="2" fill="#06b6d4" />
+                    <rect x="125" y="28" width="10" height="32" rx="2" fill="#06b6d4" />
+                    <rect x="149" y="34" width="10" height="26" rx="2" fill="#06b6d4" />
+                    <rect x="173" y="10" width="10" height="50" rx="2" fill="#06b6d4" className="animate-pulse" />
+                  </svg>
+                </div>
+                <div className="flex justify-between text-[8px] text-zinc-500 font-bold mt-1">
+                  <span>Jan</span>
+                  <span>Feb</span>
+                  <span>Apr</span>
+                  <span>May</span>
+                  <span>Jun</span>
+                  <span>Jul</span>
+                  <span>Aug</span>
+                  <span>Sep</span>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <Separator className="my-8" />
+          {/* Trust & Audit Badges Column (Right 1 Column) */}
+          <div className="space-y-6">
+            <h2 className="text-xs font-black text-zinc-500 uppercase tracking-widest leading-none">
+              Trust & Audit Badges
+            </h2>
+            
+            <div className="grid grid-cols-2 gap-4">
+              
+              {/* Badge 1: Verified Patient Records */}
+              <div className="p-4.5 rounded-2xl bg-zinc-950/40 border border-white/[0.03] hover:border-cyan-500/20 hover:bg-cyan-950/5 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[170px]">
+                <VerifiedDocIcon />
+                <h3 className="font-extrabold text-[11px] text-zinc-100 mt-3 leading-snug">
+                  Verified Patient Records
+                </h3>
+                <span className="text-[9px] text-zinc-500 font-semibold mt-1">MediTrust AI Certified</span>
+              </div>
 
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">
-              © {new Date().getFullYear()} MedCare Hospital. All rights
-              reserved.
-            </p>
-            <div className="flex gap-6">
-              {["Privacy Policy", "Terms of Service", "Sitemap"].map((link) => (
-                <a
-                  key={link}
-                  href="#"
-                  className="text-sm text-zinc-500 transition-colors hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400"
-                >
-                  {link}
-                </a>
-              ))}
+              {/* Badge 2: Audited Financials */}
+              <div className="p-4.5 rounded-2xl bg-zinc-950/40 border border-white/[0.03] hover:border-cyan-500/20 hover:bg-cyan-950/5 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[170px]">
+                <AuditFinIcon />
+                <h3 className="font-extrabold text-[11px] text-zinc-100 mt-3 leading-snug">
+                  Audited Financials
+                </h3>
+                <span className="text-[9px] text-zinc-500 font-semibold mt-1">Blockchain Verifiable</span>
+              </div>
+
+              {/* Badge 3: AI Risk Score */}
+              <div className="p-4.5 rounded-2xl bg-zinc-950/40 border border-white/[0.03] hover:border-cyan-500/20 hover:bg-cyan-950/5 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[170px]">
+                {/* Circular progress loader */}
+                <div className="relative w-12 h-12 flex items-center justify-center">
+                  <svg className="w-full h-full transform -rotate-90">
+                    <circle cx="24" cy="24" r="20" stroke="rgba(255,255,255,0.03)" strokeWidth="3" fill="none" />
+                    <circle cx="24" cy="24" r="20" stroke="#22d3ee" strokeWidth="3" fill="none" strokeDasharray="125" strokeDashoffset="12" />
+                  </svg>
+                  <span className="absolute text-[10px] font-black text-white">94</span>
+                </div>
+                <h3 className="font-extrabold text-[11px] text-zinc-100 mt-3 leading-snug">
+                  AI Risk Score
+                </h3>
+                <span className="text-[9px] text-zinc-500 font-semibold mt-1">Score: 94/100</span>
+              </div>
+
+              {/* Badge 4: Secure Payments */}
+              <div className="p-4.5 rounded-2xl bg-zinc-950/40 border border-white/[0.03] hover:border-cyan-500/20 hover:bg-cyan-950/5 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[170px]">
+                <ShieldIcon />
+                <h3 className="font-extrabold text-[11px] text-zinc-100 mt-3 leading-snug">
+                  Secure Payments
+                </h3>
+                <span className="text-[9px] text-zinc-500 font-semibold mt-1">Fully Encrypted</span>
+              </div>
+
             </div>
           </div>
-        </div>
+
+        </section>
+
+      </main>
+
+      {/* Footer */}
+      <footer className="w-full border-t border-white/[0.02] py-6 text-center text-xs text-zinc-700 z-10 backdrop-blur-md">
+        <p>&copy; {new Date().getFullYear()} MediTrust AI. Verified Medical Crowdfunding Registry. Deployed via Firebase.</p>
       </footer>
     </div>
   );
