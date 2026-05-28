@@ -1,4 +1,4 @@
-import { OpenAI } from 'openai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export interface MedicalGuideline {
   id: string;
@@ -58,7 +58,7 @@ export const medicalGuidelines: MedicalGuideline[] = [
 // Memory cache for guidelines vector embeddings to prevent redundant API calls
 const embeddingsCache: Record<string, number[]> = {};
 
-// Simple 1D vector operations in pure TypeScript
+// Simple 1D vector operations in pure TypeScript (supports both 768 and 1536-dimensional arrays)
 export function dotProduct(a: number[], b: number[]): number {
   return a.reduce((sum, val, i) => sum + val * (b[i] || 0), 0);
 }
@@ -75,18 +75,18 @@ export function cosineSimilarity(a: number[], b: number[]): number {
 }
 
 // -------------------------------------------------------------
-// RAG Retrieval Engine
+// RAG Retrieval Engine (Google Gemini Version)
 // -------------------------------------------------------------
 export async function retrieveGuidelines(
   disease: string,
   ocrText: string
 ): Promise<{ guideline: MedicalGuideline; score: number }[]> {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   const targetText = `${disease} ${ocrText}`.toLowerCase();
 
-  // --- FALLBACK MODE: Pure TF-IDF/Keyword Matching if API Key is not set ---
+  // --- FALLBACK MODE: Pure TF-IDF/Keyword Matching if Gemini API Key is not set ---
   if (!apiKey || apiKey === "mock-key" || apiKey.trim() === "") {
-    console.log("RAG Engine operating in offline Keyword Similarity Fallback mode.");
+    console.log("Gemini RAG Engine operating in offline Keyword Similarity Fallback mode.");
     
     const results = medicalGuidelines.map((guide) => {
       let score = 0;
@@ -119,16 +119,14 @@ export async function retrieveGuidelines(
       .slice(0, 2);
   }
 
-  // --- VECTOR MODE: OpenAI 1536-dimensional Embeddings & Cosine Similarity ---
+  // --- VECTOR MODE: Google Gemini 768-dimensional Embeddings & Cosine Similarity ---
   try {
-    const openai = new OpenAI({ apiKey });
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const embeddingModel = genAI.getGenerativeModel({ model: "text-embedding-004" });
 
-    // 1. Generate query embedding
-    const queryResponse = await openai.embeddings.create({
-      model: "text-embedding-3-small",
-      input: targetText
-    });
-    const queryVector = queryResponse.data[0].embedding;
+    // 1. Generate query embedding vector using Gemini text-embedding-004
+    const queryResponse = await embeddingModel.embedContent(targetText);
+    const queryVector = queryResponse.embedding.values;
 
     // 2. Load or compute embeddings for each reference guideline
     const results = await Promise.all(
@@ -136,13 +134,12 @@ export async function retrieveGuidelines(
         let guideVector = embeddingsCache[guide.id];
 
         if (!guideVector) {
-          // Embed the clinical reference text
-          const guideResponse = await openai.embeddings.create({
-            model: "text-embedding-3-small",
-            input: `${guide.disease} ${guide.category} ${guide.guidelineText}`
-          });
-          guideVector = guideResponse.data[0].embedding;
-          embeddingsCache[guide.id] = guideVector; // cache it in memory
+          // Embed the clinical reference text using Gemini
+          const guideResponse = await embeddingModel.embedContent(
+            `${guide.disease} ${guide.category} ${guide.guidelineText}`
+          );
+          guideVector = guideResponse.embedding.values;
+          embeddingsCache[guide.id] = guideVector; // cache in memory
         }
 
         // Calculate cosine distance
@@ -156,8 +153,8 @@ export async function retrieveGuidelines(
       .sort((a, b) => b.score - a.score)
       .slice(0, 2);
   } catch (error) {
-    console.error("OpenAI RAG embedding generation failed, falling back to keywords:", error);
-    // Graceful secondary fallback if OpenAI API returns rate limits, network timeouts, etc.
+    console.error("Gemini RAG embedding generation failed, falling back to keywords:", error);
+    // Graceful secondary fallback if Google API returns limits, timeouts, etc.
     return retrieveGuidelines(disease, "");
   }
 }

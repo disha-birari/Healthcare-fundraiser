@@ -166,6 +166,8 @@ export default function Home() {
   const [isOcrScanning, setIsOcrScanning] = useState(false);
   const [ocrLog, setOcrLog] = useState<string[]>([]);
   const [isAiWriting, setIsAiWriting] = useState(false);
+  const [isAuditing, setIsAuditing] = useState(false);
+  const [auditText, setAuditText] = useState("");
 
   // Modal / Detail States
   const [selectedCampaign, setSelectedCampaign] = useState<Campaign | null>(null);
@@ -173,6 +175,7 @@ export default function Home() {
   const [donorName, setDonorName] = useState("");
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [isSuccessAnimation, setIsSuccessAnimation] = useState(false);
+  const [gatewayStep, setGatewayStep] = useState<number>(0);
 
   // Real-time Transaction states
   const [paymentMethod, setPaymentMethod] = useState<"upi" | "card">("upi");
@@ -474,11 +477,18 @@ export default function Home() {
         timestamp: new Date().toISOString()
       });
 
-      // 4. Complete authorization transition and open Receipt Hub
-      setTimeout(() => {
-        setIsSuccessAnimation(false);
-        setIsReceiptView(true);
-      }, 2000);
+      // 4. Immersive multi-step real-time gateway handshake simulation
+      setGatewayStep(0);
+      let currentStep = 0;
+      const interval = setInterval(() => {
+        currentStep++;
+        setGatewayStep(currentStep);
+        if (currentStep >= 4) {
+          clearInterval(interval);
+          setIsSuccessAnimation(false);
+          setIsReceiptView(true);
+        }
+      }, 950);
     } catch (err) {
       console.error("Donation failed:", err);
       alert("Cloud sync failed. Verification of transaction failed.");
@@ -511,6 +521,62 @@ export default function Home() {
     } catch (err) {
       console.error("Verification toggle failed:", err);
       alert("Cloud update failed. Verify hospital status connection.");
+    }
+  };
+
+  // -------------------------------------------------------------
+  // Live RAG AI Medical Auditor Claims Verification
+  // -------------------------------------------------------------
+  const runRAGAudit = async (campaign: Campaign) => {
+    if (!campaign || !campaign.id) return;
+    setIsAuditing(true);
+
+    // Dynamic high-fidelity mock prescription inputs matching specific diseases for presentation testing
+    const defaultMockScans: Record<string, string> = {
+      "Acute Lymphoblastic Leukemia": "PATIENT ADMISSION & PRESCRIPTION CHART. Hospital Name: Apollo Hospitals, Hyderabad. Patient Name: Pranav Patil. Clinical Diagnosis: Acute Lymphoblastic Leukemia (AML-92). Indicated Treatment: Induction Chemotherapy using Vincristine, L-asparaginase, and Daunorubicin. Expected hospital stay: 14 days in oncology isolation ward. Approved surgery & treatment fees billing estimate: ₹6,50,000. Verified and signed by Dr. R. K. Sen, Oncology Chief.",
+      "Cardiac Bypass": "FORTIS HEALTH CENTER. Discharge & Treatment Invoice. Patient: Meera Nair. Surgery: Coronary Artery Bypass Grafting (CABG) sternotomy. Support items: ICU post-op ventilator care 2 days, bypass catheter tubes. Medications: Aspirin, Clopidogrel. Total billing: ₹4,50,000.",
+      "Spinal Reconstructive Surgery": "MANIPAL NEURO & ORTHO CENTRE. Clinical Intake Document. Patient Name: Rohan Das. Diagnosis: Lumbar L4-L5 vertebrae collapse. Required Treatment: Spinal reconstructive lumbar fusion with pedicle titanium screws and orthopedic rods. Intensive post-op physical therapy. Estimate charges: ₹8,00,000."
+    };
+
+    const targetOcrText = auditText || defaultMockScans[campaign.disease] || `PATIENT ADMISSION CLINICAL CASE SHEET. Patient Name: ${campaign.patientName}. Declared Diagnosis: ${campaign.disease}. Prescribed surgical treatment, medical supplies, and intensive ward recovery. Target hospital pricing estimate: ₹${campaign.targetAmount.toLocaleString()}.`;
+
+    try {
+      const response = await fetch('/api/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          campaignId: campaign.id,
+          disease: campaign.disease,
+          ocrText: targetOcrText,
+          patientName: campaign.patientName
+        })
+      });
+
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
+        // Construct audited campaign object to instantly update visual modal details
+        const updatedCampaign = {
+          ...campaign,
+          isHospitalVerified: !data.audit.mismatchFound,
+          hasDocument: true,
+          hasAIStory: true,
+          aiTrustScore: data.trustScore,
+          aiAuditReport: data.audit.auditDetails,
+          aiFraudProbability: data.audit.fraudProbability,
+          lastAuditedAt: new Date().toISOString()
+        };
+        setSelectedCampaign(updatedCampaign);
+        alert(`🛡️ RAG AI Claims Audit Complete!\nAI Trust Score: ${data.trustScore}%\nFraud Risk Check: ${data.audit.fraudProbability}%`);
+      } else {
+        alert(`AI Claims Auditing channel error: ${data.error || "Unknown verification issue"}`);
+      }
+    } catch (err: any) {
+      console.error("Audit API route failed:", err);
+      alert(`API gateway error: ${err.message || "Failed to contact RAG engine route."}`);
+    } finally {
+      setIsAuditing(false);
+      setAuditText("");
     }
   };
 
@@ -2041,6 +2107,93 @@ export default function Home() {
               </div>
             </div>
 
+            {/* RAG AI Medical Auditor Claims Verification Hub */}
+            <div className="bg-gradient-to-r from-teal-950 to-slate-900 border border-teal-500/30 p-5 rounded-2xl text-white space-y-4 font-mono shadow-lg">
+              <div className="flex items-center justify-between border-b border-teal-900 pb-2.5">
+                <div className="flex items-center space-x-2 text-teal-400">
+                  <span className="animate-pulse w-2.5 h-2.5 rounded-full bg-teal-400" />
+                  <span className="text-xs font-black uppercase tracking-wider">RAG AI Medical Claims Auditor</span>
+                </div>
+                <span className="text-[9px] text-teal-500 uppercase font-extrabold tracking-widest bg-teal-950 px-2 py-0.5 rounded border border-teal-800/60">Node V3.0</span>
+              </div>
+
+              {(selectedCampaign as any).aiTrustScore ? (
+                // Audited State View
+                <div className="space-y-3.5">
+                  <div className="grid grid-cols-2 gap-3.5">
+                    <div className="bg-slate-950/70 border border-slate-800/60 p-3 rounded-xl text-center">
+                      <span className="text-[8px] text-slate-400 block uppercase font-bold tracking-wider">AI Trust Index</span>
+                      <span className="text-xl font-black text-emerald-400 font-mono block mt-1">{(selectedCampaign as any).aiTrustScore}%</span>
+                      <span className="text-[8px] text-emerald-600 uppercase font-black tracking-widest mt-1 block">Verified Safe</span>
+                    </div>
+                    <div className="bg-slate-950/70 border border-slate-800/60 p-3 rounded-xl text-center">
+                      <span className="text-[8px] text-slate-400 block uppercase font-bold tracking-wider">Fraud Risk Rate</span>
+                      <span className={`text-xl font-black font-mono block mt-1 ${
+                        (selectedCampaign as any).aiFraudProbability && (selectedCampaign as any).aiFraudProbability > 30 ? "text-rose-400" : "text-teal-400"
+                      }`}>{((selectedCampaign as any).aiFraudProbability) || 0}%</span>
+                      <span className={`text-[8px] uppercase font-black tracking-widest mt-1 block ${
+                        (selectedCampaign as any).aiFraudProbability && (selectedCampaign as any).aiFraudProbability > 30 ? "text-rose-600 animate-pulse" : "text-teal-600"
+                      }`}>{((selectedCampaign as any).aiFraudProbability) && (selectedCampaign as any).aiFraudProbability > 30 ? "Elevated Risk" : "Minimal Risk"}</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-950 p-4 rounded-xl border border-slate-850 text-[10px] leading-relaxed space-y-1.5">
+                    <div className="text-teal-400 font-bold border-b border-slate-900 pb-1 mb-1">🛡️ Clinical Alignment Audit Report:</div>
+                    <p className="text-slate-300 italic">"{(selectedCampaign as any).aiAuditReport || 'Approved by AI auditor without clinical anomalies.'}"</p>
+                    <div className="text-[8px] text-slate-500 font-mono text-right pt-1 mt-1 border-t border-slate-900">
+                      Audited at: {new Date((selectedCampaign as any).lastAuditedAt || Date.now()).toLocaleString()}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => runRAGAudit(selectedCampaign)}
+                    disabled={isAuditing}
+                    className="w-full bg-slate-950/60 hover:bg-slate-900 text-teal-400 hover:text-teal-300 py-2.5 rounded-xl text-xs font-bold transition-all border border-slate-800 flex items-center justify-center space-x-1.5"
+                  >
+                    <span>{isAuditing ? "Re-Auditing Claims Vector..." : "🔄 Run RAG Auditor Re-Scan"}</span>
+                  </button>
+                </div>
+              ) : (
+                // Unaudited State View
+                <div className="space-y-3.5">
+                  <div className="text-[10px] text-slate-300 leading-relaxed bg-slate-950/50 p-3 rounded-xl border border-slate-850">
+                    <span className="font-bold text-teal-400 block mb-0.5">Vector Knowledge Base Cross-Referencing</span>
+                    This appeal has not gone through active RAG auditing. Run the auditor to cross-check clinical guidelines, drug standards, and partner hospital fee grids.
+                  </div>
+
+                  {/* Document input editor preview */}
+                  <div className="space-y-1.5">
+                    <label className="text-[9px] text-slate-400 uppercase tracking-wider block font-bold">Input/OCR Prescription Text to Audit (Optional)</label>
+                    <textarea
+                      rows={2}
+                      value={auditText}
+                      onChange={(e) => setAuditText(e.target.value)}
+                      placeholder="Leave empty to auto-extract official mock clinical records for verification..."
+                      className="w-full bg-slate-950/90 text-slate-300 border border-slate-800 p-2.5 rounded-xl text-[10px] focus:outline-none focus:ring-1 focus:ring-teal-500 font-mono"
+                    />
+                  </div>
+
+                  <button
+                    onClick={() => runRAGAudit(selectedCampaign)}
+                    disabled={isAuditing}
+                    className="w-full bg-gradient-to-r from-teal-600 to-emerald-500 text-slate-950 hover:from-teal-500 hover:to-emerald-400 py-3 rounded-xl text-xs font-black shadow-lg shadow-teal-500/10 hover:shadow-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
+                  >
+                    {isAuditing ? (
+                      <>
+                        <span className="animate-spin text-sm">⌛</span>
+                        <span>Auditing Invoice Vectors...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>🔍</span>
+                        <span>Run RAG AI Claims Audit</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* Confirm buttons */}
             <div className="flex items-center space-x-2 pt-2">
               <button
@@ -2109,18 +2262,41 @@ export default function Home() {
 
             {/* 1. SUCCESS PROCESSING ANIMATION */}
             {isSuccessAnimation ? (
-              <div className="py-12 text-center space-y-5 flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-emerald-50 border-2 border-emerald-400 flex items-center justify-center text-3xl animate-bounce text-emerald-600">
-                  ✔
+              <div className="py-8 text-center space-y-6 flex flex-col items-center">
+                <div className="relative flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-teal-600"></div>
+                  <span className="absolute text-teal-600 text-[10px] font-black animate-pulse">🔒 SECURE</span>
                 </div>
-                <div>
-                  <h3 className="text-lg font-black text-slate-900">Authorizing Transaction...</h3>
-                  <p className="text-xs text-slate-500 max-w-[280px] mx-auto mt-1">
-                    Validating clinical escrows and transmitting real-time GPS telemetry records...
-                  </p>
+                
+                <div className="w-full text-center space-y-2">
+                  <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">PCI-DSS Escrow Settle Gateway</h3>
+                  
+                  {/* Dynamic security status ticker */}
+                  <div className="bg-slate-950 text-emerald-400 p-4 rounded-2xl text-[10px] font-mono text-left space-y-2 border border-slate-800 shadow-inner max-w-sm mx-auto leading-relaxed">
+                    <div className="flex items-center space-x-1.5 border-b border-slate-800 pb-1.5 mb-1.5 text-[9px] text-slate-500 font-bold uppercase">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                      <span>Live Auth Node #tx-verify</span>
+                    </div>
+                    <div className={`transition-all ${gatewayStep >= 0 ? "opacity-100 text-emerald-400" : "opacity-30 text-slate-500"}`}>
+                      {gatewayStep >= 0 ? "✔" : "⚡"} [CONN] Establishing secure vault link...
+                    </div>
+                    <div className={`transition-all ${gatewayStep >= 1 ? "opacity-100 text-emerald-400" : "opacity-30 text-slate-500"}`}>
+                      {gatewayStep >= 1 ? "✔" : "⚡"} [AUTH] Tokenizing payment credentials...
+                    </div>
+                    <div className={`transition-all ${gatewayStep >= 2 ? "opacity-100 text-emerald-400" : "opacity-30 text-slate-500"}`}>
+                      {gatewayStep >= 2 ? "✔" : "⚡"} [LOCK] Anchoring medical milestone escrow...
+                    </div>
+                    <div className={`transition-all ${gatewayStep >= 3 ? "opacity-100 text-emerald-400" : "opacity-30 text-slate-500"}`}>
+                      {gatewayStep >= 3 ? "✔" : "⚡"} [SYNC] Broadcasting transaction ledger block...
+                    </div>
+                  </div>
                 </div>
-                <div className="w-32 bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                  <div className="bg-emerald-500 h-full w-[80%] animate-pulse" />
+
+                <div className="w-40 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                  <div 
+                    className="bg-gradient-to-r from-teal-500 to-emerald-400 h-full transition-all duration-300 rounded-full" 
+                    style={{ width: `${Math.min(100, (gatewayStep) * 25 + 25)}%` }}
+                  />
                 </div>
               </div>
 
@@ -2315,33 +2491,24 @@ export default function Home() {
                     
                     {/* Simulated Dynamic Escrow QR Code */}
                     <div className="flex items-center space-x-4">
-                      {/* Stylized high-fidelity QR code SVG */}
-                      <div className="w-16 h-16 bg-white border border-slate-200 rounded-lg p-1.5 shrink-0 flex items-center justify-center">
-                        <svg className="w-full h-full text-slate-800" viewBox="0 0 100 100" fill="currentColor">
-                          <rect x="0" y="0" width="30" height="30" />
-                          <rect x="5" y="5" width="20" height="20" fill="white" />
-                          <rect x="10" y="10" width="10" height="10" />
-                          
-                          <rect x="70" y="0" width="30" height="30" />
-                          <rect x="75" y="5" width="20" height="20" fill="white" />
-                          <rect x="80" y="10" width="10" height="10" />
-
-                          <rect x="0" y="70" width="30" height="30" />
-                          <rect x="5" y="75" width="20" height="20" fill="white" />
-                          <rect x="10" y="80" width="10" height="10" />
-
-                          <rect x="40" y="40" width="20" height="20" fill="#0d9488" />
-                          <rect x="45" y="45" width="10" height="10" fill="white" />
-                          
-                          <rect x="45" y="10" width="10" height="20" />
-                          <rect x="80" y="45" width="10" height="20" />
-                          <rect x="45" y="80" width="15" height="10" />
-                        </svg>
-                      </div>
+                      {/* Dynamically generated scannable real UPI payment link */}
+                      {(() => {
+                        const upiAddress = "dishabirari21@okicici";
+                        const upiLink = `upi://pay?pa=${upiAddress}&pn=MediTrust%20AI%20Escrow&am=${donationAmount || 5000}&cu=INR&tn=MediTrust%20Escrow%20Deposit`;
+                        const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(upiLink)}&color=0d9488`;
+                        return (
+                          <div className="w-16 h-16 bg-white border border-slate-200 rounded-xl p-1 shrink-0 flex items-center justify-center shadow-sm relative group overflow-hidden">
+                            <img src={qrCodeUrl} alt="UPI QR Code" className="w-full h-full object-contain rounded" />
+                            <div className="absolute inset-0 bg-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                              <span className="text-[7px] font-black bg-teal-600 text-white px-1 py-0.5 rounded leading-none">SCANNABLE</span>
+                            </div>
+                          </div>
+                        );
+                      })()}
 
                       <div className="text-[11px] leading-relaxed">
-                        <span className="font-extrabold text-slate-800 block">Dynamic Escrow QR Generated</span>
-                        <p className="text-slate-500 mt-0.5">Scan to instantly match hospital deposits or enter your Virtual Payment Address below.</p>
+                        <span className="font-extrabold text-slate-800 block">Scannable Real UPI QR Code</span>
+                        <p className="text-slate-500 mt-0.5">Scan this QR code with your actual mobile payment app (Paytm, Google Pay, PhonePe) to populate the amount in real-time!</p>
                       </div>
                     </div>
 
@@ -2359,32 +2526,53 @@ export default function Home() {
                 ) : (
                   <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4.5 space-y-4">
                     
-                    {/* Simulated holographic Visual Credit Card */}
-                    <div className="w-full h-28 bg-gradient-to-tr from-slate-900 via-slate-800 to-teal-900 rounded-xl p-3.5 text-white flex flex-col justify-between shadow-md relative overflow-hidden font-mono select-none">
-                      <div className="flex justify-between items-start">
-                        <span className="text-[9px] text-teal-400 font-bold uppercase tracking-widest leading-none">MediTrust Gateway</span>
-                        <span className="text-xs italic font-bold">VISA</span>
-                      </div>
+                    {/* Simulated holographic Visual Credit Card with dynamic brand detection */}
+                    {(() => {
+                      let brandName = "SECURE CARD";
+                      let cardGradient = "from-slate-950 to-slate-800 border-slate-700/25";
+                      
+                      if (cardNumber.startsWith("4")) {
+                        brandName = "VISA";
+                        cardGradient = "from-slate-950 via-slate-900 to-teal-900 border-teal-500/20";
+                      } else if (cardNumber.startsWith("5")) {
+                        brandName = "MASTERCARD";
+                        cardGradient = "from-slate-950 via-slate-900 to-rose-950 border-rose-500/20";
+                      } else if (cardNumber.startsWith("3")) {
+                        brandName = "AMEX";
+                        cardGradient = "from-slate-950 via-slate-900 to-amber-950 border-amber-500/20";
+                      } else if (cardNumber.startsWith("6")) {
+                        brandName = "RUPAY";
+                        cardGradient = "from-slate-950 via-slate-900 to-blue-900 border-blue-500/20";
+                      }
 
-                      <div className="text-sm tracking-widest text-center py-1">
-                        {cardNumber ? cardNumber.replace(/(\d{4})/g, '$1 ').trim() : "•••• •••• •••• ••••"}
-                      </div>
+                      return (
+                        <div className={`w-full h-28 bg-gradient-to-tr ${cardGradient} rounded-xl p-3.5 text-white flex flex-col justify-between shadow-md relative overflow-hidden font-mono select-none border transition-all duration-300`}>
+                          <div className="flex justify-between items-start">
+                            <span className="text-[9px] text-teal-400 font-bold uppercase tracking-widest leading-none">MediTrust Gateway</span>
+                            <span className="text-xs italic font-bold tracking-wider">{brandName}</span>
+                          </div>
 
-                      <div className="flex justify-between text-[8px] leading-tight">
-                        <div>
-                          <span className="text-slate-400 block text-[6px] uppercase">Card Holder</span>
-                          <span className="font-bold truncate max-w-[120px] block mt-0.5">{cardHolder ? cardHolder.toUpperCase() : "YOUR NAME"}</span>
+                          <div className="text-sm tracking-widest text-center py-1 font-semibold">
+                            {cardNumber ? cardNumber.replace(/(\d{4})/g, '$1 ').trim() : "•••• •••• •••• ••••"}
+                          </div>
+
+                          <div className="flex justify-between text-[8px] leading-tight">
+                            <div>
+                              <span className="text-slate-400 block text-[6px] uppercase">Card Holder</span>
+                              <span className="font-bold truncate max-w-[120px] block mt-0.5">{cardHolder ? cardHolder.toUpperCase() : "YOUR NAME"}</span>
+                            </div>
+                            <div>
+                              <span className="text-slate-400 block text-[6px] uppercase">Expires</span>
+                              <span className="font-bold block mt-0.5">{cardExpiry ? cardExpiry : "MM/YY"}</span>
+                            </div>
+                            <div>
+                              <span className="text-slate-400 block text-[6px] uppercase">CVV</span>
+                              <span className="font-bold block mt-0.5">{cardCvv ? cardCvv : "•••"}</span>
+                            </div>
+                          </div>
                         </div>
-                        <div>
-                          <span className="text-slate-400 block text-[6px] uppercase">Expires</span>
-                          <span className="font-bold block mt-0.5">{cardExpiry ? cardExpiry : "MM/YY"}</span>
-                        </div>
-                        <div>
-                          <span className="text-slate-400 block text-[6px] uppercase">CVV</span>
-                          <span className="font-bold block mt-0.5">{cardCvv ? cardCvv : "•••"}</span>
-                        </div>
-                      </div>
-                    </div>
+                      );
+                    })()}
 
                     {/* Inputs */}
                     <div className="space-y-2.5 text-xs">
