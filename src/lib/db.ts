@@ -25,7 +25,7 @@ export interface Donor {
 
 export interface ActivityLog {
   id?: string;
-  type: "donation" | "verification" | "creation";
+  type: "donation" | "verification" | "creation" | "transit";
   message: string;
   timestamp: string;
 }
