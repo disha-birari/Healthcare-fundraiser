@@ -824,34 +824,34 @@ export default function Home() {
     .sort((a, b) => b.amount - a.amount);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 antialiased font-sans pb-12">
+    <div className="min-h-screen bg-[#fdf8f5] text-[#1a1a1a] antialiased font-sans pb-12">
       {/* Premium Header */}
-      <header className="sticky top-0 z-40 w-full bg-white/80 backdrop-blur-md border-b border-slate-200">
+      <header className="sticky top-0 z-40 w-full bg-white/80 backdrop-blur-md border-b border-[#e8e0dd]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="p-2.5 bg-gradient-to-tr from-teal-600 to-emerald-400 rounded-xl text-white shadow-md shadow-teal-600/20">
+            <div className="p-2.5 bg-gradient-to-tr from-[#6b5b95] to-[#87c7a1] rounded-xl text-white shadow-md shadow-[#6b5b95]/20">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
               </svg>
             </div>
             <div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-teal-800 to-emerald-600 bg-clip-text text-transparent leading-none">
+              <h1 className="text-xl font-bold bg-gradient-to-r from-[#1a1a1a] to-[#6b5b95] bg-clip-text text-transparent leading-none">
                 MediTrust AI
               </h1>
-              <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest block mt-0.5">
+              <span className="text-[10px] font-semibold text-[#7a7a7a] uppercase tracking-widest block mt-0.5">
                 AI + Transparency + Trust
               </span>
             </div>
           </div>
 
           {/* Navigation tabs */}
-          <nav className="flex space-x-1 bg-slate-100 p-1 rounded-xl">
+          <nav className="flex space-x-1 bg-[#f4f0ed] p-1 rounded-xl">
             <button
               onClick={() => setActiveTab("donor")}
               className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
                 activeTab === "donor" 
-                  ? "bg-white text-teal-700 shadow-sm" 
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-white text-[#6b5b95] shadow-sm" 
+                  : "text-[#7a7a7a] hover:text-[#1a1a1a]"
               }`}
             >
               <HeartIcon className="w-4 h-4" />
@@ -861,8 +861,8 @@ export default function Home() {
               onClick={() => setActiveTab("patient")}
               className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
                 activeTab === "patient" 
-                  ? "bg-white text-teal-700 shadow-sm" 
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-white text-[#6b5b95] shadow-sm" 
+                  : "text-[#7a7a7a] hover:text-[#1a1a1a]"
               }`}
             >
               <PlusIcon className="w-4 h-4" />
@@ -872,8 +872,8 @@ export default function Home() {
               onClick={() => setActiveTab("admin")}
               className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
                 activeTab === "admin" 
-                  ? "bg-white text-teal-700 shadow-sm" 
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-white text-[#6b5b95] shadow-sm" 
+                  : "text-[#7a7a7a] hover:text-[#1a1a1a]"
               }`}
             >
               <ShieldCheckIcon className="w-4 h-4" />
@@ -883,8 +883,8 @@ export default function Home() {
               onClick={() => setActiveTab("leaderboard")}
               className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
                 activeTab === "leaderboard" 
-                  ? "bg-white text-teal-700 shadow-sm" 
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-white text-[#6b5b95] shadow-sm" 
+                  : "text-[#7a7a7a] hover:text-[#1a1a1a]"
               }`}
             >
               <TrophyIcon className="w-4 h-4" />
@@ -894,8 +894,8 @@ export default function Home() {
               onClick={() => setActiveTab("ambulance")}
               className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
                 activeTab === "ambulance" 
-                  ? "bg-white text-teal-700 shadow-sm" 
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-white text-[#6b5b95] shadow-sm" 
+                  : "text-[#7a7a7a] hover:text-[#1a1a1a]"
               }`}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
@@ -912,47 +912,47 @@ export default function Home() {
         
         {/* Real-time Platform statistics */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-            <span className="text-xs font-semibold text-slate-500 block uppercase tracking-wider">Total Funds Raised</span>
+          <div className="bg-white p-5 rounded-2xl border border-[#e8e0dd] shadow-sm hover:shadow-md transition-shadow">
+            <span className="text-xs font-semibold text-[#7a7a7a] block uppercase tracking-wider">Total Funds Raised</span>
             <div className="flex items-baseline space-x-1.5 mt-2">
-              <span className="text-2xl font-black text-slate-900">₹{totalRaised.toLocaleString()}</span>
-              <span className="text-xs text-emerald-600 font-bold">100% Secure</span>
+              <span className="text-2xl font-black text-[#1a1a1a]">₹{totalRaised.toLocaleString()}</span>
+              <span className="text-xs text-[#87c7a1] font-bold">100% Secure</span>
             </div>
-            <div className="w-full bg-slate-100 h-1.5 rounded-full mt-3 overflow-hidden">
-              <div className="bg-gradient-to-r from-teal-500 to-emerald-400 h-full w-[80%]" />
+            <div className="w-full bg-[#f4f0ed] h-1.5 rounded-full mt-3 overflow-hidden">
+              <div className="bg-gradient-to-r from-[#6b5b95] to-[#87c7a1] h-full w-[80%]" />
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-            <span className="text-xs font-semibold text-slate-500 block uppercase tracking-wider">Verified Cases</span>
+          <div className="bg-white p-5 rounded-2xl border border-[#e8e0dd] shadow-sm hover:shadow-md transition-shadow">
+            <span className="text-xs font-semibold text-[#7a7a7a] block uppercase tracking-wider">Verified Cases</span>
             <div className="flex items-baseline space-x-1.5 mt-2">
-              <span className="text-2xl font-black text-slate-900">{totalVerified}</span>
-              <span className="text-xs text-teal-600 font-bold">Hospital Signed</span>
+              <span className="text-2xl font-black text-[#1a1a1a]">{totalVerified}</span>
+              <span className="text-xs text-[#6b5b95] font-bold">Hospital Signed</span>
             </div>
-            <div className="w-full bg-slate-100 h-1.5 rounded-full mt-3 overflow-hidden">
-              <div className="bg-gradient-to-r from-teal-500 to-emerald-400 h-full w-[70%]" />
+            <div className="w-full bg-[#f4f0ed] h-1.5 rounded-full mt-3 overflow-hidden">
+              <div className="bg-gradient-to-r from-[#6b5b95] to-[#87c7a1] h-full w-[70%]" />
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-            <span className="text-xs font-semibold text-slate-500 block uppercase tracking-wider">Active Supporters</span>
+          <div className="bg-white p-5 rounded-2xl border border-[#e8e0dd] shadow-sm hover:shadow-md transition-shadow">
+            <span className="text-xs font-semibold text-[#7a7a7a] block uppercase tracking-wider">Active Supporters</span>
             <div className="flex items-baseline space-x-1.5 mt-2">
-              <span className="text-2xl font-black text-slate-900">{uniqueDonorsCount}</span>
-              <span className="text-xs text-emerald-600 font-bold">Round-the-clock</span>
+              <span className="text-2xl font-black text-[#1a1a1a]">{uniqueDonorsCount}</span>
+              <span className="text-xs text-[#87c7a1] font-bold">Round-the-clock</span>
             </div>
-            <div className="w-full bg-slate-100 h-1.5 rounded-full mt-3 overflow-hidden">
-              <div className="bg-gradient-to-r from-teal-500 to-emerald-400 h-full w-[65%]" />
+            <div className="w-full bg-[#f4f0ed] h-1.5 rounded-full mt-3 overflow-hidden">
+              <div className="bg-gradient-to-r from-[#6b5b95] to-[#87c7a1] h-full w-[65%]" />
             </div>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow bg-gradient-to-tr from-teal-50/50 to-emerald-50/50">
-            <span className="text-xs font-semibold text-teal-800 block uppercase tracking-wider">Platform Trust Index</span>
+          <div className="bg-white p-5 rounded-2xl border border-[#e8e0dd] shadow-sm hover:shadow-md transition-shadow bg-gradient-to-tr from-[#b8a4d4]/20 to-[#87c7a1]/20">
+            <span className="text-xs font-semibold text-[#6b5b95] block uppercase tracking-wider">Platform Trust Index</span>
             <div className="flex items-baseline space-x-1.5 mt-2">
-              <span className="text-2xl font-black text-teal-900">{averageTrust}%</span>
-              <span className="text-xs text-teal-600 font-bold">Highly Genuine</span>
+              <span className="text-2xl font-black text-[#1a1a1a]">{averageTrust}%</span>
+              <span className="text-xs text-[#6b5b95] font-bold">Highly Genuine</span>
             </div>
-            <div className="w-full bg-slate-100 h-1.5 rounded-full mt-3 overflow-hidden">
-              <div className="bg-gradient-to-r from-teal-500 to-emerald-400 h-full" style={{ width: `${averageTrust}%` }} />
+            <div className="w-full bg-[#f4f0ed] h-1.5 rounded-full mt-3 overflow-hidden">
+              <div className="bg-gradient-to-r from-[#6b5b95] to-[#87c7a1] h-full" style={{ width: `${averageTrust}%` }} />
             </div>
           </div>
         </section>
@@ -964,7 +964,7 @@ export default function Home() {
           <section className="space-y-6">
             
             {/* Search & Filter Header */}
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="bg-white p-4 rounded-2xl border border-[#e8e0dd] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="relative flex-1">
                 <SearchIcon className="absolute left-3.5 top-3 w-5 h-5 text-slate-400" />
                 <input
@@ -972,19 +972,19 @@ export default function Home() {
                   placeholder="Search by diagnosis, hospital name, or patient..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                  className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                 />
               </div>
 
               {/* Filters */}
               <div className="flex flex-wrap gap-1.5 items-center">
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider mr-2">Need Level:</span>
+                <span className="text-xs font-bold text-[#7a7a7a] uppercase tracking-wider mr-2">Need Level:</span>
                 <button
                   onClick={() => setUrgencyFilter("all")}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                     urgencyFilter === "all"
                       ? "bg-teal-600 text-white shadow-sm"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                      : "bg-[#f4f0ed] text-[#7a7a7a] hover:bg-slate-200"
                   }`}
                 >
                   All Cases
@@ -1024,12 +1024,12 @@ export default function Home() {
 
             {/* Campaign Cards Grid */}
             {filteredCampaigns.length === 0 ? (
-              <div className="bg-white p-12 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div className="bg-white p-12 rounded-2xl border border-[#e8e0dd] shadow-sm text-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12 mx-auto text-slate-400 mb-3">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z" />
                 </svg>
                 <h3 className="text-base font-bold text-slate-700">No campaigns found</h3>
-                <p className="text-xs text-slate-500 mt-1">Try modifying your keyword search or selected filters.</p>
+                <p className="text-xs text-[#7a7a7a] mt-1">Try modifying your keyword search or selected filters.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1042,10 +1042,10 @@ export default function Home() {
                   return (
                     <div 
                       key={c.id} 
-                      className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
+                      className="bg-white rounded-2xl border border-[#e8e0dd] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
                     >
                       {/* Card Header image placeholder with Gradient */}
-                      <div className="h-44 bg-gradient-to-tr from-teal-800 to-emerald-600 relative p-5 flex flex-col justify-between text-white">
+                      <div className="h-44 bg-gradient-to-tr from-[#1a1a1a] to-[#6b5b95] relative p-5 flex flex-col justify-between text-white">
                         <div className="flex items-center justify-between">
                           <span className={`text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full flex items-center space-x-1 bg-white/20 backdrop-blur-md`}>
                             <span>{urgencyCat.icon}</span>
@@ -1077,7 +1077,7 @@ export default function Home() {
 
                       {/* Card Body */}
                       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                        <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
+                        <p className="text-xs text-[#7a7a7a] line-clamp-3 leading-relaxed">
                           {c.story}
                         </p>
 
@@ -1088,21 +1088,21 @@ export default function Home() {
                               <span>Raised: ₹{c.raisedAmount.toLocaleString()}</span>
                               <span>{percentRaised}%</span>
                             </div>
-                            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div className="w-full bg-[#f4f0ed] h-2 rounded-full overflow-hidden">
                               <div 
-                                className="bg-gradient-to-r from-teal-600 to-emerald-400 h-full rounded-full transition-all duration-500" 
+                                className="bg-gradient-to-r from-[#6b5b95] to-[#87c7a1] h-full rounded-full transition-all duration-500" 
                                 style={{ width: `${Math.min(100, percentRaised)}%` }}
                               />
                             </div>
-                            <div className="flex justify-between text-[10px] text-slate-500 mt-1">
+                            <div className="flex justify-between text-[10px] text-[#7a7a7a] mt-1">
                               <span>Goal: ₹{c.targetAmount.toLocaleString()}</span>
                               <span className="font-bold text-slate-700">{c.daysLeft} days left</span>
                             </div>
                           </div>
 
                           {/* Predictive success text */}
-                          <div className="bg-teal-50 border border-teal-100/50 p-2.5 rounded-xl text-[10px] text-teal-800 leading-snug flex items-start space-x-1.5">
-                            <SparklesIcon className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                          <div className="bg-teal-50 border border-teal-100/50 p-2.5 rounded-xl text-[10px] text-[#6b5b95] leading-snug flex items-start space-x-1.5">
+                            <SparklesIcon className="w-4 h-4 text-[#6b5b95] shrink-0 mt-0.5" />
                             <div>
                               <span className="font-bold block">AI Funding Projection:</span>
                               {getPredictiveIndicator(c)}
@@ -1113,7 +1113,7 @@ export default function Home() {
                         <div className="flex items-center space-x-2 pt-2">
                           <button
                             onClick={() => setSelectedCampaign(c)}
-                            className="flex-1 bg-slate-100 text-slate-700 hover:bg-slate-200 py-2.5 rounded-xl text-xs font-bold transition-all text-center"
+                            className="flex-1 bg-[#f4f0ed] text-slate-700 hover:bg-slate-200 py-2.5 rounded-xl text-xs font-bold transition-all text-center"
                           >
                             Details & Audits
                           </button>
@@ -1140,17 +1140,17 @@ export default function Home() {
           <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
             {/* Form Column */}
-            <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+            <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-6">
               <div>
-                <h2 className="text-lg font-black text-slate-900">Create Fundraising Campaign</h2>
-                <p className="text-xs text-slate-500 mt-1">Setup patient details, goals, and leverage AI analysis to increase trust factors.</p>
+                <h2 className="text-lg font-black text-[#1a1a1a]">Create Fundraising Campaign</h2>
+                <p className="text-xs text-[#7a7a7a] mt-1">Setup patient details, goals, and leverage AI analysis to increase trust factors.</p>
               </div>
 
               {/* Mock OCR Scan Box */}
               <div className="border-2 border-dashed border-teal-200 bg-teal-50/20 p-5 rounded-2xl text-center space-y-4">
                 <div>
-                  <h3 className="text-xs font-bold text-teal-900 uppercase tracking-wider">🌟 Hackathon Shortcut: Mock AI Medical OCR Scan</h3>
-                  <p className="text-[11px] text-slate-600 mt-1">Simulate hospital prescription invoice parsing to auto-populate the form instantly and boost verification trust!</p>
+                  <h3 className="text-xs font-bold text-[#1a1a1a] uppercase tracking-wider">🌟 Hackathon Shortcut: Mock AI Medical OCR Scan</h3>
+                  <p className="text-[11px] text-[#7a7a7a] mt-1">Simulate hospital prescription invoice parsing to auto-populate the form instantly and boost verification trust!</p>
                 </div>
 
                 <div className="flex justify-center">
@@ -1179,77 +1179,77 @@ export default function Home() {
               <form onSubmit={submitCampaign} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-bold text-slate-600 block mb-1">Patient Full Name</label>
+                    <label className="text-xs font-bold text-[#7a7a7a] block mb-1">Patient Full Name</label>
                     <input
                       type="text"
                       placeholder="e.g. Aarav Sharma"
                       value={patientName}
                       onChange={(e) => setPatientName(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-slate-600 block mb-1">Medical Diagnosis / Disease</label>
+                    <label className="text-xs font-bold text-[#7a7a7a] block mb-1">Medical Diagnosis / Disease</label>
                     <input
                       type="text"
                       placeholder="e.g. Acute Lymphoblastic Leukemia"
                       value={disease}
                       onChange={(e) => setDisease(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-600 block mb-1">Fundraiser Campaign Title</label>
+                  <label className="text-xs font-bold text-[#7a7a7a] block mb-1">Fundraiser Campaign Title</label>
                   <input
                     type="text"
                     placeholder="e.g. Emergency bone marrow transplant treatment funding required"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="md:col-span-2">
-                    <label className="text-xs font-bold text-slate-600 block mb-1">Hospital Hospital & Location</label>
+                    <label className="text-xs font-bold text-[#7a7a7a] block mb-1">Hospital Hospital & Location</label>
                     <input
                       type="text"
                       placeholder="e.g. Apollo Health City, Hyderabad"
                       value={hospitalName}
                       onChange={(e) => setHospitalName(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-slate-600 block mb-1">Fundraising Target (INR)</label>
+                    <label className="text-xs font-bold text-[#7a7a7a] block mb-1">Fundraising Target (INR)</label>
                     <input
                       type="number"
                       placeholder="Goal in ₹"
                       value={targetAmount || ""}
                       onChange={(e) => setTargetAmount(Number(e.target.value))}
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-bold text-slate-600 block mb-1">Days Remaining for Surgery</label>
+                    <label className="text-xs font-bold text-[#7a7a7a] block mb-1">Days Remaining for Surgery</label>
                     <input
                       type="number"
                       placeholder="e.g. 10"
                       value={daysLeft || ""}
                       onChange={(e) => setDaysLeft(Number(e.target.value))}
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-slate-600 block mb-1">Prescription Proof (IPFS Pinned)</label>
+                    <label className="text-xs font-bold text-[#7a7a7a] block mb-1">Prescription Proof (IPFS Pinned)</label>
                     
                     <div className="flex flex-col space-y-2 mt-1">
                       {/* Hidden native file selector */}
@@ -1263,7 +1263,7 @@ export default function Home() {
 
                       {isIpfsUploading ? (
                         // Pinned Loading Indicator
-                        <div className="border border-dashed border-teal-300 bg-teal-500/5 px-4 py-3 rounded-xl flex items-center justify-between text-xs font-mono text-teal-800 animate-pulse">
+                        <div className="border border-dashed border-teal-300 bg-teal-500/5 px-4 py-3 rounded-xl flex items-center justify-between text-xs font-mono text-[#6b5b95] animate-pulse">
                           <span className="flex items-center space-x-2">
                             <span className="animate-spin text-sm">⌛</span>
                             <span>Pinning file securely to IPFS node...</span>
@@ -1296,7 +1296,7 @@ export default function Home() {
                         // Initial Upload CTA Button
                         <label
                           htmlFor="ipfs-file-uploader"
-                          className="flex items-center justify-center space-x-2 border-2 border-dashed border-slate-200 hover:border-teal-500 hover:bg-slate-50 py-3.5 rounded-xl cursor-pointer text-xs font-bold text-slate-500 hover:text-teal-700 transition-all text-center"
+                          className="flex items-center justify-center space-x-2 border-2 border-dashed border-[#e8e0dd] hover:border-teal-500 hover:bg-[#fdf8f5] py-3.5 rounded-xl cursor-pointer text-xs font-bold text-[#7a7a7a] hover:text-[#6b5b95] transition-all text-center"
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
@@ -1310,12 +1310,12 @@ export default function Home() {
 
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="text-xs font-bold text-slate-600">Emotional Story Appeal</label>
+                    <label className="text-xs font-bold text-[#7a7a7a]">Emotional Story Appeal</label>
                     <button
                       type="button"
                       onClick={generateAiStory}
                       disabled={isAiWriting}
-                      className="text-xs font-bold text-teal-600 hover:text-teal-700 flex items-center space-x-1 disabled:opacity-50"
+                      className="text-xs font-bold text-[#6b5b95] hover:text-[#6b5b95] flex items-center space-x-1 disabled:opacity-50"
                     >
                       <SparklesIcon className="w-3.5 h-3.5 text-teal-500" />
                       <span>{isAiWriting ? "Drafting with AI..." : "Generate AI Patient Story"}</span>
@@ -1326,7 +1326,7 @@ export default function Home() {
                     placeholder="Provide detailed descriptions of your medical situation and fundraising urgency, or use the Generate AI Patient Story button..."
                     value={story}
                     onChange={(e) => setStory(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
 
@@ -1425,15 +1425,15 @@ export default function Home() {
                             </div>
                             <div className="flex justify-between">
                               <span>Hospital Verification:</span>
-                              <span className={mockCampaign.isHospitalVerified ? "text-emerald-400 font-bold" : "text-slate-500"}>+20%</span>
+                              <span className={mockCampaign.isHospitalVerified ? "text-emerald-400 font-bold" : "text-[#7a7a7a]"}>+20%</span>
                             </div>
                             <div className="flex justify-between">
                               <span>OCR Document Attach:</span>
-                              <span className={mockCampaign.hasDocument ? "text-emerald-400 font-bold" : "text-slate-500"}>+15%</span>
+                              <span className={mockCampaign.hasDocument ? "text-emerald-400 font-bold" : "text-[#7a7a7a]"}>+15%</span>
                             </div>
                             <div className="flex justify-between">
                               <span>AI Generated Story:</span>
-                              <span className={mockCampaign.hasAIStory ? "text-emerald-400 font-bold" : "text-slate-500"}>+15%</span>
+                              <span className={mockCampaign.hasAIStory ? "text-emerald-400 font-bold" : "text-[#7a7a7a]"}>+15%</span>
                             </div>
                           </div>
                         </div>
@@ -1489,10 +1489,10 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               
               {/* Admin Verification list */}
-              <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+              <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-5">
                 <div>
-                  <h2 className="text-lg font-black text-slate-900">Hospital Verification Console</h2>
-                  <p className="text-xs text-slate-500 mt-1">Review pending healthcare campaigns, audit invoices, and toggle authentic verification flags.</p>
+                  <h2 className="text-lg font-black text-[#1a1a1a]">Hospital Verification Console</h2>
+                  <p className="text-xs text-[#7a7a7a] mt-1">Review pending healthcare campaigns, audit invoices, and toggle authentic verification flags.</p>
                 </div>
 
                 <div className="space-y-4">
@@ -1502,25 +1502,25 @@ export default function Home() {
                     const urgencyCat = getUrgencyCategory(urgency);
 
                     return (
-                      <div key={c.id} className="border border-slate-200 rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50 hover:bg-slate-50 transition-all">
+                      <div key={c.id} className="border border-[#e8e0dd] rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#fdf8f5]/50 hover:bg-[#fdf8f5] transition-all">
                         <div className="space-y-1.5">
                           <div className="flex items-center space-x-2">
-                            <span className="text-xs font-black text-slate-800">{c.patientName}</span>
-                            <span className="text-[10px] bg-slate-200/80 px-2 py-0.5 rounded text-slate-600 font-bold">{c.disease}</span>
+                            <span className="text-xs font-black text-[#1a1a1a]">{c.patientName}</span>
+                            <span className="text-[10px] bg-slate-200/80 px-2 py-0.5 rounded text-[#7a7a7a] font-bold">{c.disease}</span>
                             <span className={`text-[10px] px-2 py-0.5 rounded font-bold ${urgencyCat.bgColor} ${urgencyCat.color}`}>
                               {urgencyCat.icon} {urgencyCat.label}
                             </span>
                           </div>
                           
                           <h4 className="text-xs font-bold text-slate-700 line-clamp-1">{c.title}</h4>
-                          <span className="text-[10px] text-slate-500 block">🏥 {c.hospitalName}</span>
+                          <span className="text-[10px] text-[#7a7a7a] block">🏥 {c.hospitalName}</span>
                         </div>
 
                         <div className="flex items-center space-x-3 shrink-0">
                           {/* Trust metrics */}
                           <div className="text-right">
                             <span className="text-[10px] text-slate-400 block font-bold">Trust Indicator</span>
-                            <span className="text-xs font-black text-slate-800">{trust}% Score</span>
+                            <span className="text-xs font-black text-[#1a1a1a]">{trust}% Score</span>
                           </div>
 
                           {/* Verification Switch Button */}
@@ -1529,7 +1529,7 @@ export default function Home() {
                             className={`px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all border ${
                               c.isHospitalVerified
                                 ? "bg-emerald-50 border-emerald-200 text-emerald-700 hover:bg-emerald-100"
-                                : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100 shadow-sm"
+                                : "bg-white border-[#e8e0dd] text-slate-700 hover:bg-[#f4f0ed] shadow-sm"
                             }`}
                           >
                             {c.isHospitalVerified ? "✔ Doctor Verified" : "Verify Campaign"}
@@ -1542,14 +1542,14 @@ export default function Home() {
               </div>
 
               {/* Hospital Expense Breakdown Simulator */}
-              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6 flex flex-col justify-between">
+              <div className="bg-white p-6 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-6 flex flex-col justify-between">
                 <div className="space-y-5">
                   <div>
-                    <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-900 border-b border-slate-100 pb-2 flex items-center space-x-1.5">
+                    <h2 className="text-sm font-extrabold uppercase tracking-wider text-[#1a1a1a] border-b border-slate-100 pb-2 flex items-center space-x-1.5">
                       <span>🏥</span>
                       <span>Hospital Partner Portal</span>
                     </h2>
-                    <p className="text-[10px] text-slate-500 mt-1">Audit active expense allocations and update actual surgery statuses dynamically.</p>
+                    <p className="text-[10px] text-[#7a7a7a] mt-1">Audit active expense allocations and update actual surgery statuses dynamically.</p>
                   </div>
 
                   {/* Dynamic cost slider mock inputs */}
@@ -1614,7 +1614,7 @@ export default function Home() {
                           className={`py-1.5 rounded text-[10px] font-bold transition-all border ${
                             surgeryStatus === status
                               ? "bg-teal-600 border-teal-600 text-white"
-                              : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100"
+                              : "bg-[#fdf8f5] border-[#e8e0dd] text-[#7a7a7a] hover:bg-[#f4f0ed]"
                           }`}
                         >
                           {status}
@@ -1624,7 +1624,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="bg-slate-50 border border-slate-150 p-3 rounded-xl text-[10px] text-slate-600 leading-snug">
+                <div className="bg-[#fdf8f5] border border-slate-150 p-3 rounded-xl text-[10px] text-[#7a7a7a] leading-snug">
                   <strong>Live Synchronization:</strong> Cost percentages and scheduling status are simulated on the donor detail panels immediately.
                 </div>
               </div>
@@ -1637,7 +1637,7 @@ export default function Home() {
                   <span className="animate-ping w-2 h-2 rounded-full bg-emerald-400" />
                   <span className="text-xs font-bold uppercase tracking-widest">MediTrust Transparent Ledger Stream (Local Node)</span>
                 </div>
-                <span className="text-[10px] text-slate-500 font-bold">Consensus: ACTIVE</span>
+                <span className="text-[10px] text-[#7a7a7a] font-bold">Consensus: ACTIVE</span>
               </div>
 
               <div className="space-y-2 text-[11px] max-h-60 overflow-y-auto">
@@ -1649,7 +1649,7 @@ export default function Home() {
                         <span className="text-teal-400">[{new Date(log.timestamp).toLocaleTimeString()}]</span>
                         <span className="text-slate-300">{log.message}</span>
                       </div>
-                      <span className="text-slate-500 text-[10px] md:text-right shrink-0 mt-0.5 md:mt-0">
+                      <span className="text-[#7a7a7a] text-[10px] md:text-right shrink-0 mt-0.5 md:mt-0">
                         Block hash: {simulatedHash}
                       </span>
                     </div>
@@ -1667,25 +1667,25 @@ export default function Home() {
           <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
             {/* Top Donors List (Leaderboard) */}
-            <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+            <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-6">
               <div>
-                <h2 className="text-lg font-black text-slate-900">Top Donors Recognition Leaderboard</h2>
-                <p className="text-xs text-slate-500 mt-1">Honoring our top financial heroes supporting critical medical treatments.</p>
+                <h2 className="text-lg font-black text-[#1a1a1a]">Top Donors Recognition Leaderboard</h2>
+                <p className="text-xs text-[#7a7a7a] mt-1">Honoring our top financial heroes supporting critical medical treatments.</p>
               </div>
 
               {sortedLeaderboard.length === 0 ? (
-                <div className="p-8 text-center text-xs text-slate-500">No donation transactions registered yet.</div>
+                <div className="p-8 text-center text-xs text-[#7a7a7a]">No donation transactions registered yet.</div>
               ) : (
                 <div className="space-y-3">
                   {sortedLeaderboard.map((d, index) => {
                     let medal = "";
-                    let medalBg = "bg-slate-50 border-slate-200";
+                    let medalBg = "bg-[#fdf8f5] border-[#e8e0dd]";
                     if (index === 0) {
                       medal = "🥇";
                       medalBg = "bg-amber-50 border-amber-200 text-amber-900";
                     } else if (index === 1) {
                       medal = "🥈";
-                      medalBg = "bg-slate-100 border-slate-300 text-slate-900";
+                      medalBg = "bg-[#f4f0ed] border-slate-300 text-[#1a1a1a]";
                     } else if (index === 2) {
                       medal = "🥉";
                       medalBg = "bg-orange-50 border-orange-200 text-orange-900";
@@ -1702,11 +1702,11 @@ export default function Home() {
                           </span>
                           <div>
                             <span className="font-extrabold text-sm block">{d.name}</span>
-                            <span className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider block mt-0.5">Verified Medical Philanthropist</span>
+                            <span className="text-[10px] text-[#7a7a7a] font-semibold uppercase tracking-wider block mt-0.5">Verified Medical Philanthropist</span>
                           </div>
                         </div>
 
-                        <span className="text-base font-black text-slate-800">
+                        <span className="text-base font-black text-[#1a1a1a]">
                           ₹{d.amount.toLocaleString()}
                         </span>
                       </div>
@@ -1717,20 +1717,20 @@ export default function Home() {
             </div>
 
             {/* Recent Live Activity Stream */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+            <div className="bg-white p-6 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-5">
               <div>
-                <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-900 border-b border-slate-100 pb-2">Recent Contributions</h2>
-                <p className="text-[10px] text-slate-500 mt-1">Real-time public donor transactions ledger feed updates.</p>
+                <h2 className="text-sm font-extrabold uppercase tracking-wider text-[#1a1a1a] border-b border-slate-100 pb-2">Recent Contributions</h2>
+                <p className="text-[10px] text-[#7a7a7a] mt-1">Real-time public donor transactions ledger feed updates.</p>
               </div>
 
               <div className="space-y-4">
                 {donors.slice(0, 5).map(d => (
                   <div key={d.id} className="border-b border-slate-100 pb-3 last:border-b-0 space-y-1">
                     <div className="flex justify-between text-xs">
-                      <span className="font-bold text-slate-800">{d.name}</span>
-                      <span className="font-black text-emerald-600">+₹{d.amount.toLocaleString()}</span>
+                      <span className="font-bold text-[#1a1a1a]">{d.name}</span>
+                      <span className="font-black text-[#87c7a1]">+₹{d.amount.toLocaleString()}</span>
                     </div>
-                    <p className="text-[10px] text-slate-500 line-clamp-1">Support for: {d.campaignTitle}</p>
+                    <p className="text-[10px] text-[#7a7a7a] line-clamp-1">Support for: {d.campaignTitle}</p>
                     <span className="text-[9px] text-slate-400 block">{new Date(d.timestamp).toLocaleTimeString()}</span>
                   </div>
                 ))}
@@ -1770,7 +1770,7 @@ export default function Home() {
                   <button
                     onClick={detectUserLocation}
                     disabled={isDetectingLocation}
-                    className="bg-gradient-to-r from-teal-500 to-emerald-400 text-slate-950 font-black px-5 py-2.5 rounded-xl text-xs flex items-center space-x-2 shadow-lg shadow-teal-500/20 hover:scale-[1.02] transition-all disabled:opacity-50"
+                    className="bg-gradient-to-r from-[#6b5b95] to-[#87c7a1] text-slate-950 font-black px-5 py-2.5 rounded-xl text-xs flex items-center space-x-2 shadow-lg shadow-teal-500/20 hover:scale-[1.02] transition-all disabled:opacity-50"
                   >
                     <span>📍</span>
                     <span>{isDetectingLocation ? "Accessing GPS Satellite..." : "Detect Nearest Emergency Hospital"}</span>
@@ -1785,7 +1785,7 @@ export default function Home() {
               <div className="lg:col-span-1 space-y-6">
                 
                 {/* Ambulance Selector Card */}
-                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div className="bg-white p-5 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-4">
                   <span className="text-xs font-bold text-slate-700 block uppercase tracking-wider">Active Ambulance Fleet</span>
                   <div className="space-y-3">
                     {ambulances.map(amb => {
@@ -1793,7 +1793,7 @@ export default function Home() {
                       let statusBadge = "bg-amber-50 text-amber-700 border-amber-200";
                       let pulseDot = "bg-amber-500";
                       if (amb.status === "In Transit") {
-                        statusBadge = "bg-teal-50 text-teal-700 border-teal-200 animate-pulse";
+                        statusBadge = "bg-teal-50 text-[#6b5b95] border-teal-200 animate-pulse";
                         pulseDot = "bg-teal-500";
                       } else if (amb.status === "Arrived") {
                         statusBadge = "bg-emerald-50 text-emerald-700 border-emerald-200";
@@ -1807,7 +1807,7 @@ export default function Home() {
                           className={`w-full text-left p-4 rounded-xl border transition-all duration-200 flex flex-col space-y-2.5 ${
                             isSelected 
                               ? "bg-slate-900 text-white border-slate-900 shadow-lg" 
-                              : "bg-slate-50 hover:bg-slate-100 text-slate-800 border-slate-200"
+                              : "bg-[#fdf8f5] hover:bg-[#f4f0ed] text-[#1a1a1a] border-[#e8e0dd]"
                           }`}
                         >
                           <div className="flex items-center justify-between w-full">
@@ -1821,10 +1821,10 @@ export default function Home() {
                           </div>
 
                           <div className="text-[11px] leading-tight">
-                            <div className={isSelected ? "text-slate-300" : "text-slate-500"}>
+                            <div className={isSelected ? "text-slate-300" : "text-[#7a7a7a]"}>
                               Driver: <span className="font-bold">{amb.driverName}</span>
                             </div>
-                            <div className={`mt-0.5 font-mono ${isSelected ? "text-teal-400" : "text-slate-600"}`}>
+                            <div className={`mt-0.5 font-mono ${isSelected ? "text-teal-400" : "text-[#7a7a7a]"}`}>
                               Coords: {amb.lat.toFixed(4)}, {amb.lng.toFixed(4)}
                             </div>
                           </div>
@@ -1835,7 +1835,7 @@ export default function Home() {
                             className={`w-full py-1.5 rounded-lg text-[10px] font-bold text-center border transition-all ${
                               isSelected 
                                 ? "bg-slate-800 border-slate-700 text-teal-400 hover:bg-slate-750" 
-                                : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
+                                : "bg-white border-[#e8e0dd] text-slate-700 hover:bg-[#fdf8f5]"
                             }`}
                           >
                             📞 Direct Call Driver
@@ -1848,10 +1848,10 @@ export default function Home() {
 
                 {/* Transit Simulator Interface */}
                 {selectedAmbulanceId === "amb_01" && (
-                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                  <div className="bg-white p-5 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-4">
                     <div>
-                      <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wide">Emergency Routing Simulator</h3>
-                      <p className="text-[10px] text-slate-500 mt-0.5">Route Ramesh Kumar's emergency vehicle from Santacruz to your selected destination hospital.</p>
+                      <h3 className="text-xs font-bold text-[#1a1a1a] uppercase tracking-wide">Emergency Routing Simulator</h3>
+                      <p className="text-[10px] text-[#7a7a7a] mt-0.5">Route Ramesh Kumar's emergency vehicle from Santacruz to your selected destination hospital.</p>
                     </div>
 
                     {/* Progress Bar showing current transit steps */}
@@ -1863,13 +1863,13 @@ export default function Home() {
 
                       return (
                         <div className="space-y-1.5">
-                          <div className="flex justify-between text-[10px] font-bold text-slate-600">
+                          <div className="flex justify-between text-[10px] font-bold text-[#7a7a7a]">
                             <span>Transit Progress</span>
                             <span>{percent}%</span>
                           </div>
-                          <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                          <div className="w-full bg-[#f4f0ed] h-1.5 rounded-full overflow-hidden">
                             <div 
-                              className="bg-gradient-to-r from-teal-500 to-emerald-400 h-full rounded-full transition-all duration-300"
+                              className="bg-gradient-to-r from-[#6b5b95] to-[#87c7a1] h-full rounded-full transition-all duration-300"
                               style={{ width: `${percent}%` }}
                             />
                           </div>
@@ -1919,7 +1919,7 @@ export default function Home() {
                 )}
 
                 {selectedAmbulanceId === "amb_02" && (
-                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center text-xs text-slate-500">
+                  <div className="bg-white p-5 rounded-2xl border border-[#e8e0dd] shadow-sm text-center text-xs text-[#7a7a7a]">
                     <span>Ambulance MH-02-BY-5678 is currently stationed at base depot coordinates. Select Ramesh Kumar (MH-01-AX-1234) to run live routing simulation vectors.</span>
                   </div>
                 )}
@@ -1929,11 +1929,11 @@ export default function Home() {
               <div className="lg:col-span-2 space-y-6">
                 
                 {/* Live High-Precision Map Canvas */}
-                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div className="bg-white p-5 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-4">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                     <div>
-                      <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-wide">Live High-Precision Map</h3>
-                      <p className="text-[10px] text-slate-500 mt-0.5">Interactive visualization canvas displaying live emergency telemetry updates.</p>
+                      <h3 className="text-sm font-extrabold text-[#1a1a1a] uppercase tracking-wide">Live High-Precision Map</h3>
+                      <p className="text-[10px] text-[#7a7a7a] mt-0.5">Interactive visualization canvas displaying live emergency telemetry updates.</p>
                     </div>
                     {(() => {
                       const selectedAmb = ambulances.find(a => a.id === selectedAmbulanceId);
@@ -1951,7 +1951,7 @@ export default function Home() {
                     const selectedHosp = mumbaiHospitals.find(h => h.id === selectedHospitalId);
 
                     return selectedAmb ? (
-                      <div className="w-full relative rounded-2xl overflow-hidden shadow-inner border border-slate-200">
+                      <div className="w-full relative rounded-2xl overflow-hidden shadow-inner border border-[#e8e0dd]">
                         <LiveMap 
                           lat={selectedAmb.lat} 
                           lng={selectedAmb.lng} 
@@ -1965,7 +1965,7 @@ export default function Home() {
                         />
                       </div>
                     ) : (
-                      <div className="w-full h-96 rounded-2xl bg-slate-100 flex items-center justify-center text-xs text-slate-400 border border-slate-200">
+                      <div className="w-full h-96 rounded-2xl bg-[#f4f0ed] flex items-center justify-center text-xs text-slate-400 border border-[#e8e0dd]">
                         Initializing high-precision leaflet map engine...
                       </div>
                     );
@@ -1973,11 +1973,11 @@ export default function Home() {
                 </div>
 
                 {/* Emergency Hospital Locator & Haversine Distance Search Engine */}
-                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+                <div className="bg-white p-5 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-5">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-3">
                     <div>
-                      <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-wide">Hospital locator & Haversine GPS search</h3>
-                      <p className="text-[10px] text-slate-500 mt-0.5">Spherical calculations determine the physical nearest clinical escrows instantly.</p>
+                      <h3 className="text-sm font-extrabold text-[#1a1a1a] uppercase tracking-wide">Hospital locator & Haversine GPS search</h3>
+                      <p className="text-[10px] text-[#7a7a7a] mt-0.5">Spherical calculations determine the physical nearest clinical escrows instantly.</p>
                     </div>
 
                     {/* Hospital Search input */}
@@ -1988,7 +1988,7 @@ export default function Home() {
                         placeholder="Search hospital by name..."
                         value={hospitalSearchQuery}
                         onChange={(e) => setHospitalSearchQuery(e.target.value)}
-                        className="pl-9 pr-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 text-xs w-60"
+                        className="pl-9 pr-3.5 py-2 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-teal-500 text-xs w-60"
                       />
                     </div>
                   </div>
@@ -2032,12 +2032,12 @@ export default function Home() {
                               className={`border rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-200 ${
                                 isTarget 
                                   ? "bg-rose-50/50 border-rose-200" 
-                                  : "bg-slate-50 border-slate-200 hover:bg-slate-100"
+                                  : "bg-[#fdf8f5] border-[#e8e0dd] hover:bg-[#f4f0ed]"
                               }`}
                             >
                               <div className="space-y-1">
                                 <div className="flex items-center space-x-2">
-                                  <span className="text-xs font-black text-slate-800">{h.name}</span>
+                                  <span className="text-xs font-black text-[#1a1a1a]">{h.name}</span>
                                   {isNearest && (
                                     <span className="text-[8px] font-black uppercase tracking-widest bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full animate-bounce">
                                       🏆 Nearest
@@ -2049,7 +2049,7 @@ export default function Home() {
                                     </span>
                                   )}
                                 </div>
-                                <span className="text-[10px] text-slate-500 block">📍 {h.address}</span>
+                                <span className="text-[10px] text-[#7a7a7a] block">📍 {h.address}</span>
                                 <span className="text-[10px] font-mono text-slate-400 block">📞 Phone: {h.phone}</span>
                               </div>
 
@@ -2058,7 +2058,7 @@ export default function Home() {
                                 {h.distance !== null && (
                                   <div className="text-right">
                                     <span className="text-[9px] text-slate-400 block font-bold">Computed Distance</span>
-                                    <span className="text-xs font-black text-slate-800 font-mono">
+                                    <span className="text-xs font-black text-[#1a1a1a] font-mono">
                                       {h.distance.toFixed(2)} km
                                     </span>
                                   </div>
@@ -2078,7 +2078,7 @@ export default function Home() {
                                   className={`px-3 py-2 rounded-lg text-[10px] font-bold border transition-all ${
                                     isTarget 
                                       ? "bg-rose-600 border-rose-600 text-white shadow-sm" 
-                                      : "bg-white border-slate-200 text-slate-700 hover:bg-slate-100"
+                                      : "bg-white border-[#e8e0dd] text-slate-700 hover:bg-[#f4f0ed]"
                                   }`}
                                 >
                                   {isTarget ? "🎯 Destination Set" : "🗺️ Set as Destination"}
@@ -2088,7 +2088,7 @@ export default function Home() {
                           );
                         })}
                         {computedHospitals.length === 0 && (
-                          <div className="text-center text-xs text-slate-500 py-6">
+                          <div className="text-center text-xs text-[#7a7a7a] py-6">
                             No hospitals found matching your keyword search.
                           </div>
                         )}
@@ -2104,7 +2104,7 @@ export default function Home() {
                       <span className="animate-pulse w-2 h-2 rounded-full bg-teal-400" />
                       <span className="text-xs font-extrabold uppercase tracking-wider">Telemetry GPS Ledger Logs</span>
                     </div>
-                    <span className="text-[10px] text-slate-500 font-bold font-mono">Channel ID: #telemetry-stream</span>
+                    <span className="text-[10px] text-[#7a7a7a] font-bold font-mono">Channel ID: #telemetry-stream</span>
                   </div>
 
                   <div className="space-y-1.5 text-[10px] max-h-40 overflow-y-auto">
@@ -2116,14 +2116,14 @@ export default function Home() {
                             <span className="text-teal-400">[{new Date(log.timestamp).toLocaleTimeString()}]</span>
                             <span className="text-slate-300">{log.message}</span>
                           </div>
-                          <span className="text-slate-500 text-[9px] font-mono shrink-0 ml-4">
+                          <span className="text-[#7a7a7a] text-[9px] font-mono shrink-0 ml-4">
                             hash: {simulatedHash}
                           </span>
                         </div>
                       );
                     })}
                     {logs.filter(l => l.type === "transit").length === 0 && (
-                      <div className="text-slate-500 text-center py-4 italic">No telemetry transits recorded in the public ledger block yet. Click 'Simulate Transit' to dispatch emergency vehicles.</div>
+                      <div className="text-[#7a7a7a] text-center py-4 italic">No telemetry transits recorded in the public ledger block yet. Click 'Simulate Transit' to dispatch emergency vehicles.</div>
                     )}
                   </div>
                 </div>
@@ -2139,12 +2139,12 @@ export default function Home() {
           ------------------------------------------------------------- */}
       {selectedCampaign && !isPaymentModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl border border-slate-200 max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-3xl border border-[#e8e0dd] max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
             
             {/* Close Button */}
             <button
               onClick={() => setSelectedCampaign(null)}
-              className="absolute right-5 top-5 p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition-colors"
+              className="absolute right-5 top-5 p-2 text-slate-400 hover:text-[#7a7a7a] rounded-xl hover:bg-[#f4f0ed] transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -2153,7 +2153,7 @@ export default function Home() {
 
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-2">
-                <span className="text-[10px] font-extrabold uppercase bg-teal-50 text-teal-700 px-2.5 py-1 rounded-full border border-teal-200/50">
+                <span className="text-[10px] font-extrabold uppercase bg-teal-50 text-[#6b5b95] px-2.5 py-1 rounded-full border border-teal-200/50">
                   🛡️ {calculateTrustScore(selectedCampaign)}% Trust
                 </span>
                 <span className={`text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full ${
@@ -2162,18 +2162,18 @@ export default function Home() {
                   Need: {getUrgencyCategory(calculateUrgencyScore(selectedCampaign)).label}
                 </span>
               </div>
-              <h3 className="text-lg font-black text-slate-900 leading-snug pr-8">
+              <h3 className="text-lg font-black text-[#1a1a1a] leading-snug pr-8">
                 {selectedCampaign.title}
               </h3>
-              <span className="text-xs text-slate-500 font-semibold block mt-1">
+              <span className="text-xs text-[#7a7a7a] font-semibold block mt-1">
                 🏥 Hospital Location: {selectedCampaign.hospitalName}
               </span>
             </div>
 
             {/* Story */}
             <div className="space-y-2">
-              <span className="text-xs font-bold text-slate-800 block">Campaign Appeal & Story</span>
-              <p className="text-xs text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-150 font-serif">
+              <span className="text-xs font-bold text-[#1a1a1a] block">Campaign Appeal & Story</span>
+              <p className="text-xs text-[#7a7a7a] leading-relaxed bg-[#fdf8f5] p-4 rounded-2xl border border-slate-150 font-serif">
                 "{selectedCampaign.story}"
               </p>
             </div>
@@ -2189,19 +2189,19 @@ export default function Home() {
                 <div className="space-y-1.5">
                   <div className="flex justify-between">
                     <span>Document Auditing:</span>
-                    <span className={selectedCampaign.hasDocument ? "text-emerald-400 font-bold" : "text-slate-500"}>
+                    <span className={selectedCampaign.hasDocument ? "text-emerald-400 font-bold" : "text-[#7a7a7a]"}>
                       {selectedCampaign.hasDocument ? "OCR ATTACHED (+15%)" : "MISSING"}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Hospital API Check:</span>
-                    <span className={selectedCampaign.isHospitalVerified ? "text-emerald-400 font-bold" : "text-slate-500"}>
+                    <span className={selectedCampaign.isHospitalVerified ? "text-emerald-400 font-bold" : "text-[#7a7a7a]"}>
                       {selectedCampaign.isHospitalVerified ? "DOCTOR SIGNED (+20%)" : "PENDING"}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>AI Story Synthesis:</span>
-                    <span className={selectedCampaign.hasAIStory ? "text-emerald-400 font-bold" : "text-slate-500"}>
+                    <span className={selectedCampaign.hasAIStory ? "text-emerald-400 font-bold" : "text-[#7a7a7a]"}>
                       {selectedCampaign.hasAIStory ? "ACTIVE (+15%)" : "INACTIVE"}
                     </span>
                   </div>
@@ -2213,7 +2213,7 @@ export default function Home() {
                     <span className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse" />
                     <span className="font-bold text-white text-xs">{surgeryStatus}</span>
                   </div>
-                  <span className="text-slate-500 block text-[9px] mt-1 leading-snug">
+                  <span className="text-[#7a7a7a] block text-[9px] mt-1 leading-snug">
                     *Verified cost splits: Surgery {expenseBreakdown.surgery}%, Medicine {expenseBreakdown.medicines}%, ICU {expenseBreakdown.icu}%.
                   </span>
                 </div>
@@ -2237,7 +2237,7 @@ export default function Home() {
                     <div className="bg-slate-950/70 border border-slate-800/60 p-3 rounded-xl text-center">
                       <span className="text-[8px] text-slate-400 block uppercase font-bold tracking-wider">AI Trust Index</span>
                       <span className="text-xl font-black text-emerald-400 font-mono block mt-1">{(selectedCampaign as any).aiTrustScore}%</span>
-                      <span className="text-[8px] text-emerald-600 uppercase font-black tracking-widest mt-1 block">Verified Safe</span>
+                      <span className="text-[8px] text-[#87c7a1] uppercase font-black tracking-widest mt-1 block">Verified Safe</span>
                     </div>
                     <div className="bg-slate-950/70 border border-slate-800/60 p-3 rounded-xl text-center">
                       <span className="text-[8px] text-slate-400 block uppercase font-bold tracking-wider">Fraud Risk Rate</span>
@@ -2245,7 +2245,7 @@ export default function Home() {
                         (selectedCampaign as any).aiFraudProbability && (selectedCampaign as any).aiFraudProbability > 30 ? "text-rose-400" : "text-teal-400"
                       }`}>{((selectedCampaign as any).aiFraudProbability) || 0}%</span>
                       <span className={`text-[8px] uppercase font-black tracking-widest mt-1 block ${
-                        (selectedCampaign as any).aiFraudProbability && (selectedCampaign as any).aiFraudProbability > 30 ? "text-rose-600 animate-pulse" : "text-teal-600"
+                        (selectedCampaign as any).aiFraudProbability && (selectedCampaign as any).aiFraudProbability > 30 ? "text-rose-600 animate-pulse" : "text-[#6b5b95]"
                       }`}>{((selectedCampaign as any).aiFraudProbability) && (selectedCampaign as any).aiFraudProbability > 30 ? "Elevated Risk" : "Minimal Risk"}</span>
                     </div>
                   </div>
@@ -2253,7 +2253,7 @@ export default function Home() {
                   <div className="bg-slate-950 p-4 rounded-xl border border-slate-850 text-[10px] leading-relaxed space-y-1.5">
                     <div className="text-teal-400 font-bold border-b border-slate-900 pb-1 mb-1">🛡️ Clinical Alignment Audit Report:</div>
                     <p className="text-slate-300 italic">"{(selectedCampaign as any).aiAuditReport || 'Approved by AI auditor without clinical anomalies.'}"</p>
-                    <div className="text-[8px] text-slate-500 font-mono text-right pt-1 mt-1 border-t border-slate-900">
+                    <div className="text-[8px] text-[#7a7a7a] font-mono text-right pt-1 mt-1 border-t border-slate-900">
                       Audited at: {new Date((selectedCampaign as any).lastAuditedAt || Date.now()).toLocaleString()}
                     </div>
                   </div>
@@ -2311,7 +2311,7 @@ export default function Home() {
             <div className="flex items-center space-x-2 pt-2">
               <button
                 onClick={() => setSelectedCampaign(null)}
-                className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-3 rounded-xl text-xs font-bold transition-all text-center"
+                className="flex-1 bg-[#f4f0ed] hover:bg-slate-200 text-slate-700 py-3 rounded-xl text-xs font-bold transition-all text-center"
               >
                 Close Details
               </button>
@@ -2355,7 +2355,7 @@ export default function Home() {
             }
           `}} />
 
-          <div className="bg-white rounded-3xl border border-slate-200 max-w-lg w-full p-6 space-y-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-3xl border border-[#e8e0dd] max-w-lg w-full p-6 space-y-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
             
             {/* Close Button */}
             {!isSuccessAnimation && (
@@ -2365,7 +2365,7 @@ export default function Home() {
                   setSelectedCampaign(null);
                   setIsReceiptView(false);
                 }}
-                className="absolute right-5 top-5 p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition-colors"
+                className="absolute right-5 top-5 p-2 text-slate-400 hover:text-[#7a7a7a] rounded-xl hover:bg-[#f4f0ed] transition-colors"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -2378,36 +2378,36 @@ export default function Home() {
               <div className="py-8 text-center space-y-6 flex flex-col items-center">
                 <div className="relative flex items-center justify-center">
                   <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-teal-600"></div>
-                  <span className="absolute text-teal-600 text-[10px] font-black animate-pulse">🔒 SECURE</span>
+                  <span className="absolute text-[#6b5b95] text-[10px] font-black animate-pulse">🔒 SECURE</span>
                 </div>
                 
                 <div className="w-full text-center space-y-2">
-                  <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">PCI-DSS Escrow Settle Gateway</h3>
+                  <h3 className="text-sm font-black text-[#1a1a1a] uppercase tracking-widest">PCI-DSS Escrow Settle Gateway</h3>
                   
                   {/* Dynamic security status ticker */}
                   <div className="bg-slate-950 text-emerald-400 p-4 rounded-2xl text-[10px] font-mono text-left space-y-2 border border-slate-800 shadow-inner max-w-sm mx-auto leading-relaxed">
-                    <div className="flex items-center space-x-1.5 border-b border-slate-800 pb-1.5 mb-1.5 text-[9px] text-slate-500 font-bold uppercase">
+                    <div className="flex items-center space-x-1.5 border-b border-slate-800 pb-1.5 mb-1.5 text-[9px] text-[#7a7a7a] font-bold uppercase">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                       <span>Live Auth Node #tx-verify</span>
                     </div>
-                    <div className={`transition-all ${gatewayStep >= 0 ? "opacity-100 text-emerald-400" : "opacity-30 text-slate-500"}`}>
+                    <div className={`transition-all ${gatewayStep >= 0 ? "opacity-100 text-emerald-400" : "opacity-30 text-[#7a7a7a]"}`}>
                       {gatewayStep >= 0 ? "✔" : "⚡"} [CONN] Establishing secure vault link...
                     </div>
-                    <div className={`transition-all ${gatewayStep >= 1 ? "opacity-100 text-emerald-400" : "opacity-30 text-slate-500"}`}>
+                    <div className={`transition-all ${gatewayStep >= 1 ? "opacity-100 text-emerald-400" : "opacity-30 text-[#7a7a7a]"}`}>
                       {gatewayStep >= 1 ? "✔" : "⚡"} [AUTH] Tokenizing payment credentials...
                     </div>
-                    <div className={`transition-all ${gatewayStep >= 2 ? "opacity-100 text-emerald-400" : "opacity-30 text-slate-500"}`}>
+                    <div className={`transition-all ${gatewayStep >= 2 ? "opacity-100 text-emerald-400" : "opacity-30 text-[#7a7a7a]"}`}>
                       {gatewayStep >= 2 ? "✔" : "⚡"} [LOCK] Anchoring medical milestone escrow...
                     </div>
-                    <div className={`transition-all ${gatewayStep >= 3 ? "opacity-100 text-emerald-400" : "opacity-30 text-slate-500"}`}>
+                    <div className={`transition-all ${gatewayStep >= 3 ? "opacity-100 text-emerald-400" : "opacity-30 text-[#7a7a7a]"}`}>
                       {gatewayStep >= 3 ? "✔" : "⚡"} [SYNC] Broadcasting transaction ledger block...
                     </div>
                   </div>
                 </div>
 
-                <div className="w-40 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                <div className="w-40 bg-[#f4f0ed] h-1.5 rounded-full overflow-hidden">
                   <div 
-                    className="bg-gradient-to-r from-teal-500 to-emerald-400 h-full transition-all duration-300 rounded-full" 
+                    className="bg-gradient-to-r from-[#6b5b95] to-[#87c7a1] h-full transition-all duration-300 rounded-full" 
                     style={{ width: `${Math.min(100, (gatewayStep) * 25 + 25)}%` }}
                   />
                 </div>
@@ -2418,20 +2418,20 @@ export default function Home() {
               <div className="space-y-6">
                 
                 {/* Official Receipt Card Block */}
-                <div className="print-receipt-only border-2 border-dashed border-slate-200 rounded-2xl p-6 bg-slate-50/50 space-y-5 text-slate-800">
+                <div className="print-receipt-only border-2 border-dashed border-[#e8e0dd] rounded-2xl p-6 bg-[#fdf8f5]/50 space-y-5 text-[#1a1a1a]">
                   
                   {/* Receipt Header */}
-                  <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+                  <div className="flex items-center justify-between border-b border-[#e8e0dd] pb-4">
                     <div className="flex items-center space-x-2">
                       <span className="p-1.5 bg-teal-600 rounded-lg text-white font-bold text-sm">🏥</span>
                       <div>
-                        <h4 className="text-sm font-black uppercase tracking-wide text-slate-900">MediTrust AI Escrow</h4>
-                        <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest block mt-0.5">On-Chain Healthcare Registry</span>
+                        <h4 className="text-sm font-black uppercase tracking-wide text-[#1a1a1a]">MediTrust AI Escrow</h4>
+                        <span className="text-[9px] text-[#7a7a7a] font-bold uppercase tracking-widest block mt-0.5">On-Chain Healthcare Registry</span>
                       </div>
                     </div>
                     
                     {/* Mock Stamp Seal */}
-                    <div className="border border-emerald-500 text-emerald-600 px-2 py-1 rounded text-[8px] font-black uppercase tracking-widest rotate-6 select-none shrink-0 bg-white">
+                    <div className="border border-emerald-500 text-[#87c7a1] px-2 py-1 rounded text-[8px] font-black uppercase tracking-widest rotate-6 select-none shrink-0 bg-white">
                       ✔ Escrow Signed
                     </div>
                   </div>
@@ -2440,42 +2440,42 @@ export default function Home() {
                   <div className="space-y-3.5 text-xs">
                     <div className="flex justify-between border-b border-slate-100 pb-1.5">
                       <span className="text-slate-400 font-semibold">Transaction ID / Hash:</span>
-                      <span className="font-mono font-bold text-[10px] text-slate-800">{latestTxHash}</span>
+                      <span className="font-mono font-bold text-[10px] text-[#1a1a1a]">{latestTxHash}</span>
                     </div>
 
                     <div className="flex justify-between border-b border-slate-100 pb-1.5">
                       <span className="text-slate-400 font-semibold">Payment Timestamp:</span>
-                      <span className="font-bold text-slate-800">{new Date().toLocaleString()}</span>
+                      <span className="font-bold text-[#1a1a1a]">{new Date().toLocaleString()}</span>
                     </div>
 
                     <div className="flex justify-between border-b border-slate-100 pb-1.5">
                       <span className="text-slate-400 font-semibold">Medical Philanthropist:</span>
-                      <span className="font-extrabold text-slate-900 uppercase">{donorName}</span>
+                      <span className="font-extrabold text-[#1a1a1a] uppercase">{donorName}</span>
                     </div>
 
                     <div className="flex justify-between border-b border-slate-100 pb-1.5">
                       <span className="text-slate-400 font-semibold">Healthcare Recipient:</span>
-                      <span className="font-bold text-slate-800">{selectedCampaign.patientName} ({selectedCampaign.disease})</span>
+                      <span className="font-bold text-[#1a1a1a]">{selectedCampaign.patientName} ({selectedCampaign.disease})</span>
                     </div>
 
                     <div className="flex justify-between border-b border-slate-100 pb-1.5">
                       <span className="text-slate-400 font-semibold">Escrow Partner Hospital:</span>
-                      <span className="font-bold text-slate-800">{selectedCampaign.hospitalName}</span>
+                      <span className="font-bold text-[#1a1a1a]">{selectedCampaign.hospitalName}</span>
                     </div>
 
                     <div className="flex justify-between border-b border-slate-100 pb-1.5">
                       <span className="text-slate-400 font-semibold">Contribution Amount:</span>
-                      <span className="text-base font-black text-teal-700">₹{donationAmount.toLocaleString()}</span>
+                      <span className="text-base font-black text-[#6b5b95]">₹{donationAmount.toLocaleString()}</span>
                     </div>
 
                     <div className="flex justify-between">
                       <span className="text-slate-400 font-semibold">Payment Channel:</span>
-                      <span className="font-bold text-slate-800 uppercase font-mono">{paymentMethod}</span>
+                      <span className="font-bold text-[#1a1a1a] uppercase font-mono">{paymentMethod}</span>
                     </div>
                   </div>
 
                   {/* Receipt Footer disclaimer */}
-                  <div className="border-t border-slate-200 pt-4 text-[9px] text-slate-400 leading-relaxed text-center">
+                  <div className="border-t border-[#e8e0dd] pt-4 text-[9px] text-slate-400 leading-relaxed text-center">
                     This document certifies secure escrow allocation for direct clinical settlement under project ID `disha21`. Generative blockchain receipt established.
                   </div>
                 </div>
@@ -2488,7 +2488,7 @@ export default function Home() {
                       setSelectedCampaign(null);
                       setIsReceiptView(false);
                     }}
-                    className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-3 rounded-xl text-xs font-bold transition-all text-center"
+                    className="flex-1 bg-[#f4f0ed] hover:bg-slate-200 text-slate-700 py-3 rounded-xl text-xs font-bold transition-all text-center"
                   >
                     Close & Return
                   </button>
@@ -2508,17 +2508,17 @@ export default function Home() {
                 
                 {/* Modal Title */}
                 <div>
-                  <h3 className="text-base font-black text-slate-900">Secure Medical Contribution</h3>
-                  <p className="text-xs text-slate-500 mt-1">Select UPI or Credit Card. 100% of funds settle directly to clinical partner escrows.</p>
+                  <h3 className="text-base font-black text-[#1a1a1a]">Secure Medical Contribution</h3>
+                  <p className="text-xs text-[#7a7a7a] mt-1">Select UPI or Credit Card. 100% of funds settle directly to clinical partner escrows.</p>
                 </div>
 
                 {/* Selected Campaign Header */}
-                <div className="bg-slate-50 border border-slate-150 p-3 rounded-2xl text-xs flex justify-between items-center">
+                <div className="bg-[#fdf8f5] border border-slate-150 p-3 rounded-2xl text-xs flex justify-between items-center">
                   <div>
                     <span className="text-slate-400 block font-bold uppercase tracking-wider text-[9px]">Fundraising Target</span>
-                    <span className="font-extrabold text-slate-800 block mt-0.5">{selectedCampaign.patientName}</span>
+                    <span className="font-extrabold text-[#1a1a1a] block mt-0.5">{selectedCampaign.patientName}</span>
                   </div>
-                  <span className="text-[10px] font-black text-teal-700 bg-white border border-teal-500/25 px-2.5 py-0.5 rounded-full shrink-0">
+                  <span className="text-[10px] font-black text-[#6b5b95] bg-white border border-teal-500/25 px-2.5 py-0.5 rounded-full shrink-0">
                     ₹{donationAmount.toLocaleString()}
                   </span>
                 </div>
@@ -2526,25 +2526,25 @@ export default function Home() {
                 {/* Form Fields: Name and Amount */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-[10px] font-black text-slate-500 block mb-1 uppercase tracking-wide">Your Full Name</label>
+                    <label className="text-[10px] font-black text-[#7a7a7a] block mb-1 uppercase tracking-wide">Your Full Name</label>
                     <input
                       type="text"
                       placeholder="e.g. Rajesh Kumar"
                       value={donorName}
                       onChange={(e) => setDonorName(e.target.value)}
                       required
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-xs focus:outline-none focus:ring-2 focus:ring-teal-500"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-black text-slate-500 block mb-1 uppercase tracking-wide">Donation Amount (INR)</label>
+                    <label className="text-[10px] font-black text-[#7a7a7a] block mb-1 uppercase tracking-wide">Donation Amount (INR)</label>
                     <input
                       type="number"
                       value={donationAmount || ""}
                       onChange={(e) => setDonationAmount(Number(e.target.value))}
                       required
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-teal-500 font-bold"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-xs focus:outline-none focus:ring-2 focus:ring-teal-500 font-bold"
                     />
                   </div>
                 </div>
@@ -2559,7 +2559,7 @@ export default function Home() {
                       className={`py-2 rounded-lg text-[10px] font-bold transition-all border ${
                         donationAmount === amt
                           ? "bg-teal-600 border-teal-600 text-white shadow-sm"
-                          : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100"
+                          : "bg-[#fdf8f5] border-[#e8e0dd] text-slate-700 hover:bg-[#f4f0ed]"
                       }`}
                     >
                       ₹{amt.toLocaleString()}
@@ -2569,15 +2569,15 @@ export default function Home() {
 
                 {/* Payment Option Selector Tabs */}
                 <div className="border-t border-slate-100 pt-4">
-                  <span className="text-[10px] font-black text-slate-500 block mb-2.5 uppercase tracking-wide">Escrow Settle Channel</span>
-                  <div className="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-xl">
+                  <span className="text-[10px] font-black text-[#7a7a7a] block mb-2.5 uppercase tracking-wide">Escrow Settle Channel</span>
+                  <div className="grid grid-cols-2 gap-2 bg-[#f4f0ed] p-1 rounded-xl">
                     <button
                       type="button"
                       onClick={() => setPaymentMethod("upi")}
                       className={`py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center space-x-1.5 cursor-pointer ${
                         paymentMethod === "upi"
-                          ? "bg-white text-teal-700 shadow-sm"
-                          : "text-slate-600 hover:text-slate-800"
+                          ? "bg-white text-[#6b5b95] shadow-sm"
+                          : "text-[#7a7a7a] hover:text-[#1a1a1a]"
                       }`}
                     >
                       <span>⚡</span>
@@ -2588,8 +2588,8 @@ export default function Home() {
                       onClick={() => setPaymentMethod("card")}
                       className={`py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center space-x-1.5 cursor-pointer ${
                         paymentMethod === "card"
-                          ? "bg-white text-teal-700 shadow-sm"
-                          : "text-slate-600 hover:text-slate-800"
+                          ? "bg-white text-[#6b5b95] shadow-sm"
+                          : "text-[#7a7a7a] hover:text-[#1a1a1a]"
                       }`}
                     >
                       <span>💳</span>
@@ -2600,7 +2600,7 @@ export default function Home() {
 
                 {/* Payment Fields according to Selected Tab */}
                 {paymentMethod === "upi" ? (
-                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4.5 space-y-4">
+                  <div className="bg-[#fdf8f5] border border-[#e8e0dd] rounded-2xl p-4.5 space-y-4">
                     
                     {/* Simulated Dynamic Escrow QR Code */}
                     <div className="flex items-center space-x-4">
@@ -2610,7 +2610,7 @@ export default function Home() {
                         const upiLink = `upi://pay?pa=${upiAddress}&pn=MediTrust%20AI%20Escrow&am=${donationAmount || 5000}&cu=INR&tn=MediTrust%20Escrow%20Deposit`;
                         const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(upiLink)}&color=0d9488`;
                         return (
-                          <div className="w-16 h-16 bg-white border border-slate-200 rounded-xl p-1 shrink-0 flex items-center justify-center shadow-sm relative group overflow-hidden">
+                          <div className="w-16 h-16 bg-white border border-[#e8e0dd] rounded-xl p-1 shrink-0 flex items-center justify-center shadow-sm relative group overflow-hidden">
                             <img src={qrCodeUrl} alt="UPI QR Code" className="w-full h-full object-contain rounded" />
                             <div className="absolute inset-0 bg-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                               <span className="text-[7px] font-black bg-teal-600 text-white px-1 py-0.5 rounded leading-none">SCANNABLE</span>
@@ -2620,24 +2620,24 @@ export default function Home() {
                       })()}
 
                       <div className="text-[11px] leading-relaxed">
-                        <span className="font-extrabold text-slate-800 block">Scannable Real UPI QR Code</span>
-                        <p className="text-slate-500 mt-0.5">Scan this QR code with your actual mobile payment app (Paytm, Google Pay, PhonePe) to populate the amount in real-time!</p>
+                        <span className="font-extrabold text-[#1a1a1a] block">Scannable Real UPI QR Code</span>
+                        <p className="text-[#7a7a7a] mt-0.5">Scan this QR code with your actual mobile payment app (Paytm, Google Pay, PhonePe) to populate the amount in real-time!</p>
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-[9px] font-black text-slate-500 block mb-1 uppercase tracking-wide">Enter UPI ID</label>
+                      <label className="text-[9px] font-black text-[#7a7a7a] block mb-1 uppercase tracking-wide">Enter UPI ID</label>
                       <input
                         type="text"
                         placeholder="e.g. name@okhdfcbank"
                         value={upiId}
                         onChange={(e) => setUpiId(e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono"
+                        className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-xs focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono"
                       />
                     </div>
                   </div>
                 ) : (
-                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4.5 space-y-4">
+                  <div className="bg-[#fdf8f5] border border-[#e8e0dd] rounded-2xl p-4.5 space-y-4">
                     
                     {/* Simulated holographic Visual Credit Card with dynamic brand detection */}
                     {(() => {
@@ -2690,49 +2690,49 @@ export default function Home() {
                     {/* Inputs */}
                     <div className="space-y-2.5 text-xs">
                       <div>
-                        <label className="text-[9px] font-black text-slate-500 block mb-0.5 uppercase tracking-wide">Card Holder Name</label>
+                        <label className="text-[9px] font-black text-[#7a7a7a] block mb-0.5 uppercase tracking-wide">Card Holder Name</label>
                         <input
                           type="text"
                           placeholder="Name as printed on card"
                           value={cardHolder}
                           onChange={(e) => setCardHolder(e.target.value)}
-                          className="w-full px-3 py-1.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                          className="w-full px-3 py-1.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-teal-500"
                         />
                       </div>
 
                       <div>
-                        <label className="text-[9px] font-black text-slate-500 block mb-0.5 uppercase tracking-wide">Card Number</label>
+                        <label className="text-[9px] font-black text-[#7a7a7a] block mb-0.5 uppercase tracking-wide">Card Number</label>
                         <input
                           type="text"
                           maxLength={16}
                           placeholder="4000 1234 5678 9010"
                           value={cardNumber}
                           onChange={(e) => setCardNumber(e.target.value)}
-                          className="w-full px-3 py-1.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono"
+                          className="w-full px-3 py-1.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono"
                         />
                       </div>
 
                       <div className="grid grid-cols-2 gap-3.5">
                         <div>
-                          <label className="text-[9px] font-black text-slate-500 block mb-0.5 uppercase tracking-wide">Expiry Date</label>
+                          <label className="text-[9px] font-black text-[#7a7a7a] block mb-0.5 uppercase tracking-wide">Expiry Date</label>
                           <input
                             type="text"
                             placeholder="MM/YY"
                             maxLength={5}
                             value={cardExpiry}
                             onChange={(e) => setCardExpiry(e.target.value)}
-                            className="w-full px-3 py-1.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono"
+                            className="w-full px-3 py-1.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono"
                           />
                         </div>
                         <div>
-                          <label className="text-[9px] font-black text-slate-500 block mb-0.5 uppercase tracking-wide">CVV Code</label>
+                          <label className="text-[9px] font-black text-[#7a7a7a] block mb-0.5 uppercase tracking-wide">CVV Code</label>
                           <input
                             type="password"
                             placeholder="•••"
                             maxLength={3}
                             value={cardCvv}
                             onChange={(e) => setCardCvv(e.target.value)}
-                            className="w-full px-3 py-1.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono"
+                            className="w-full px-3 py-1.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono"
                           />
                         </div>
                       </div>
