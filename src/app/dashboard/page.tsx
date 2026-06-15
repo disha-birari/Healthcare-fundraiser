@@ -966,13 +966,13 @@ export default function Home() {
             {/* Search & Filter Header */}
             <div className="bg-white p-4 rounded-2xl border border-[#e8e0dd] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="relative flex-1">
-                <SearchIcon className="absolute left-3.5 top-3 w-5 h-5 text-slate-400" />
+                <SearchIcon className="absolute left-3.5 top-3 w-5 h-5 text-[#7a7a7a]" />
                 <input
                   type="text"
                   placeholder="Search by diagnosis, hospital name, or patient..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
+                  className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-[#6b5b95] text-sm"
                 />
               </div>
 
@@ -983,8 +983,8 @@ export default function Home() {
                   onClick={() => setUrgencyFilter("all")}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                     urgencyFilter === "all"
-                      ? "bg-teal-600 text-white shadow-sm"
-                      : "bg-[#f4f0ed] text-[#7a7a7a] hover:bg-slate-200"
+                      ? "bg-[#6b5b95] text-white shadow-sm"
+                      : "bg-[#f4f0ed] text-[#7a7a7a] hover:bg-[#e8e0dd]"
                   }`}
                 >
                   All Cases
@@ -1013,8 +1013,8 @@ export default function Home() {
                   onClick={() => setUrgencyFilter("Stable")}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center space-x-1 ${
                     urgencyFilter === "Stable"
-                      ? "bg-emerald-600 text-white shadow-sm"
-                      : "bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
+                      ? "bg-[#76b690] text-white shadow-sm"
+                      : "bg-[#f0faf5] text-[#87c7a1] hover:bg-[#e0f5eb]"
                   }`}
                 >
                   <span>🟢 Stable</span>
@@ -1025,10 +1025,10 @@ export default function Home() {
             {/* Campaign Cards Grid */}
             {filteredCampaigns.length === 0 ? (
               <div className="bg-white p-12 rounded-2xl border border-[#e8e0dd] shadow-sm text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12 mx-auto text-slate-400 mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12 mx-auto text-[#7a7a7a] mb-3">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z" />
                 </svg>
-                <h3 className="text-base font-bold text-slate-700">No campaigns found</h3>
+                <h3 className="text-base font-bold text-[#1a1a1a]">No campaigns found</h3>
                 <p className="text-xs text-[#7a7a7a] mt-1">Try modifying your keyword search or selected filters.</p>
               </div>
             ) : (
@@ -1052,7 +1052,7 @@ export default function Home() {
                             <span>{urgencyCat.label} Case</span>
                           </span>
                           <span className={`text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full ${
-                            trustScore >= 80 ? "bg-emerald-500/95" : "bg-teal-500/90"
+                            trustScore >= 80 ? "bg-[#f0faf5]0/95" : "bg-[#f5f0f8]0/90"
                           }`}>
                             🛡️ {trustScore}% Trust
                           </span>
@@ -1064,12 +1064,12 @@ export default function Home() {
                               {c.disease}
                             </span>
                             {c.isHospitalVerified && (
-                              <span className="text-[10px] font-bold bg-emerald-500/30 border border-emerald-400 text-emerald-100 px-2 py-0.5 rounded-full flex items-center space-x-0.5">
+                              <span className="text-[10px] font-bold bg-[#f0faf5]0/30 border border-[#97c7a8] text-[#f0faf5] px-2 py-0.5 rounded-full flex items-center space-x-0.5">
                                 <span>✔ Verified</span>
                               </span>
                             )}
                           </div>
-                          <h3 className="font-extrabold text-base mt-2 group-hover:text-emerald-300 transition-colors line-clamp-1">
+                          <h3 className="font-extrabold text-base mt-2 group-hover:text-[#a8d8b9] transition-colors line-clamp-1">
                             {c.title}
                           </h3>
                         </div>
@@ -1084,7 +1084,7 @@ export default function Home() {
                         <div className="space-y-3">
                           {/* Progress */}
                           <div>
-                            <div className="flex justify-between text-xs font-bold text-slate-700 mb-1.5">
+                            <div className="flex justify-between text-xs font-bold text-[#1a1a1a] mb-1.5">
                               <span>Raised: ₹{c.raisedAmount.toLocaleString()}</span>
                               <span>{percentRaised}%</span>
                             </div>
@@ -1096,12 +1096,12 @@ export default function Home() {
                             </div>
                             <div className="flex justify-between text-[10px] text-[#7a7a7a] mt-1">
                               <span>Goal: ₹{c.targetAmount.toLocaleString()}</span>
-                              <span className="font-bold text-slate-700">{c.daysLeft} days left</span>
+                              <span className="font-bold text-[#1a1a1a]">{c.daysLeft} days left</span>
                             </div>
                           </div>
 
                           {/* Predictive success text */}
-                          <div className="bg-teal-50 border border-teal-100/50 p-2.5 rounded-xl text-[10px] text-[#6b5b95] leading-snug flex items-start space-x-1.5">
+                          <div className="bg-[#f5f0f8] border border-[#b8a4d4]/50 p-2.5 rounded-xl text-[10px] text-[#6b5b95] leading-snug flex items-start space-x-1.5">
                             <SparklesIcon className="w-4 h-4 text-[#6b5b95] shrink-0 mt-0.5" />
                             <div>
                               <span className="font-bold block">AI Funding Projection:</span>
@@ -1113,13 +1113,13 @@ export default function Home() {
                         <div className="flex items-center space-x-2 pt-2">
                           <button
                             onClick={() => setSelectedCampaign(c)}
-                            className="flex-1 bg-[#f4f0ed] text-slate-700 hover:bg-slate-200 py-2.5 rounded-xl text-xs font-bold transition-all text-center"
+                            className="flex-1 bg-[#f4f0ed] text-[#1a1a1a] hover:bg-[#e8e0dd] py-2.5 rounded-xl text-xs font-bold transition-all text-center"
                           >
                             Details & Audits
                           </button>
                           <button
                             onClick={() => openDonationModal(c)}
-                            className="flex-1 bg-gradient-to-r from-teal-600 to-emerald-500 text-white hover:from-teal-700 hover:to-emerald-600 py-2.5 rounded-xl text-xs font-bold shadow-md shadow-teal-600/10 hover:shadow-lg transition-all"
+                            className="flex-1 bg-gradient-to-r from-[#6b5b95] to-[#87c7a1] text-white hover:from-[#5a4a80] hover:to-[#76b690] py-2.5 rounded-xl text-xs font-bold shadow-md shadow-[#6b5b95]/10 hover:shadow-lg transition-all"
                           >
                             Donate Securely
                           </button>
@@ -1147,7 +1147,7 @@ export default function Home() {
               </div>
 
               {/* Mock OCR Scan Box */}
-              <div className="border-2 border-dashed border-teal-200 bg-teal-50/20 p-5 rounded-2xl text-center space-y-4">
+              <div className="border-2 border-dashed border-[#b8a4d4] bg-[#f5f0f8]/20 p-5 rounded-2xl text-center space-y-4">
                 <div>
                   <h3 className="text-xs font-bold text-[#1a1a1a] uppercase tracking-wider">🌟 Hackathon Shortcut: Mock AI Medical OCR Scan</h3>
                   <p className="text-[11px] text-[#7a7a7a] mt-1">Simulate hospital prescription invoice parsing to auto-populate the form instantly and boost verification trust!</p>
@@ -1158,7 +1158,7 @@ export default function Home() {
                     type="button"
                     onClick={triggerOcrScan}
                     disabled={isOcrScanning}
-                    className="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 rounded-xl text-xs font-extrabold flex items-center space-x-2 shadow-md shadow-teal-600/10 transition-all disabled:opacity-50"
+                    className="bg-[#6b5b95] hover:bg-[#5a4a80] text-white px-5 py-2.5 rounded-xl text-xs font-extrabold flex items-center space-x-2 shadow-md shadow-[#6b5b95]/10 transition-all disabled:opacity-50"
                   >
                     <FileTextIcon className="w-4 h-4" />
                     <span>{isOcrScanning ? "Scanning Invoice Documents..." : "Simulate Prescription Upload & Scan"}</span>
@@ -1166,8 +1166,8 @@ export default function Home() {
                 </div>
 
                 {isOcrScanning && (
-                  <div className="bg-slate-900 text-slate-100 p-4 rounded-xl text-left text-[11px] font-mono space-y-1.5 shadow-inner max-h-48 overflow-y-auto animate-pulse">
-                    <div className="text-cyan-400 font-bold border-b border-slate-800 pb-1 mb-1">⚡ medi-ocr-engine v2.0.4 - scan initialized</div>
+                  <div className="bg-[#2d2d2d] text-[#fdf8f5] p-4 rounded-xl text-left text-[11px] font-mono space-y-1.5 shadow-inner max-h-48 overflow-y-auto animate-pulse">
+                    <div className="text-[#6b5b95] font-bold border-b border-[#3a3a3a] pb-1 mb-1">⚡ medi-ocr-engine v2.0.4 - scan initialized</div>
                     {ocrLog.map((log, index) => (
                       <div key={index} className="transition-all duration-300">{log}</div>
                     ))}
@@ -1185,7 +1185,7 @@ export default function Home() {
                       placeholder="e.g. Aarav Sharma"
                       value={patientName}
                       onChange={(e) => setPatientName(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-[#6b5b95]"
                     />
                   </div>
 
@@ -1196,7 +1196,7 @@ export default function Home() {
                       placeholder="e.g. Acute Lymphoblastic Leukemia"
                       value={disease}
                       onChange={(e) => setDisease(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-[#6b5b95]"
                     />
                   </div>
                 </div>
@@ -1208,7 +1208,7 @@ export default function Home() {
                     placeholder="e.g. Emergency bone marrow transplant treatment funding required"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-[#6b5b95]"
                   />
                 </div>
 
@@ -1220,7 +1220,7 @@ export default function Home() {
                       placeholder="e.g. Apollo Health City, Hyderabad"
                       value={hospitalName}
                       onChange={(e) => setHospitalName(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-[#6b5b95]"
                     />
                   </div>
 
@@ -1231,7 +1231,7 @@ export default function Home() {
                       placeholder="Goal in ₹"
                       value={targetAmount || ""}
                       onChange={(e) => setTargetAmount(Number(e.target.value))}
-                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-[#6b5b95]"
                     />
                   </div>
                 </div>
@@ -1244,7 +1244,7 @@ export default function Home() {
                       placeholder="e.g. 10"
                       value={daysLeft || ""}
                       onChange={(e) => setDaysLeft(Number(e.target.value))}
-                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-[#6b5b95]"
                     />
                   </div>
 
@@ -1263,7 +1263,7 @@ export default function Home() {
 
                       {isIpfsUploading ? (
                         // Pinned Loading Indicator
-                        <div className="border border-dashed border-teal-300 bg-teal-500/5 px-4 py-3 rounded-xl flex items-center justify-between text-xs font-mono text-[#6b5b95] animate-pulse">
+                        <div className="border border-dashed border-[#b8a4d4] bg-[#f5f0f8]0/5 px-4 py-3 rounded-xl flex items-center justify-between text-xs font-mono text-[#6b5b95] animate-pulse">
                           <span className="flex items-center space-x-2">
                             <span className="animate-spin text-sm">⌛</span>
                             <span>Pinning file securely to IPFS node...</span>
@@ -1271,9 +1271,9 @@ export default function Home() {
                         </div>
                       ) : ipfsCid ? (
                         // Success State with hash and link
-                        <div className="border border-dashed border-emerald-300 bg-emerald-500/5 px-4 py-3 rounded-xl space-y-2 text-[10px] font-mono text-emerald-800">
+                        <div className="border border-dashed border-[#97c7a8] bg-[#f0faf5]0/5 px-4 py-3 rounded-xl space-y-2 text-[10px] font-mono text-[#87c7a1]">
                           <div className="flex items-center justify-between">
-                            <span className="font-bold uppercase tracking-wider text-[8px] bg-emerald-500 text-white px-2 py-0.5 rounded leading-none">🛡️ IPFS SECURED</span>
+                            <span className="font-bold uppercase tracking-wider text-[8px] bg-[#f0faf5]0 text-white px-2 py-0.5 rounded leading-none">🛡️ IPFS SECURED</span>
                             <button
                               type="button"
                               onClick={() => { setIpfsUrl(""); setIpfsCid(""); setHasDocument(false); }}
@@ -1287,7 +1287,7 @@ export default function Home() {
                             href={ipfsUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-emerald-700 hover:text-emerald-900 font-extrabold flex items-center space-x-1 underline"
+                            className="text-[#87c7a1] hover:text-[#55956e] font-extrabold flex items-center space-x-1 underline"
                           >
                             <span>🌐 Open file on IPFS Gateway</span>
                           </a>
@@ -1296,7 +1296,7 @@ export default function Home() {
                         // Initial Upload CTA Button
                         <label
                           htmlFor="ipfs-file-uploader"
-                          className="flex items-center justify-center space-x-2 border-2 border-dashed border-[#e8e0dd] hover:border-teal-500 hover:bg-[#fdf8f5] py-3.5 rounded-xl cursor-pointer text-xs font-bold text-[#7a7a7a] hover:text-[#6b5b95] transition-all text-center"
+                          className="flex items-center justify-center space-x-2 border-2 border-dashed border-[#e8e0dd] hover:border-[#6b5b95] hover:bg-[#fdf8f5] py-3.5 rounded-xl cursor-pointer text-xs font-bold text-[#7a7a7a] hover:text-[#6b5b95] transition-all text-center"
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 shrink-0">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
@@ -1317,7 +1317,7 @@ export default function Home() {
                       disabled={isAiWriting}
                       className="text-xs font-bold text-[#6b5b95] hover:text-[#6b5b95] flex items-center space-x-1 disabled:opacity-50"
                     >
-                      <SparklesIcon className="w-3.5 h-3.5 text-teal-500" />
+                      <SparklesIcon className="w-3.5 h-3.5 text-[#6b5b95]" />
                       <span>{isAiWriting ? "Drafting with AI..." : "Generate AI Patient Story"}</span>
                     </button>
                   </div>
@@ -1326,14 +1326,14 @@ export default function Home() {
                     placeholder="Provide detailed descriptions of your medical situation and fundraising urgency, or use the Generate AI Patient Story button..."
                     value={story}
                     onChange={(e) => setStory(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-sm focus:outline-none focus:ring-2 focus:ring-[#6b5b95]"
                   />
                 </div>
 
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-teal-700 to-emerald-600 text-white hover:from-teal-800 hover:to-emerald-700 py-3 rounded-xl text-sm font-bold shadow-md shadow-teal-600/10 hover:shadow-lg transition-all"
+                    className="w-full bg-gradient-to-r from-[#5a4a80] to-[#76b690] text-white hover:from-[#4a3a70] hover:to-[#65a57f] py-3 rounded-xl text-sm font-bold shadow-md shadow-[#6b5b95]/10 hover:shadow-lg transition-all"
                   >
                     Publish Healthcare Appeal Campaign
                   </button>
@@ -1342,18 +1342,18 @@ export default function Home() {
             </div>
 
             {/* AI Real-time calculations Preview Sidebar */}
-            <div className="bg-gradient-to-tr from-slate-900 to-slate-950 text-white p-6 rounded-2xl shadow-xl flex flex-col justify-between">
+            <div className="bg-gradient-to-tr from-[#2d2d2d] to-[#1a1a1a] text-white p-6 rounded-2xl shadow-xl flex flex-col justify-between">
               <div>
-                <div className="flex items-center space-x-2 border-b border-slate-800 pb-3 mb-5">
-                  <SparklesIcon className="w-5 h-5 text-teal-400" />
-                  <h3 className="text-sm font-extrabold uppercase tracking-wider text-teal-400">Medi-AI Core Analytics</h3>
+                <div className="flex items-center space-x-2 border-b border-[#3a3a3a] pb-3 mb-5">
+                  <SparklesIcon className="w-5 h-5 text-[#6b5b95]" />
+                  <h3 className="text-sm font-extrabold uppercase tracking-wider text-[#6b5b95]">Medi-AI Core Analytics</h3>
                 </div>
 
                 {/* Score calculators preview box */}
                 <div className="space-y-6">
                   {/* Need/Urgency Level Preview */}
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Predictive Urgency Level</span>
+                    <span className="text-[10px] text-[#7a7a7a] uppercase tracking-widest font-bold">Predictive Urgency Level</span>
                     {(() => {
                       const mockCampaign: Campaign = {
                         id: "temp",
@@ -1380,10 +1380,10 @@ export default function Home() {
                               <span>{cat.icon}</span>
                               <span className={cat.color}>{cat.label} ({urgency}%)</span>
                             </span>
-                            <span className="text-slate-400 font-semibold">Weight: 0.5 severity</span>
+                            <span className="text-[#7a7a7a] font-semibold">Weight: 0.5 severity</span>
                           </div>
-                          <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div className="bg-teal-400 h-full rounded-full transition-all duration-300" style={{ width: `${urgency}%` }} />
+                          <div className="w-full bg-[#3a3a3a] h-2 rounded-full overflow-hidden">
+                            <div className="bg-[#b8a4d4] h-full rounded-full transition-all duration-300" style={{ width: `${urgency}%` }} />
                           </div>
                         </div>
                       );
@@ -1392,7 +1392,7 @@ export default function Home() {
 
                   {/* Trust Score Preview */}
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Calculated Platform Trust Index</span>
+                    <span className="text-[10px] text-[#7a7a7a] uppercase tracking-widest font-bold">Calculated Platform Trust Index</span>
                     {(() => {
                       const mockCampaign: Campaign = {
                         id: "temp",
@@ -1412,28 +1412,28 @@ export default function Home() {
                       const trust = calculateTrustScore(mockCampaign);
 
                       return (
-                        <div className="mt-2.5 bg-slate-900 border border-slate-800 p-4 rounded-xl space-y-2">
+                        <div className="mt-2.5 bg-[#2d2d2d] border border-[#3a3a3a] p-4 rounded-xl space-y-2">
                           <div className="flex items-center justify-between text-xs">
-                            <span className="font-extrabold text-teal-400">Total Trust Score:</span>
+                            <span className="font-extrabold text-[#6b5b95]">Total Trust Score:</span>
                             <span className="font-black text-white">{trust}%</span>
                           </div>
                           
-                          <div className="text-[10px] text-slate-400 space-y-1 pt-1.5 border-t border-slate-800">
+                          <div className="text-[10px] text-[#7a7a7a] space-y-1 pt-1.5 border-t border-[#3a3a3a]">
                             <div className="flex justify-between">
                               <span>Base Score:</span>
                               <span className="text-white">50%</span>
                             </div>
                             <div className="flex justify-between">
                               <span>Hospital Verification:</span>
-                              <span className={mockCampaign.isHospitalVerified ? "text-emerald-400 font-bold" : "text-[#7a7a7a]"}>+20%</span>
+                              <span className={mockCampaign.isHospitalVerified ? "text-[#87c7a1] font-bold" : "text-[#7a7a7a]"}>+20%</span>
                             </div>
                             <div className="flex justify-between">
                               <span>OCR Document Attach:</span>
-                              <span className={mockCampaign.hasDocument ? "text-emerald-400 font-bold" : "text-[#7a7a7a]"}>+15%</span>
+                              <span className={mockCampaign.hasDocument ? "text-[#87c7a1] font-bold" : "text-[#7a7a7a]"}>+15%</span>
                             </div>
                             <div className="flex justify-between">
                               <span>AI Generated Story:</span>
-                              <span className={mockCampaign.hasAIStory ? "text-emerald-400 font-bold" : "text-[#7a7a7a]"}>+15%</span>
+                              <span className={mockCampaign.hasAIStory ? "text-[#87c7a1] font-bold" : "text-[#7a7a7a]"}>+15%</span>
                             </div>
                           </div>
                         </div>
@@ -1443,7 +1443,7 @@ export default function Home() {
 
                   {/* Machine Learning success timeline */}
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase tracking-widest font-bold block mb-2">Predictive Funding Probability</span>
+                    <span className="text-[10px] text-[#7a7a7a] uppercase tracking-widest font-bold block mb-2">Predictive Funding Probability</span>
                     {(() => {
                       const mockCampaign: Campaign = {
                         id: "temp",
@@ -1461,7 +1461,7 @@ export default function Home() {
                         createdAt: new Date().toISOString()
                       };
                       return (
-                        <p className="text-xs text-slate-300 leading-relaxed bg-slate-900/60 border border-slate-800 p-3 rounded-xl italic">
+                        <p className="text-xs text-[#a0a0a0] leading-relaxed bg-[#2d2d2d]/60 border border-[#3a3a3a] p-3 rounded-xl italic">
                           "{getPredictiveIndicator(mockCampaign)}"
                         </p>
                       );
@@ -1471,7 +1471,7 @@ export default function Home() {
               </div>
 
               {/* Hackathon Judge Tip */}
-              <div className="mt-8 border-t border-slate-800 pt-4 text-[10px] text-teal-400 flex items-center space-x-1.5">
+              <div className="mt-8 border-t border-[#3a3a3a] pt-4 text-[10px] text-[#6b5b95] flex items-center space-x-1.5">
                 <span className="text-base">💡</span>
                 <p className="leading-snug">
                   <strong>Judge Pro Tip:</strong> Upload a medical prescription document via our simulated OCR scanner to instantly populate the data and gain the Trust Score bonuses automatically!
@@ -1506,20 +1506,20 @@ export default function Home() {
                         <div className="space-y-1.5">
                           <div className="flex items-center space-x-2">
                             <span className="text-xs font-black text-[#1a1a1a]">{c.patientName}</span>
-                            <span className="text-[10px] bg-slate-200/80 px-2 py-0.5 rounded text-[#7a7a7a] font-bold">{c.disease}</span>
+                            <span className="text-[10px] bg-[#e8e0dd]/80 px-2 py-0.5 rounded text-[#7a7a7a] font-bold">{c.disease}</span>
                             <span className={`text-[10px] px-2 py-0.5 rounded font-bold ${urgencyCat.bgColor} ${urgencyCat.color}`}>
                               {urgencyCat.icon} {urgencyCat.label}
                             </span>
                           </div>
                           
-                          <h4 className="text-xs font-bold text-slate-700 line-clamp-1">{c.title}</h4>
+                          <h4 className="text-xs font-bold text-[#1a1a1a] line-clamp-1">{c.title}</h4>
                           <span className="text-[10px] text-[#7a7a7a] block">🏥 {c.hospitalName}</span>
                         </div>
 
                         <div className="flex items-center space-x-3 shrink-0">
                           {/* Trust metrics */}
                           <div className="text-right">
-                            <span className="text-[10px] text-slate-400 block font-bold">Trust Indicator</span>
+                            <span className="text-[10px] text-[#7a7a7a] block font-bold">Trust Indicator</span>
                             <span className="text-xs font-black text-[#1a1a1a]">{trust}% Score</span>
                           </div>
 
@@ -1528,8 +1528,8 @@ export default function Home() {
                             onClick={() => toggleVerification(c.id!)}
                             className={`px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all border ${
                               c.isHospitalVerified
-                                ? "bg-emerald-50 border-emerald-200 text-emerald-700 hover:bg-emerald-100"
-                                : "bg-white border-[#e8e0dd] text-slate-700 hover:bg-[#f4f0ed] shadow-sm"
+                                ? "bg-[#f0faf5] border-[#a8d8b9] text-[#87c7a1] hover:bg-[#e0f5eb]"
+                                : "bg-white border-[#e8e0dd] text-[#1a1a1a] hover:bg-[#f4f0ed] shadow-sm"
                             }`}
                           >
                             {c.isHospitalVerified ? "✔ Doctor Verified" : "Verify Campaign"}
@@ -1545,7 +1545,7 @@ export default function Home() {
               <div className="bg-white p-6 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-6 flex flex-col justify-between">
                 <div className="space-y-5">
                   <div>
-                    <h2 className="text-sm font-extrabold uppercase tracking-wider text-[#1a1a1a] border-b border-slate-100 pb-2 flex items-center space-x-1.5">
+                    <h2 className="text-sm font-extrabold uppercase tracking-wider text-[#1a1a1a] border-b border-[#e8e0dd] pb-2 flex items-center space-x-1.5">
                       <span>🏥</span>
                       <span>Hospital Partner Portal</span>
                     </h2>
@@ -1554,7 +1554,7 @@ export default function Home() {
 
                   {/* Dynamic cost slider mock inputs */}
                   <div className="space-y-3">
-                    <span className="text-xs font-bold text-slate-700 block">Expense Usage Allocations (Simulated)</span>
+                    <span className="text-xs font-bold text-[#1a1a1a] block">Expense Usage Allocations (Simulated)</span>
                     <div className="space-y-2 text-xs">
                       <div>
                         <div className="flex justify-between mb-1">
@@ -1567,7 +1567,7 @@ export default function Home() {
                           max="80"
                           value={expenseBreakdown.surgery}
                           onChange={(e) => setExpenseBreakdown(prev => ({ ...prev, surgery: Number(e.target.value) }))}
-                          className="w-full accent-teal-600"
+                          className="w-full accent-[#6b5b95]"
                         />
                       </div>
 
@@ -1582,7 +1582,7 @@ export default function Home() {
                           max="80"
                           value={expenseBreakdown.medicines}
                           onChange={(e) => setExpenseBreakdown(prev => ({ ...prev, medicines: Number(e.target.value) }))}
-                          className="w-full accent-teal-600"
+                          className="w-full accent-[#6b5b95]"
                         />
                       </div>
 
@@ -1597,7 +1597,7 @@ export default function Home() {
                           max="80"
                           value={expenseBreakdown.icu}
                           onChange={(e) => setExpenseBreakdown(prev => ({ ...prev, icu: Number(e.target.value) }))}
-                          className="w-full accent-teal-600"
+                          className="w-full accent-[#6b5b95]"
                         />
                       </div>
                     </div>
@@ -1605,7 +1605,7 @@ export default function Home() {
 
                   {/* Treatment status tracker */}
                   <div className="space-y-2">
-                    <span className="text-xs font-bold text-slate-700 block">Surgery Treatment Tracker</span>
+                    <span className="text-xs font-bold text-[#1a1a1a] block">Surgery Treatment Tracker</span>
                     <div className="grid grid-cols-3 gap-1">
                       {["Scheduled", "In Progress", "Completed"].map(status => (
                         <button
@@ -1613,7 +1613,7 @@ export default function Home() {
                           onClick={() => setSurgeryStatus(status as any)}
                           className={`py-1.5 rounded text-[10px] font-bold transition-all border ${
                             surgeryStatus === status
-                              ? "bg-teal-600 border-teal-600 text-white"
+                              ? "bg-[#6b5b95] border-[#6b5b95] text-white"
                               : "bg-[#fdf8f5] border-[#e8e0dd] text-[#7a7a7a] hover:bg-[#f4f0ed]"
                           }`}
                         >
@@ -1624,17 +1624,17 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="bg-[#fdf8f5] border border-slate-150 p-3 rounded-xl text-[10px] text-[#7a7a7a] leading-snug">
+                <div className="bg-[#fdf8f5] border border-[#e8e0dd] p-3 rounded-xl text-[10px] text-[#7a7a7a] leading-snug">
                   <strong>Live Synchronization:</strong> Cost percentages and scheduling status are simulated on the donor detail panels immediately.
                 </div>
               </div>
             </div>
 
             {/* Blockchain-Style Transaction Ledger */}
-            <div className="bg-slate-900 text-slate-100 p-6 rounded-2xl shadow-lg font-mono">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
-                <div className="flex items-center space-x-2 text-emerald-400">
-                  <span className="animate-ping w-2 h-2 rounded-full bg-emerald-400" />
+            <div className="bg-[#2d2d2d] text-[#fdf8f5] p-6 rounded-2xl shadow-lg font-mono">
+              <div className="flex items-center justify-between border-b border-[#3a3a3a] pb-3 mb-4">
+                <div className="flex items-center space-x-2 text-[#87c7a1]">
+                  <span className="animate-ping w-2 h-2 rounded-full bg-[#87c7a1]" />
                   <span className="text-xs font-bold uppercase tracking-widest">MediTrust Transparent Ledger Stream (Local Node)</span>
                 </div>
                 <span className="text-[10px] text-[#7a7a7a] font-bold">Consensus: ACTIVE</span>
@@ -1644,10 +1644,10 @@ export default function Home() {
                 {logs.map((log, index) => {
                   const simulatedHash = "0x" + Math.floor(Math.random() * 10000000).toString(16).padEnd(8, "f") + "..." + Math.floor(Math.random() * 1000).toString(16);
                   return (
-                    <div key={log.id} className="flex flex-col md:flex-row md:justify-between border-b border-slate-800/50 py-1.5 hover:bg-slate-850 transition-colors">
+                    <div key={log.id} className="flex flex-col md:flex-row md:justify-between border-b border-[#3a3a3a]/50 py-1.5 hover:bg-[#3a3a3a] transition-colors">
                       <div className="flex items-start space-x-2">
-                        <span className="text-teal-400">[{new Date(log.timestamp).toLocaleTimeString()}]</span>
-                        <span className="text-slate-300">{log.message}</span>
+                        <span className="text-[#6b5b95]">[{new Date(log.timestamp).toLocaleTimeString()}]</span>
+                        <span className="text-[#a0a0a0]">{log.message}</span>
                       </div>
                       <span className="text-[#7a7a7a] text-[10px] md:text-right shrink-0 mt-0.5 md:mt-0">
                         Block hash: {simulatedHash}
@@ -1685,7 +1685,7 @@ export default function Home() {
                       medalBg = "bg-amber-50 border-amber-200 text-amber-900";
                     } else if (index === 1) {
                       medal = "🥈";
-                      medalBg = "bg-[#f4f0ed] border-slate-300 text-[#1a1a1a]";
+                      medalBg = "bg-[#f4f0ed] border-[#e8e0dd] text-[#1a1a1a]";
                     } else if (index === 2) {
                       medal = "🥉";
                       medalBg = "bg-orange-50 border-orange-200 text-orange-900";
@@ -1719,19 +1719,19 @@ export default function Home() {
             {/* Recent Live Activity Stream */}
             <div className="bg-white p-6 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-5">
               <div>
-                <h2 className="text-sm font-extrabold uppercase tracking-wider text-[#1a1a1a] border-b border-slate-100 pb-2">Recent Contributions</h2>
+                <h2 className="text-sm font-extrabold uppercase tracking-wider text-[#1a1a1a] border-b border-[#e8e0dd] pb-2">Recent Contributions</h2>
                 <p className="text-[10px] text-[#7a7a7a] mt-1">Real-time public donor transactions ledger feed updates.</p>
               </div>
 
               <div className="space-y-4">
                 {donors.slice(0, 5).map(d => (
-                  <div key={d.id} className="border-b border-slate-100 pb-3 last:border-b-0 space-y-1">
+                  <div key={d.id} className="border-b border-[#e8e0dd] pb-3 last:border-b-0 space-y-1">
                     <div className="flex justify-between text-xs">
                       <span className="font-bold text-[#1a1a1a]">{d.name}</span>
                       <span className="font-black text-[#87c7a1]">+₹{d.amount.toLocaleString()}</span>
                     </div>
                     <p className="text-[10px] text-[#7a7a7a] line-clamp-1">Support for: {d.campaignTitle}</p>
-                    <span className="text-[9px] text-slate-400 block">{new Date(d.timestamp).toLocaleTimeString()}</span>
+                    <span className="text-[9px] text-[#7a7a7a] block">{new Date(d.timestamp).toLocaleTimeString()}</span>
                   </div>
                 ))}
               </div>
@@ -1746,24 +1746,24 @@ export default function Home() {
           <section className="space-y-6 animate-in fade-in duration-200">
             
             {/* Top Geolocation Helper Banner */}
-            <div className="bg-gradient-to-r from-teal-900 to-slate-900 text-white p-6 rounded-2xl border border-slate-800 shadow-xl flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="bg-gradient-to-r from-[#3a2a60] to-[#2d2d2d] text-white p-6 rounded-2xl border border-[#3a3a3a] shadow-xl flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="space-y-1">
-                <h3 className="text-base font-extrabold flex items-center space-x-2 text-teal-300">
+                <h3 className="text-base font-extrabold flex items-center space-x-2 text-[#a8d8b9]">
                   <span className="relative flex h-2.5 w-2.5 shrink-0">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#b8a4d4] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#f5f0f8]0"></span>
                   </span>
                   <span>Interactive High-Precision GPS Ambulance Telemetry</span>
                 </h3>
-                <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
+                <p className="text-xs text-[#a0a0a0] max-w-2xl leading-relaxed">
                   Our system computes real-time spherical distances using the **Haversine Algorithm** to determine your nearest emergency medical center instantly. Select any hospital to auto-route active clinical transits.
                 </p>
               </div>
 
               <div className="shrink-0">
                 {userLat && userLng ? (
-                  <div className="bg-slate-800/80 border border-teal-500/30 px-4.5 py-2.5 rounded-xl text-xs font-mono flex items-center space-x-2">
-                    <span className="text-teal-400">📍 GPS Connected:</span>
+                  <div className="bg-[#3a3a3a]/80 border border-[#6b5b95]/30 px-4.5 py-2.5 rounded-xl text-xs font-mono flex items-center space-x-2">
+                    <span className="text-[#6b5b95]">📍 GPS Connected:</span>
                     <span>{userLat.toFixed(4)}°N, {userLng.toFixed(4)}°E</span>
                   </div>
                 ) : (
@@ -1786,18 +1786,18 @@ export default function Home() {
                 
                 {/* Ambulance Selector Card */}
                 <div className="bg-white p-5 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-4">
-                  <span className="text-xs font-bold text-slate-700 block uppercase tracking-wider">Active Ambulance Fleet</span>
+                  <span className="text-xs font-bold text-[#1a1a1a] block uppercase tracking-wider">Active Ambulance Fleet</span>
                   <div className="space-y-3">
                     {ambulances.map(amb => {
                       const isSelected = selectedAmbulanceId === amb.id;
                       let statusBadge = "bg-amber-50 text-amber-700 border-amber-200";
                       let pulseDot = "bg-amber-500";
                       if (amb.status === "In Transit") {
-                        statusBadge = "bg-teal-50 text-[#6b5b95] border-teal-200 animate-pulse";
-                        pulseDot = "bg-teal-500";
+                        statusBadge = "bg-[#f5f0f8] text-[#6b5b95] border-[#b8a4d4] animate-pulse";
+                        pulseDot = "bg-[#f5f0f8]0";
                       } else if (amb.status === "Arrived") {
-                        statusBadge = "bg-emerald-50 text-emerald-700 border-emerald-200";
-                        pulseDot = "bg-emerald-500";
+                        statusBadge = "bg-[#f0faf5] text-[#87c7a1] border-[#a8d8b9]";
+                        pulseDot = "bg-[#f0faf5]0";
                       }
 
                       return (
@@ -1806,7 +1806,7 @@ export default function Home() {
                           onClick={() => setSelectedAmbulanceId(amb.id)}
                           className={`w-full text-left p-4 rounded-xl border transition-all duration-200 flex flex-col space-y-2.5 ${
                             isSelected 
-                              ? "bg-slate-900 text-white border-slate-900 shadow-lg" 
+                              ? "bg-[#2d2d2d] text-white border-[#1a1a1a] shadow-lg" 
                               : "bg-[#fdf8f5] hover:bg-[#f4f0ed] text-[#1a1a1a] border-[#e8e0dd]"
                           }`}
                         >
@@ -1821,10 +1821,10 @@ export default function Home() {
                           </div>
 
                           <div className="text-[11px] leading-tight">
-                            <div className={isSelected ? "text-slate-300" : "text-[#7a7a7a]"}>
+                            <div className={isSelected ? "text-[#a0a0a0]" : "text-[#7a7a7a]"}>
                               Driver: <span className="font-bold">{amb.driverName}</span>
                             </div>
-                            <div className={`mt-0.5 font-mono ${isSelected ? "text-teal-400" : "text-[#7a7a7a]"}`}>
+                            <div className={`mt-0.5 font-mono ${isSelected ? "text-[#6b5b95]" : "text-[#7a7a7a]"}`}>
                               Coords: {amb.lat.toFixed(4)}, {amb.lng.toFixed(4)}
                             </div>
                           </div>
@@ -1834,8 +1834,8 @@ export default function Home() {
                             onClick={(e) => e.stopPropagation()}
                             className={`w-full py-1.5 rounded-lg text-[10px] font-bold text-center border transition-all ${
                               isSelected 
-                                ? "bg-slate-800 border-slate-700 text-teal-400 hover:bg-slate-750" 
-                                : "bg-white border-[#e8e0dd] text-slate-700 hover:bg-[#fdf8f5]"
+                                ? "bg-[#3a3a3a] border-[#4a4a4a] text-[#6b5b95] hover:bg-slate-750" 
+                                : "bg-white border-[#e8e0dd] text-[#1a1a1a] hover:bg-[#fdf8f5]"
                             }`}
                           >
                             📞 Direct Call Driver
@@ -1873,7 +1873,7 @@ export default function Home() {
                               style={{ width: `${percent}%` }}
                             />
                           </div>
-                          <div className="flex justify-between text-[9px] text-slate-400 font-mono">
+                          <div className="flex justify-between text-[9px] text-[#7a7a7a] font-mono">
                             <span>Santacruz Depot</span>
                             <span className="text-right truncate max-w-[150px]">
                               {mumbaiHospitals.find(h => h.id === selectedHospitalId)?.name || "Hospital"}
@@ -1898,7 +1898,7 @@ export default function Home() {
                       ) : (
                         <button
                           onClick={startTransitSimulation}
-                          className="flex-1 bg-gradient-to-r from-teal-600 to-emerald-500 text-white hover:from-teal-700 hover:to-emerald-600 py-2.5 rounded-xl text-xs font-extrabold shadow-md shadow-teal-600/10 hover:shadow-lg transition-all text-center flex items-center justify-center space-x-1.5"
+                          className="flex-1 bg-gradient-to-r from-[#6b5b95] to-[#87c7a1] text-white hover:from-[#5a4a80] hover:to-[#76b690] py-2.5 rounded-xl text-xs font-extrabold shadow-md shadow-[#6b5b95]/10 hover:shadow-lg transition-all text-center flex items-center justify-center space-x-1.5"
                         >
                           <span>⚡ Dispatch & Simulate</span>
                         </button>
@@ -1906,9 +1906,9 @@ export default function Home() {
                     </div>
 
                     {isSimulating && (
-                      <div className="bg-slate-900 text-slate-300 p-2.5 rounded-lg text-[9px] font-mono leading-relaxed space-y-0.5 border border-slate-800">
-                        <div className="text-teal-400 font-bold flex items-center space-x-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" />
+                      <div className="bg-[#2d2d2d] text-[#a0a0a0] p-2.5 rounded-lg text-[9px] font-mono leading-relaxed space-y-0.5 border border-[#3a3a3a]">
+                        <div className="text-[#6b5b95] font-bold flex items-center space-x-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#b8a4d4] animate-ping" />
                           <span>Transmitting GPS Telemetry...</span>
                         </div>
                         <div>Packet status: Connected</div>
@@ -1930,7 +1930,7 @@ export default function Home() {
                 
                 {/* Live High-Precision Map Canvas */}
                 <div className="bg-white p-5 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-4">
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <div className="flex items-center justify-between border-b border-[#e8e0dd] pb-3">
                     <div>
                       <h3 className="text-sm font-extrabold text-[#1a1a1a] uppercase tracking-wide">Live High-Precision Map</h3>
                       <p className="text-[10px] text-[#7a7a7a] mt-0.5">Interactive visualization canvas displaying live emergency telemetry updates.</p>
@@ -1938,7 +1938,7 @@ export default function Home() {
                     {(() => {
                       const selectedAmb = ambulances.find(a => a.id === selectedAmbulanceId);
                       return selectedAmb ? (
-                        <span className="text-[10px] font-bold text-slate-400 font-mono">
+                        <span className="text-[10px] font-bold text-[#7a7a7a] font-mono">
                           AMB LOC: {selectedAmb.lat.toFixed(5)}°N, {selectedAmb.lng.toFixed(5)}°E
                         </span>
                       ) : null;
@@ -1965,7 +1965,7 @@ export default function Home() {
                         />
                       </div>
                     ) : (
-                      <div className="w-full h-96 rounded-2xl bg-[#f4f0ed] flex items-center justify-center text-xs text-slate-400 border border-[#e8e0dd]">
+                      <div className="w-full h-96 rounded-2xl bg-[#f4f0ed] flex items-center justify-center text-xs text-[#7a7a7a] border border-[#e8e0dd]">
                         Initializing high-precision leaflet map engine...
                       </div>
                     );
@@ -1974,7 +1974,7 @@ export default function Home() {
 
                 {/* Emergency Hospital Locator & Haversine Distance Search Engine */}
                 <div className="bg-white p-5 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-5">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-3">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#e8e0dd] pb-3">
                     <div>
                       <h3 className="text-sm font-extrabold text-[#1a1a1a] uppercase tracking-wide">Hospital locator & Haversine GPS search</h3>
                       <p className="text-[10px] text-[#7a7a7a] mt-0.5">Spherical calculations determine the physical nearest clinical escrows instantly.</p>
@@ -1982,13 +1982,13 @@ export default function Home() {
 
                     {/* Hospital Search input */}
                     <div className="relative">
-                      <SearchIcon className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
+                      <SearchIcon className="absolute left-3 top-2.5 w-4 h-4 text-[#7a7a7a]" />
                       <input
                         type="text"
                         placeholder="Search hospital by name..."
                         value={hospitalSearchQuery}
                         onChange={(e) => setHospitalSearchQuery(e.target.value)}
-                        className="pl-9 pr-3.5 py-2 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-teal-500 text-xs w-60"
+                        className="pl-9 pr-3.5 py-2 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-[#6b5b95] text-xs w-60"
                       />
                     </div>
                   </div>
@@ -2039,7 +2039,7 @@ export default function Home() {
                                 <div className="flex items-center space-x-2">
                                   <span className="text-xs font-black text-[#1a1a1a]">{h.name}</span>
                                   {isNearest && (
-                                    <span className="text-[8px] font-black uppercase tracking-widest bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full animate-bounce">
+                                    <span className="text-[8px] font-black uppercase tracking-widest bg-emerald-100 text-[#87c7a1] px-2 py-0.5 rounded-full animate-bounce">
                                       🏆 Nearest
                                     </span>
                                   )}
@@ -2050,14 +2050,14 @@ export default function Home() {
                                   )}
                                 </div>
                                 <span className="text-[10px] text-[#7a7a7a] block">📍 {h.address}</span>
-                                <span className="text-[10px] font-mono text-slate-400 block">📞 Phone: {h.phone}</span>
+                                <span className="text-[10px] font-mono text-[#7a7a7a] block">📞 Phone: {h.phone}</span>
                               </div>
 
                               <div className="flex items-center space-x-4 shrink-0 justify-between md:justify-end">
                                 {/* Distance readout if calculated */}
                                 {h.distance !== null && (
                                   <div className="text-right">
-                                    <span className="text-[9px] text-slate-400 block font-bold">Computed Distance</span>
+                                    <span className="text-[9px] text-[#7a7a7a] block font-bold">Computed Distance</span>
                                     <span className="text-xs font-black text-[#1a1a1a] font-mono">
                                       {h.distance.toFixed(2)} km
                                     </span>
@@ -2078,7 +2078,7 @@ export default function Home() {
                                   className={`px-3 py-2 rounded-lg text-[10px] font-bold border transition-all ${
                                     isTarget 
                                       ? "bg-rose-600 border-rose-600 text-white shadow-sm" 
-                                      : "bg-white border-[#e8e0dd] text-slate-700 hover:bg-[#f4f0ed]"
+                                      : "bg-white border-[#e8e0dd] text-[#1a1a1a] hover:bg-[#f4f0ed]"
                                   }`}
                                 >
                                   {isTarget ? "🎯 Destination Set" : "🗺️ Set as Destination"}
@@ -2098,10 +2098,10 @@ export default function Home() {
                 </div>
 
                 {/* Real-time Telemetry Ledger updates */}
-                <div className="bg-slate-900 text-slate-100 p-5 rounded-2xl shadow-lg font-mono">
-                  <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
-                    <div className="flex items-center space-x-2 text-teal-400">
-                      <span className="animate-pulse w-2 h-2 rounded-full bg-teal-400" />
+                <div className="bg-[#2d2d2d] text-[#fdf8f5] p-5 rounded-2xl shadow-lg font-mono">
+                  <div className="flex items-center justify-between border-b border-[#3a3a3a] pb-3 mb-3">
+                    <div className="flex items-center space-x-2 text-[#6b5b95]">
+                      <span className="animate-pulse w-2 h-2 rounded-full bg-[#b8a4d4]" />
                       <span className="text-xs font-extrabold uppercase tracking-wider">Telemetry GPS Ledger Logs</span>
                     </div>
                     <span className="text-[10px] text-[#7a7a7a] font-bold font-mono">Channel ID: #telemetry-stream</span>
@@ -2111,10 +2111,10 @@ export default function Home() {
                     {logs.filter(l => l.type === "transit" || l.type === "creation").slice(0, 15).map((log) => {
                       const simulatedHash = "0x" + Math.floor(Math.random() * 10000000).toString(16).padEnd(8, "f");
                       return (
-                        <div key={log.id} className="flex justify-between border-b border-slate-800/40 py-1 hover:bg-slate-850 transition-colors">
+                        <div key={log.id} className="flex justify-between border-b border-[#3a3a3a]/40 py-1 hover:bg-[#3a3a3a] transition-colors">
                           <div className="flex items-start space-x-2">
-                            <span className="text-teal-400">[{new Date(log.timestamp).toLocaleTimeString()}]</span>
-                            <span className="text-slate-300">{log.message}</span>
+                            <span className="text-[#6b5b95]">[{new Date(log.timestamp).toLocaleTimeString()}]</span>
+                            <span className="text-[#a0a0a0]">{log.message}</span>
                           </div>
                           <span className="text-[#7a7a7a] text-[9px] font-mono shrink-0 ml-4">
                             hash: {simulatedHash}
@@ -2138,13 +2138,13 @@ export default function Home() {
           MODAL: CAMPAIGN DETAILS (AUDITS & EXPENSES)
           ------------------------------------------------------------- */}
       {selectedCampaign && !isPaymentModalOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2d2d2d]/60 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl border border-[#e8e0dd] max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
             
             {/* Close Button */}
             <button
               onClick={() => setSelectedCampaign(null)}
-              className="absolute right-5 top-5 p-2 text-slate-400 hover:text-[#7a7a7a] rounded-xl hover:bg-[#f4f0ed] transition-colors"
+              className="absolute right-5 top-5 p-2 text-[#7a7a7a] hover:text-[#7a7a7a] rounded-xl hover:bg-[#f4f0ed] transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -2153,7 +2153,7 @@ export default function Home() {
 
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-2">
-                <span className="text-[10px] font-extrabold uppercase bg-teal-50 text-[#6b5b95] px-2.5 py-1 rounded-full border border-teal-200/50">
+                <span className="text-[10px] font-extrabold uppercase bg-[#f5f0f8] text-[#6b5b95] px-2.5 py-1 rounded-full border border-[#b8a4d4]/50">
                   🛡️ {calculateTrustScore(selectedCampaign)}% Trust
                 </span>
                 <span className={`text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full ${
@@ -2173,44 +2173,44 @@ export default function Home() {
             {/* Story */}
             <div className="space-y-2">
               <span className="text-xs font-bold text-[#1a1a1a] block">Campaign Appeal & Story</span>
-              <p className="text-xs text-[#7a7a7a] leading-relaxed bg-[#fdf8f5] p-4 rounded-2xl border border-slate-150 font-serif">
+              <p className="text-xs text-[#7a7a7a] leading-relaxed bg-[#fdf8f5] p-4 rounded-2xl border border-[#e8e0dd] font-serif">
                 "{selectedCampaign.story}"
               </p>
             </div>
 
             {/* AI Trust auditing breakdown */}
-            <div className="bg-slate-900 text-white p-5 rounded-2xl shadow-inner space-y-4 font-mono">
-              <div className="flex items-center space-x-2 border-b border-slate-800 pb-2 mb-2">
-                <SparklesIcon className="w-4.5 h-4.5 text-teal-400 shrink-0" />
-                <h4 className="text-xs font-bold uppercase tracking-widest text-teal-400">Hospital Partner Trust Verification Matrix</h4>
+            <div className="bg-[#2d2d2d] text-white p-5 rounded-2xl shadow-inner space-y-4 font-mono">
+              <div className="flex items-center space-x-2 border-b border-[#3a3a3a] pb-2 mb-2">
+                <SparklesIcon className="w-4.5 h-4.5 text-[#6b5b95] shrink-0" />
+                <h4 className="text-xs font-bold uppercase tracking-widest text-[#6b5b95]">Hospital Partner Trust Verification Matrix</h4>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[10px] leading-relaxed">
                 <div className="space-y-1.5">
                   <div className="flex justify-between">
                     <span>Document Auditing:</span>
-                    <span className={selectedCampaign.hasDocument ? "text-emerald-400 font-bold" : "text-[#7a7a7a]"}>
+                    <span className={selectedCampaign.hasDocument ? "text-[#87c7a1] font-bold" : "text-[#7a7a7a]"}>
                       {selectedCampaign.hasDocument ? "OCR ATTACHED (+15%)" : "MISSING"}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Hospital API Check:</span>
-                    <span className={selectedCampaign.isHospitalVerified ? "text-emerald-400 font-bold" : "text-[#7a7a7a]"}>
+                    <span className={selectedCampaign.isHospitalVerified ? "text-[#87c7a1] font-bold" : "text-[#7a7a7a]"}>
                       {selectedCampaign.isHospitalVerified ? "DOCTOR SIGNED (+20%)" : "PENDING"}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>AI Story Synthesis:</span>
-                    <span className={selectedCampaign.hasAIStory ? "text-emerald-400 font-bold" : "text-[#7a7a7a]"}>
+                    <span className={selectedCampaign.hasAIStory ? "text-[#87c7a1] font-bold" : "text-[#7a7a7a]"}>
                       {selectedCampaign.hasAIStory ? "ACTIVE (+15%)" : "INACTIVE"}
                     </span>
                   </div>
                 </div>
 
-                <div className="border-t md:border-t-0 md:border-l border-slate-800/80 pt-2 md:pt-0 md:pl-4 space-y-1">
-                  <span className="text-slate-400 uppercase tracking-wider block font-bold text-[9px]">Live Treatment Status:</span>
+                <div className="border-t md:border-t-0 md:border-l border-[#3a3a3a]/80 pt-2 md:pt-0 md:pl-4 space-y-1">
+                  <span className="text-[#7a7a7a] uppercase tracking-wider block font-bold text-[9px]">Live Treatment Status:</span>
                   <div className="flex items-center space-x-1.5 mt-1">
-                    <span className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#b8a4d4] animate-pulse" />
                     <span className="font-bold text-white text-xs">{surgeryStatus}</span>
                   </div>
                   <span className="text-[#7a7a7a] block text-[9px] mt-1 leading-snug">
@@ -2221,28 +2221,28 @@ export default function Home() {
             </div>
 
             {/* RAG AI Medical Auditor Claims Verification Hub */}
-            <div className="bg-gradient-to-r from-teal-950 to-slate-900 border border-teal-500/30 p-5 rounded-2xl text-white space-y-4 font-mono shadow-lg">
-              <div className="flex items-center justify-between border-b border-teal-900 pb-2.5">
-                <div className="flex items-center space-x-2 text-teal-400">
-                  <span className="animate-pulse w-2.5 h-2.5 rounded-full bg-teal-400" />
+            <div className="bg-gradient-to-r from-teal-950 to-slate-900 border border-[#6b5b95]/30 p-5 rounded-2xl text-white space-y-4 font-mono shadow-lg">
+              <div className="flex items-center justify-between border-b border-[#3a2a60] pb-2.5">
+                <div className="flex items-center space-x-2 text-[#6b5b95]">
+                  <span className="animate-pulse w-2.5 h-2.5 rounded-full bg-[#b8a4d4]" />
                   <span className="text-xs font-black uppercase tracking-wider">RAG AI Medical Claims Auditor</span>
                 </div>
-                <span className="text-[9px] text-teal-500 uppercase font-extrabold tracking-widest bg-teal-950 px-2 py-0.5 rounded border border-teal-800/60">Node V3.0</span>
+                <span className="text-[9px] text-[#6b5b95] uppercase font-extrabold tracking-widest bg-[#1a0f2a] px-2 py-0.5 rounded border border-[#4a3a70]/60">Node V3.0</span>
               </div>
 
               {(selectedCampaign as any).aiTrustScore ? (
                 // Audited State View
                 <div className="space-y-3.5">
                   <div className="grid grid-cols-2 gap-3.5">
-                    <div className="bg-slate-950/70 border border-slate-800/60 p-3 rounded-xl text-center">
-                      <span className="text-[8px] text-slate-400 block uppercase font-bold tracking-wider">AI Trust Index</span>
-                      <span className="text-xl font-black text-emerald-400 font-mono block mt-1">{(selectedCampaign as any).aiTrustScore}%</span>
+                    <div className="bg-[#1a1a1a]/70 border border-[#3a3a3a]/60 p-3 rounded-xl text-center">
+                      <span className="text-[8px] text-[#7a7a7a] block uppercase font-bold tracking-wider">AI Trust Index</span>
+                      <span className="text-xl font-black text-[#87c7a1] font-mono block mt-1">{(selectedCampaign as any).aiTrustScore}%</span>
                       <span className="text-[8px] text-[#87c7a1] uppercase font-black tracking-widest mt-1 block">Verified Safe</span>
                     </div>
-                    <div className="bg-slate-950/70 border border-slate-800/60 p-3 rounded-xl text-center">
-                      <span className="text-[8px] text-slate-400 block uppercase font-bold tracking-wider">Fraud Risk Rate</span>
+                    <div className="bg-[#1a1a1a]/70 border border-[#3a3a3a]/60 p-3 rounded-xl text-center">
+                      <span className="text-[8px] text-[#7a7a7a] block uppercase font-bold tracking-wider">Fraud Risk Rate</span>
                       <span className={`text-xl font-black font-mono block mt-1 ${
-                        (selectedCampaign as any).aiFraudProbability && (selectedCampaign as any).aiFraudProbability > 30 ? "text-rose-400" : "text-teal-400"
+                        (selectedCampaign as any).aiFraudProbability && (selectedCampaign as any).aiFraudProbability > 30 ? "text-rose-400" : "text-[#6b5b95]"
                       }`}>{((selectedCampaign as any).aiFraudProbability) || 0}%</span>
                       <span className={`text-[8px] uppercase font-black tracking-widest mt-1 block ${
                         (selectedCampaign as any).aiFraudProbability && (selectedCampaign as any).aiFraudProbability > 30 ? "text-rose-600 animate-pulse" : "text-[#6b5b95]"
@@ -2250,10 +2250,10 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="bg-slate-950 p-4 rounded-xl border border-slate-850 text-[10px] leading-relaxed space-y-1.5">
-                    <div className="text-teal-400 font-bold border-b border-slate-900 pb-1 mb-1">🛡️ Clinical Alignment Audit Report:</div>
-                    <p className="text-slate-300 italic">"{(selectedCampaign as any).aiAuditReport || 'Approved by AI auditor without clinical anomalies.'}"</p>
-                    <div className="text-[8px] text-[#7a7a7a] font-mono text-right pt-1 mt-1 border-t border-slate-900">
+                  <div className="bg-[#1a1a1a] p-4 rounded-xl border border-[#2a2a2a] text-[10px] leading-relaxed space-y-1.5">
+                    <div className="text-[#6b5b95] font-bold border-b border-[#1a1a1a] pb-1 mb-1">🛡️ Clinical Alignment Audit Report:</div>
+                    <p className="text-[#a0a0a0] italic">"{(selectedCampaign as any).aiAuditReport || 'Approved by AI auditor without clinical anomalies.'}"</p>
+                    <div className="text-[8px] text-[#7a7a7a] font-mono text-right pt-1 mt-1 border-t border-[#1a1a1a]">
                       Audited at: {new Date((selectedCampaign as any).lastAuditedAt || Date.now()).toLocaleString()}
                     </div>
                   </div>
@@ -2261,7 +2261,7 @@ export default function Home() {
                   <button
                     onClick={() => runRAGAudit(selectedCampaign)}
                     disabled={isAuditing}
-                    className="w-full bg-slate-950/60 hover:bg-slate-900 text-teal-400 hover:text-teal-300 py-2.5 rounded-xl text-xs font-bold transition-all border border-slate-800 flex items-center justify-center space-x-1.5"
+                    className="w-full bg-[#1a1a1a]/60 hover:bg-[#2d2d2d] text-[#6b5b95] hover:text-[#a8d8b9] py-2.5 rounded-xl text-xs font-bold transition-all border border-[#3a3a3a] flex items-center justify-center space-x-1.5"
                   >
                     <span>{isAuditing ? "Re-Auditing Claims Vector..." : "🔄 Run RAG Auditor Re-Scan"}</span>
                   </button>
@@ -2269,27 +2269,27 @@ export default function Home() {
               ) : (
                 // Unaudited State View
                 <div className="space-y-3.5">
-                  <div className="text-[10px] text-slate-300 leading-relaxed bg-slate-950/50 p-3 rounded-xl border border-slate-850">
-                    <span className="font-bold text-teal-400 block mb-0.5">Vector Knowledge Base Cross-Referencing</span>
+                  <div className="text-[10px] text-[#a0a0a0] leading-relaxed bg-[#1a1a1a]/50 p-3 rounded-xl border border-[#2a2a2a]">
+                    <span className="font-bold text-[#6b5b95] block mb-0.5">Vector Knowledge Base Cross-Referencing</span>
                     This appeal has not gone through active RAG auditing. Run the auditor to cross-check clinical guidelines, drug standards, and partner hospital fee grids.
                   </div>
 
                   {/* Document input editor preview */}
                   <div className="space-y-1.5">
-                    <label className="text-[9px] text-slate-400 uppercase tracking-wider block font-bold">Input/OCR Prescription Text to Audit (Optional)</label>
+                    <label className="text-[9px] text-[#7a7a7a] uppercase tracking-wider block font-bold">Input/OCR Prescription Text to Audit (Optional)</label>
                     <textarea
                       rows={2}
                       value={auditText}
                       onChange={(e) => setAuditText(e.target.value)}
                       placeholder="Leave empty to auto-extract official mock clinical records for verification..."
-                      className="w-full bg-slate-950/90 text-slate-300 border border-slate-800 p-2.5 rounded-xl text-[10px] focus:outline-none focus:ring-1 focus:ring-teal-500 font-mono"
+                      className="w-full bg-[#1a1a1a]/90 text-[#a0a0a0] border border-[#3a3a3a] p-2.5 rounded-xl text-[10px] focus:outline-none focus:ring-1 focus:ring-[#6b5b95] font-mono"
                     />
                   </div>
 
                   <button
                     onClick={() => runRAGAudit(selectedCampaign)}
                     disabled={isAuditing}
-                    className="w-full bg-gradient-to-r from-teal-600 to-emerald-500 text-slate-950 hover:from-teal-500 hover:to-emerald-400 py-3 rounded-xl text-xs font-black shadow-lg shadow-teal-500/10 hover:shadow-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
+                    className="w-full bg-gradient-to-r from-[#6b5b95] to-[#87c7a1] text-slate-950 hover:from-[#6b5b95] hover:to-[#87c7a1] py-3 rounded-xl text-xs font-black shadow-lg shadow-teal-500/10 hover:shadow-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
                   >
                     {isAuditing ? (
                       <>
@@ -2311,13 +2311,13 @@ export default function Home() {
             <div className="flex items-center space-x-2 pt-2">
               <button
                 onClick={() => setSelectedCampaign(null)}
-                className="flex-1 bg-[#f4f0ed] hover:bg-slate-200 text-slate-700 py-3 rounded-xl text-xs font-bold transition-all text-center"
+                className="flex-1 bg-[#f4f0ed] hover:bg-[#e8e0dd] text-[#1a1a1a] py-3 rounded-xl text-xs font-bold transition-all text-center"
               >
                 Close Details
               </button>
               <button
                 onClick={() => openDonationModal(selectedCampaign)}
-                className="flex-1 bg-gradient-to-r from-teal-700 to-emerald-600 text-white hover:from-teal-800 hover:to-emerald-700 py-3 rounded-xl text-xs font-bold shadow-md shadow-teal-600/10 hover:shadow-lg transition-all"
+                className="flex-1 bg-gradient-to-r from-[#5a4a80] to-[#76b690] text-white hover:from-[#4a3a70] hover:to-[#65a57f] py-3 rounded-xl text-xs font-bold shadow-md shadow-[#6b5b95]/10 hover:shadow-lg transition-all"
               >
                 Proceed to Secure Donation
               </button>
@@ -2330,7 +2330,7 @@ export default function Home() {
           MODAL: PAYMENT AND SUCCESS PANEL
           ------------------------------------------------------------- */}
       {isPaymentModalOpen && selectedCampaign && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2d2d2d]/60 backdrop-blur-sm flex items-center justify-center p-4">
           {/* Custom print target stylesheet to focus printing entirely on receipt */}
           <style dangerouslySetInnerHTML={{ __html: `
             @media print {
@@ -2365,7 +2365,7 @@ export default function Home() {
                   setSelectedCampaign(null);
                   setIsReceiptView(false);
                 }}
-                className="absolute right-5 top-5 p-2 text-slate-400 hover:text-[#7a7a7a] rounded-xl hover:bg-[#f4f0ed] transition-colors"
+                className="absolute right-5 top-5 p-2 text-[#7a7a7a] hover:text-[#7a7a7a] rounded-xl hover:bg-[#f4f0ed] transition-colors"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -2377,7 +2377,7 @@ export default function Home() {
             {isSuccessAnimation ? (
               <div className="py-8 text-center space-y-6 flex flex-col items-center">
                 <div className="relative flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-teal-600"></div>
+                  <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#6b5b95]"></div>
                   <span className="absolute text-[#6b5b95] text-[10px] font-black animate-pulse">🔒 SECURE</span>
                 </div>
                 
@@ -2385,21 +2385,21 @@ export default function Home() {
                   <h3 className="text-sm font-black text-[#1a1a1a] uppercase tracking-widest">PCI-DSS Escrow Settle Gateway</h3>
                   
                   {/* Dynamic security status ticker */}
-                  <div className="bg-slate-950 text-emerald-400 p-4 rounded-2xl text-[10px] font-mono text-left space-y-2 border border-slate-800 shadow-inner max-w-sm mx-auto leading-relaxed">
-                    <div className="flex items-center space-x-1.5 border-b border-slate-800 pb-1.5 mb-1.5 text-[9px] text-[#7a7a7a] font-bold uppercase">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                  <div className="bg-[#1a1a1a] text-[#87c7a1] p-4 rounded-2xl text-[10px] font-mono text-left space-y-2 border border-[#3a3a3a] shadow-inner max-w-sm mx-auto leading-relaxed">
+                    <div className="flex items-center space-x-1.5 border-b border-[#3a3a3a] pb-1.5 mb-1.5 text-[9px] text-[#7a7a7a] font-bold uppercase">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#87c7a1] animate-ping" />
                       <span>Live Auth Node #tx-verify</span>
                     </div>
-                    <div className={`transition-all ${gatewayStep >= 0 ? "opacity-100 text-emerald-400" : "opacity-30 text-[#7a7a7a]"}`}>
+                    <div className={`transition-all ${gatewayStep >= 0 ? "opacity-100 text-[#87c7a1]" : "opacity-30 text-[#7a7a7a]"}`}>
                       {gatewayStep >= 0 ? "✔" : "⚡"} [CONN] Establishing secure vault link...
                     </div>
-                    <div className={`transition-all ${gatewayStep >= 1 ? "opacity-100 text-emerald-400" : "opacity-30 text-[#7a7a7a]"}`}>
+                    <div className={`transition-all ${gatewayStep >= 1 ? "opacity-100 text-[#87c7a1]" : "opacity-30 text-[#7a7a7a]"}`}>
                       {gatewayStep >= 1 ? "✔" : "⚡"} [AUTH] Tokenizing payment credentials...
                     </div>
-                    <div className={`transition-all ${gatewayStep >= 2 ? "opacity-100 text-emerald-400" : "opacity-30 text-[#7a7a7a]"}`}>
+                    <div className={`transition-all ${gatewayStep >= 2 ? "opacity-100 text-[#87c7a1]" : "opacity-30 text-[#7a7a7a]"}`}>
                       {gatewayStep >= 2 ? "✔" : "⚡"} [LOCK] Anchoring medical milestone escrow...
                     </div>
-                    <div className={`transition-all ${gatewayStep >= 3 ? "opacity-100 text-emerald-400" : "opacity-30 text-[#7a7a7a]"}`}>
+                    <div className={`transition-all ${gatewayStep >= 3 ? "opacity-100 text-[#87c7a1]" : "opacity-30 text-[#7a7a7a]"}`}>
                       {gatewayStep >= 3 ? "✔" : "⚡"} [SYNC] Broadcasting transaction ledger block...
                     </div>
                   </div>
@@ -2423,7 +2423,7 @@ export default function Home() {
                   {/* Receipt Header */}
                   <div className="flex items-center justify-between border-b border-[#e8e0dd] pb-4">
                     <div className="flex items-center space-x-2">
-                      <span className="p-1.5 bg-teal-600 rounded-lg text-white font-bold text-sm">🏥</span>
+                      <span className="p-1.5 bg-[#6b5b95] rounded-lg text-white font-bold text-sm">🏥</span>
                       <div>
                         <h4 className="text-sm font-black uppercase tracking-wide text-[#1a1a1a]">MediTrust AI Escrow</h4>
                         <span className="text-[9px] text-[#7a7a7a] font-bold uppercase tracking-widest block mt-0.5">On-Chain Healthcare Registry</span>
@@ -2431,51 +2431,51 @@ export default function Home() {
                     </div>
                     
                     {/* Mock Stamp Seal */}
-                    <div className="border border-emerald-500 text-[#87c7a1] px-2 py-1 rounded text-[8px] font-black uppercase tracking-widest rotate-6 select-none shrink-0 bg-white">
+                    <div className="border border-[#87c7a1] text-[#87c7a1] px-2 py-1 rounded text-[8px] font-black uppercase tracking-widest rotate-6 select-none shrink-0 bg-white">
                       ✔ Escrow Signed
                     </div>
                   </div>
 
                   {/* Transaction Metadata Table */}
                   <div className="space-y-3.5 text-xs">
-                    <div className="flex justify-between border-b border-slate-100 pb-1.5">
-                      <span className="text-slate-400 font-semibold">Transaction ID / Hash:</span>
+                    <div className="flex justify-between border-b border-[#e8e0dd] pb-1.5">
+                      <span className="text-[#7a7a7a] font-semibold">Transaction ID / Hash:</span>
                       <span className="font-mono font-bold text-[10px] text-[#1a1a1a]">{latestTxHash}</span>
                     </div>
 
-                    <div className="flex justify-between border-b border-slate-100 pb-1.5">
-                      <span className="text-slate-400 font-semibold">Payment Timestamp:</span>
+                    <div className="flex justify-between border-b border-[#e8e0dd] pb-1.5">
+                      <span className="text-[#7a7a7a] font-semibold">Payment Timestamp:</span>
                       <span className="font-bold text-[#1a1a1a]">{new Date().toLocaleString()}</span>
                     </div>
 
-                    <div className="flex justify-between border-b border-slate-100 pb-1.5">
-                      <span className="text-slate-400 font-semibold">Medical Philanthropist:</span>
+                    <div className="flex justify-between border-b border-[#e8e0dd] pb-1.5">
+                      <span className="text-[#7a7a7a] font-semibold">Medical Philanthropist:</span>
                       <span className="font-extrabold text-[#1a1a1a] uppercase">{donorName}</span>
                     </div>
 
-                    <div className="flex justify-between border-b border-slate-100 pb-1.5">
-                      <span className="text-slate-400 font-semibold">Healthcare Recipient:</span>
+                    <div className="flex justify-between border-b border-[#e8e0dd] pb-1.5">
+                      <span className="text-[#7a7a7a] font-semibold">Healthcare Recipient:</span>
                       <span className="font-bold text-[#1a1a1a]">{selectedCampaign.patientName} ({selectedCampaign.disease})</span>
                     </div>
 
-                    <div className="flex justify-between border-b border-slate-100 pb-1.5">
-                      <span className="text-slate-400 font-semibold">Escrow Partner Hospital:</span>
+                    <div className="flex justify-between border-b border-[#e8e0dd] pb-1.5">
+                      <span className="text-[#7a7a7a] font-semibold">Escrow Partner Hospital:</span>
                       <span className="font-bold text-[#1a1a1a]">{selectedCampaign.hospitalName}</span>
                     </div>
 
-                    <div className="flex justify-between border-b border-slate-100 pb-1.5">
-                      <span className="text-slate-400 font-semibold">Contribution Amount:</span>
+                    <div className="flex justify-between border-b border-[#e8e0dd] pb-1.5">
+                      <span className="text-[#7a7a7a] font-semibold">Contribution Amount:</span>
                       <span className="text-base font-black text-[#6b5b95]">₹{donationAmount.toLocaleString()}</span>
                     </div>
 
                     <div className="flex justify-between">
-                      <span className="text-slate-400 font-semibold">Payment Channel:</span>
+                      <span className="text-[#7a7a7a] font-semibold">Payment Channel:</span>
                       <span className="font-bold text-[#1a1a1a] uppercase font-mono">{paymentMethod}</span>
                     </div>
                   </div>
 
                   {/* Receipt Footer disclaimer */}
-                  <div className="border-t border-[#e8e0dd] pt-4 text-[9px] text-slate-400 leading-relaxed text-center">
+                  <div className="border-t border-[#e8e0dd] pt-4 text-[9px] text-[#7a7a7a] leading-relaxed text-center">
                     This document certifies secure escrow allocation for direct clinical settlement under project ID `disha21`. Generative blockchain receipt established.
                   </div>
                 </div>
@@ -2488,14 +2488,14 @@ export default function Home() {
                       setSelectedCampaign(null);
                       setIsReceiptView(false);
                     }}
-                    className="flex-1 bg-[#f4f0ed] hover:bg-slate-200 text-slate-700 py-3 rounded-xl text-xs font-bold transition-all text-center"
+                    className="flex-1 bg-[#f4f0ed] hover:bg-[#e8e0dd] text-[#1a1a1a] py-3 rounded-xl text-xs font-bold transition-all text-center"
                   >
                     Close & Return
                   </button>
                   
                   <button
                     onClick={() => window.print()}
-                    className="flex-1 bg-gradient-to-r from-teal-700 to-emerald-600 text-white hover:from-teal-800 hover:to-emerald-700 py-3 rounded-xl text-xs font-extrabold shadow-md shadow-teal-600/10 hover:shadow-lg transition-all text-center flex items-center justify-center space-x-1.5"
+                    className="flex-1 bg-gradient-to-r from-[#5a4a80] to-[#76b690] text-white hover:from-[#4a3a70] hover:to-[#65a57f] py-3 rounded-xl text-xs font-extrabold shadow-md shadow-[#6b5b95]/10 hover:shadow-lg transition-all text-center flex items-center justify-center space-x-1.5"
                   >
                     <span>🖨️ Download / Print Receipt</span>
                   </button>
@@ -2513,9 +2513,9 @@ export default function Home() {
                 </div>
 
                 {/* Selected Campaign Header */}
-                <div className="bg-[#fdf8f5] border border-slate-150 p-3 rounded-2xl text-xs flex justify-between items-center">
+                <div className="bg-[#fdf8f5] border border-[#e8e0dd] p-3 rounded-2xl text-xs flex justify-between items-center">
                   <div>
-                    <span className="text-slate-400 block font-bold uppercase tracking-wider text-[9px]">Fundraising Target</span>
+                    <span className="text-[#7a7a7a] block font-bold uppercase tracking-wider text-[9px]">Fundraising Target</span>
                     <span className="font-extrabold text-[#1a1a1a] block mt-0.5">{selectedCampaign.patientName}</span>
                   </div>
                   <span className="text-[10px] font-black text-[#6b5b95] bg-white border border-teal-500/25 px-2.5 py-0.5 rounded-full shrink-0">
@@ -2533,7 +2533,7 @@ export default function Home() {
                       value={donorName}
                       onChange={(e) => setDonorName(e.target.value)}
                       required
-                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-xs focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-xs focus:outline-none focus:ring-2 focus:ring-[#6b5b95]"
                     />
                   </div>
 
@@ -2544,7 +2544,7 @@ export default function Home() {
                       value={donationAmount || ""}
                       onChange={(e) => setDonationAmount(Number(e.target.value))}
                       required
-                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-xs focus:outline-none focus:ring-2 focus:ring-teal-500 font-bold"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-xs focus:outline-none focus:ring-2 focus:ring-[#6b5b95] font-bold"
                     />
                   </div>
                 </div>
@@ -2558,8 +2558,8 @@ export default function Home() {
                       onClick={() => setDonationAmount(amt)}
                       className={`py-2 rounded-lg text-[10px] font-bold transition-all border ${
                         donationAmount === amt
-                          ? "bg-teal-600 border-teal-600 text-white shadow-sm"
-                          : "bg-[#fdf8f5] border-[#e8e0dd] text-slate-700 hover:bg-[#f4f0ed]"
+                          ? "bg-[#6b5b95] border-[#6b5b95] text-white shadow-sm"
+                          : "bg-[#fdf8f5] border-[#e8e0dd] text-[#1a1a1a] hover:bg-[#f4f0ed]"
                       }`}
                     >
                       ₹{amt.toLocaleString()}
@@ -2568,7 +2568,7 @@ export default function Home() {
                 </div>
 
                 {/* Payment Option Selector Tabs */}
-                <div className="border-t border-slate-100 pt-4">
+                <div className="border-t border-[#e8e0dd] pt-4">
                   <span className="text-[10px] font-black text-[#7a7a7a] block mb-2.5 uppercase tracking-wide">Escrow Settle Channel</span>
                   <div className="grid grid-cols-2 gap-2 bg-[#f4f0ed] p-1 rounded-xl">
                     <button
@@ -2612,8 +2612,8 @@ export default function Home() {
                         return (
                           <div className="w-16 h-16 bg-white border border-[#e8e0dd] rounded-xl p-1 shrink-0 flex items-center justify-center shadow-sm relative group overflow-hidden">
                             <img src={qrCodeUrl} alt="UPI QR Code" className="w-full h-full object-contain rounded" />
-                            <div className="absolute inset-0 bg-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                              <span className="text-[7px] font-black bg-teal-600 text-white px-1 py-0.5 rounded leading-none">SCANNABLE</span>
+                            <div className="absolute inset-0 bg-[#f5f0f8]0/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                              <span className="text-[7px] font-black bg-[#6b5b95] text-white px-1 py-0.5 rounded leading-none">SCANNABLE</span>
                             </div>
                           </div>
                         );
@@ -2632,7 +2632,7 @@ export default function Home() {
                         placeholder="e.g. name@okhdfcbank"
                         value={upiId}
                         onChange={(e) => setUpiId(e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-xs focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono"
+                        className="w-full px-3 py-2 rounded-xl border border-[#e8e0dd] text-xs focus:outline-none focus:ring-2 focus:ring-[#6b5b95] font-mono"
                       />
                     </div>
                   </div>
@@ -2642,26 +2642,26 @@ export default function Home() {
                     {/* Simulated holographic Visual Credit Card with dynamic brand detection */}
                     {(() => {
                       let brandName = "SECURE CARD";
-                      let cardGradient = "from-slate-950 to-slate-800 border-slate-700/25";
+                      let cardGradient = "from-[#1a1a1a] to-[#3a3a3a] border-[#4a4a4a]/25";
                       
                       if (cardNumber.startsWith("4")) {
                         brandName = "VISA";
-                        cardGradient = "from-slate-950 via-slate-900 to-teal-900 border-teal-500/20";
+                        cardGradient = "from-[#1a1a1a] via-[#2d2d2d] to-[#3a2a60] border-[#6b5b95]/20";
                       } else if (cardNumber.startsWith("5")) {
                         brandName = "MASTERCARD";
-                        cardGradient = "from-slate-950 via-slate-900 to-rose-950 border-rose-500/20";
+                        cardGradient = "from-[#1a1a1a] via-[#2d2d2d] to-[#3a1a1a] border-[#e66465]/20";
                       } else if (cardNumber.startsWith("3")) {
                         brandName = "AMEX";
-                        cardGradient = "from-slate-950 via-slate-900 to-amber-950 border-amber-500/20";
+                        cardGradient = "from-[#1a1a1a] via-[#2d2d2d] to-[#3a2a1a] border-[#f59e0b]/20";
                       } else if (cardNumber.startsWith("6")) {
                         brandName = "RUPAY";
-                        cardGradient = "from-slate-950 via-slate-900 to-blue-900 border-blue-500/20";
+                        cardGradient = "from-[#1a1a1a] via-[#2d2d2d] to-[#1a2a4a] border-[#3b82f6]/20";
                       }
 
                       return (
                         <div className={`w-full h-28 bg-gradient-to-tr ${cardGradient} rounded-xl p-3.5 text-white flex flex-col justify-between shadow-md relative overflow-hidden font-mono select-none border transition-all duration-300`}>
                           <div className="flex justify-between items-start">
-                            <span className="text-[9px] text-teal-400 font-bold uppercase tracking-widest leading-none">MediTrust Gateway</span>
+                            <span className="text-[9px] text-[#6b5b95] font-bold uppercase tracking-widest leading-none">MediTrust Gateway</span>
                             <span className="text-xs italic font-bold tracking-wider">{brandName}</span>
                           </div>
 
@@ -2671,15 +2671,15 @@ export default function Home() {
 
                           <div className="flex justify-between text-[8px] leading-tight">
                             <div>
-                              <span className="text-slate-400 block text-[6px] uppercase">Card Holder</span>
+                              <span className="text-[#7a7a7a] block text-[6px] uppercase">Card Holder</span>
                               <span className="font-bold truncate max-w-[120px] block mt-0.5">{cardHolder ? cardHolder.toUpperCase() : "YOUR NAME"}</span>
                             </div>
                             <div>
-                              <span className="text-slate-400 block text-[6px] uppercase">Expires</span>
+                              <span className="text-[#7a7a7a] block text-[6px] uppercase">Expires</span>
                               <span className="font-bold block mt-0.5">{cardExpiry ? cardExpiry : "MM/YY"}</span>
                             </div>
                             <div>
-                              <span className="text-slate-400 block text-[6px] uppercase">CVV</span>
+                              <span className="text-[#7a7a7a] block text-[6px] uppercase">CVV</span>
                               <span className="font-bold block mt-0.5">{cardCvv ? cardCvv : "•••"}</span>
                             </div>
                           </div>
@@ -2696,7 +2696,7 @@ export default function Home() {
                           placeholder="Name as printed on card"
                           value={cardHolder}
                           onChange={(e) => setCardHolder(e.target.value)}
-                          className="w-full px-3 py-1.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-teal-500"
+                          className="w-full px-3 py-1.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-[#6b5b95]"
                         />
                       </div>
 
@@ -2708,7 +2708,7 @@ export default function Home() {
                           placeholder="4000 1234 5678 9010"
                           value={cardNumber}
                           onChange={(e) => setCardNumber(e.target.value)}
-                          className="w-full px-3 py-1.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono"
+                          className="w-full px-3 py-1.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-[#6b5b95] font-mono"
                         />
                       </div>
 
@@ -2721,7 +2721,7 @@ export default function Home() {
                             maxLength={5}
                             value={cardExpiry}
                             onChange={(e) => setCardExpiry(e.target.value)}
-                            className="w-full px-3 py-1.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono"
+                            className="w-full px-3 py-1.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-[#6b5b95] font-mono"
                           />
                         </div>
                         <div>
@@ -2732,7 +2732,7 @@ export default function Home() {
                             maxLength={3}
                             value={cardCvv}
                             onChange={(e) => setCardCvv(e.target.value)}
-                            className="w-full px-3 py-1.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono"
+                            className="w-full px-3 py-1.5 rounded-xl border border-[#e8e0dd] focus:outline-none focus:ring-2 focus:ring-[#6b5b95] font-mono"
                           />
                         </div>
                       </div>
@@ -2744,7 +2744,7 @@ export default function Home() {
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-teal-700 to-emerald-600 text-white hover:from-teal-800 hover:to-emerald-700 py-3 rounded-xl text-xs font-black tracking-widest uppercase shadow-md shadow-teal-600/10 hover:shadow-lg transition-all cursor-pointer"
+                    className="w-full bg-gradient-to-r from-[#5a4a80] to-[#76b690] text-white hover:from-[#4a3a70] hover:to-[#65a57f] py-3 rounded-xl text-xs font-black tracking-widest uppercase shadow-md shadow-[#6b5b95]/10 hover:shadow-lg transition-all cursor-pointer"
                   >
                     🔐 Secure Escrow Deposit
                   </button>

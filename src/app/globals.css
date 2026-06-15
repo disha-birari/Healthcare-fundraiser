@@ -156,11 +156,11 @@
 
 /* Premium Medical Glassmorphism Panels */
 .glass-panel {
-  background: rgba(10, 20, 30, 0.45);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(107, 91, 149, 0.15);
+  box-shadow: 0 10px 40px -10px rgba(107, 91, 149, 0.25);
 }
 
 .glass-panel-hover {
@@ -168,9 +168,9 @@
 }
 
 .glass-panel-hover:hover {
-  background: rgba(15, 28, 48, 0.6);
-  border-color: rgba(6, 182, 212, 0.25);
-  box-shadow: 0 15px 50px -10px rgba(6, 182, 212, 0.15);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(107, 91, 149, 0.35);
+  box-shadow: 0 15px 50px -10px rgba(107, 91, 149, 0.25);
   transform: translateY(-2px);
 }
 
@@ -178,8 +178,8 @@
 .bg-grid-medical {
   background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(6, 182, 212, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(6, 182, 212, 0.015) 1px, transparent 1px);
+    linear-gradient(to right, rgba(107, 91, 149, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(107, 91, 149, 0.1) 1px, transparent 1px);
 }
 
 /* ECG Line Animation Simulation */
@@ -191,8 +191,8 @@
 .ecg-grid {
   position: relative;
   background-image: 
-    linear-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(135, 199, 161, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(135, 199, 161, 0.15) 1px, transparent 1px);
   background-size: 10px 10px;
 }
 

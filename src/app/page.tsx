@@ -210,23 +210,23 @@ export default function MediTrustLanding() {
               
               {/* Overlay absolute telemetry screens to mirror the visual design */}
               <motion.div 
-                whileHover={{ scale: 1.05, borderColor: "rgba(34, 211, 238, 0.3)" }}
-                className="absolute top-4 left-4 p-3 rounded-xl bg-zinc-950/80 border border-white/[0.04] text-[9px] font-mono text-cyan-300/90 space-y-1 max-w-[120px] backdrop-blur-md shadow-2xl transition-all duration-300 cursor-help"
+                whileHover={{ scale: 1.05, borderColor: "rgba(107, 91, 149, 0.3)" }}
+                className="absolute top-4 left-4 p-3 rounded-xl bg-white/80 border border-[#e8e0dd] text-[9px] font-mono text-[#6b5b95]/90 space-y-1 max-w-[120px] backdrop-blur-md shadow-2xl transition-all duration-300 cursor-help"
               >
-                <div className="font-bold border-b border-zinc-800 pb-0.5 text-cyan-400">BRAIN_SCAN</div>
+                <div className="font-bold border-b border-[#e8e0dd] pb-0.5 text-[#6b5b95]">BRAIN_SCAN</div>
                 <div>FREQ: 9.8 Hz</div>
                 <div>STATE: ACTIVE</div>
-                <div className="text-[7px] text-zinc-500">SYSTEM: NORMAL</div>
+                <div className="text-[7px] text-[#7a7a7a]">SYSTEM: NORMAL</div>
               </motion.div>
 
-              <motion.div 
-                whileHover={{ scale: 1.05, borderColor: "rgba(34, 211, 238, 0.3)" }}
-                className="absolute bottom-6 right-4 p-3 rounded-xl bg-zinc-950/80 border border-white/[0.04] text-[9px] font-mono text-cyan-300/90 space-y-1 max-w-[125px] backdrop-blur-md shadow-2xl transition-all duration-300 cursor-help"
+              <motion.div
+                whileHover={{ scale: 1.05, borderColor: "rgba(107, 91, 149, 0.3)" }}
+                className="absolute bottom-6 right-4 p-3 rounded-xl bg-white/80 border border-[#e8e0dd] text-[9px] font-mono text-[#6b5b95]/90 space-y-1 max-w-[125px] backdrop-blur-md shadow-2xl transition-all duration-300 cursor-help"
               >
-                <div className="font-bold border-b border-zinc-800 pb-0.5 text-cyan-400">TELEMETRY_LOG</div>
+                <div className="font-bold border-b border-[#e8e0dd] pb-0.5 text-[#6b5b95]">TELEMETRY_LOG</div>
                 <div>PULSE: 74 BPM</div>
                 <div>SYNC: 100% SECURE</div>
-                <div className="text-[7px] text-emerald-400">STATUS: ON CHAIN</div>
+                <div className="text-[7px] text-[#87c7a1]">STATUS: ON CHAIN</div>
               </motion.div>
             </div>
           </motion.div>
