@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
 import { doc, updateDoc, addDoc, collection } from 'firebase/firestore';
-import { retrieveGuidelines } from '@/lib/rag';
+import { retrieveGuidelines, queryOllamaLocal } from '@/lib/rag';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export async function POST(request: Request) {
   try {
-    const { campaignId, ocrText, disease, patientName } = await request.json();
+    const { campaignId, ocrText, disease, patientName, provider = "gemini", ollamaModel = "llama3" } = await request.json();
 
     if (!campaignId || !disease || !ocrText) {
       return NextResponse.json(
@@ -15,9 +15,9 @@ export async function POST(request: Request) {
       );
     }
 
-    console.log(`Starting Gemini RAG AI Medical Audit for Campaign: ${campaignId}, Disease: ${disease}`);
+    console.log(`Starting RAG AI Medical Audit (${provider}) for Campaign: ${campaignId}, Disease: ${disease}`);
 
-    // 1. Retrieve the closest clinical reference guidelines using the Gemini RAG Retriever
+    // 1. Retrieve the closest clinical reference guidelines using the RAG Retriever
     const ragMatches = await retrieveGuidelines(disease, ocrText);
     const primaryMatch = ragMatches[0];
     const retrievedContext = primaryMatch 
@@ -30,7 +30,17 @@ export async function POST(request: Request) {
       auditDetails: "Prescription and diagnosis matches Apollo Health standards perfectly. Approved by AI Auditor."
     };
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    // --- OLLAMA LOCAL MODE: Trigger local on-premise open-source LLM ---
+    if (provider === "ollama") {
+      console.log(`Auditing via Ollama Local LLM model (${ollamaModel})...`);
+      const promptText = `
+        Scanned Prescription/Invoice Text:\n"${ocrText}"\n
+        Patient Declared Disease: ${disease}\n
+        Clinical Context:\n${retrievedContext}
+      `;
+      auditResult = await queryOllamaLocal(promptText, ollamaModel);
+    } else {
+      const apiKey = process.env.GEMINI_API_KEY;
 
     // --- FALLBACK INTERPRETER: If Gemini API Key is missing or invalid ---
     if (!apiKey || apiKey === "mock-key" || apiKey.trim() === "") {
