@@ -30,6 +30,30 @@ export interface ActivityLog {
   timestamp: string;
 }
 
+export interface MedicalReceipt {
+  id?: string;
+  receiptId: string;
+  txHash: string;
+  patientName: string;
+  patientId: string;
+  donorName: string;
+  hospitalName: string;
+  hospitalBillingId: string;
+  disease: string;
+  icdCode: string;
+  amountInr: number;
+  amountEth: string;
+  paymentMethod: "upi" | "card" | "blockchain";
+  taxExemptionCode: string;
+  timestamp: string;
+  qrChecksum: string;
+  breakdown: {
+    hospitalDepositPercent: number;
+    surgicalSuppliesPercent: number;
+    postOpCarePercent: number;
+  };
+}
+
 // ---------------------------------------------------------
 // Score Calculations (Pure Functions)
 // ---------------------------------------------------------
@@ -211,3 +235,51 @@ export const defaultLogs: ActivityLog[] = [
     timestamp: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
   },
 ];
+
+export const defaultReceipts: MedicalReceipt[] = [
+  {
+    receiptId: "RCP-2026-991823",
+    txHash: "0x8f3a19b204c5e718a291f038472910ab38c49d1e",
+    patientName: "Aarav Sharma",
+    patientId: "MRN-AP-9921",
+    donorName: "Vikram Malhotra",
+    hospitalName: "Apollo Health City, Hyderabad",
+    hospitalBillingId: "HOSP-APOLLO-992",
+    disease: "Acute Lymphoblastic Leukemia",
+    icdCode: "ICD-10 C91.0",
+    amountInr: 75000,
+    amountEth: "0.2500 ETH",
+    paymentMethod: "blockchain",
+    taxExemptionCode: "80G-MED-2026-AP882",
+    timestamp: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
+    qrChecksum: "VERIFIED-APOLLO-80G-0x8f3a19b204c5e718a291f038472910ab38c49d1e",
+    breakdown: {
+      hospitalDepositPercent: 60,
+      surgicalSuppliesPercent: 20,
+      postOpCarePercent: 20
+    }
+  },
+  {
+    receiptId: "RCP-2026-773419",
+    txHash: "0x3e192a8b9f123c56a7d8e90123456789abcdef01",
+    patientName: "Meera Nair",
+    patientId: "MRN-FT-4412",
+    donorName: "Anita Desai",
+    hospitalName: "Fortis Hospital, Mumbai",
+    hospitalBillingId: "HOSP-FORTIS-441",
+    disease: "Cardiac Bypass",
+    icdCode: "ICD-10 Z95.1",
+    amountInr: 25000,
+    amountEth: "0.0833 ETH",
+    paymentMethod: "upi",
+    taxExemptionCode: "80G-MED-2026-FT441",
+    timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+    qrChecksum: "VERIFIED-FORTIS-80G-0x3e192a8b9f123c56a7d8e90123456789abcdef01",
+    breakdown: {
+      hospitalDepositPercent: 60,
+      surgicalSuppliesPercent: 20,
+      postOpCarePercent: 20
+    }
+  }
+];
+
