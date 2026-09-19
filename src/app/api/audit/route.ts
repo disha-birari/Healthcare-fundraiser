@@ -117,6 +117,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "OpenAI Auditing channel failed. Please check your credentials." }, { status: 500 });
       }
     }
+    }
 
     // 2. Perform Real-time Firestore Updates
     const campaignRef = doc(db, 'campaigns', campaignId);
