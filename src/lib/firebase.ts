@@ -1,6 +1,6 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, enableIndexedDbPersistence } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyASJxGED6W5rzhhhZTGpbagj8vl-QSGoOM",
@@ -15,3 +15,15 @@ const firebaseConfig = {
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+// Enable offline local caching for low-connectivity emergency wards
+if (typeof window !== 'undefined') {
+  enableIndexedDbPersistence(db).catch((err) => {
+    if (err.code === 'failed-precondition') {
+      console.warn('Multiple tabs open, offline persistence enabled in first tab only.');
+    } else if (err.code === 'unimplemented') {
+      console.warn('Browser does not support offline IndexedDB persistence.');
+    }
+  });
+}
+
