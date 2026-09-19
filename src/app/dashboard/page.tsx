@@ -3196,6 +3196,10 @@ export default function Home() {
               </form>
             )}
 
+          </div>
+        </div>
+      )}
+
       {/* ------------------------------------------------------------- */}
       {/* MODAL: 80G TAX EXEMPTION & MEDICAL ERP PRINTABLE RECEIPT      */}
       {/* ------------------------------------------------------------- */}
