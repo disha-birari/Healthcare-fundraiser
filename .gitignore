@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# blockchain
+blockchain/node_modules
+blockchain/artifacts
+blockchain/cache
+

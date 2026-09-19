@@ -19,6 +19,8 @@ export const metadata: Metadata = {
   keywords: ["hospital", "healthcare", "medical", "doctor", "appointment"],
 };
 
+import Web3Providers from "@/components/Web3Providers";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,7 +31,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Web3Providers>
+          {children}
+        </Web3Providers>
+      </body>
     </html>
   );
 }
+

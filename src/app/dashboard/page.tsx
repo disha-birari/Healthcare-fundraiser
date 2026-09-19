@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { collection, doc, addDoc, updateDoc, onSnapshot, query, orderBy, setDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import dynamic from 'next/dynamic';
+import DonateOnChain from "@/components/DonateOnChain";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { 
   Campaign, 
   Donor, 
@@ -175,7 +177,7 @@ export default function Home() {
   const [isSuccessAnimation, setIsSuccessAnimation] = useState(false);
 
   // Real-time Transaction states
-  const [paymentMethod, setPaymentMethod] = useState<"upi" | "card">("upi");
+  const [paymentMethod, setPaymentMethod] = useState<"upi" | "card" | "blockchain">("upi");
   const [upiId, setUpiId] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [cardExpiry, setCardExpiry] = useState("");
@@ -413,8 +415,44 @@ export default function Home() {
     setIsSuccessAnimation(false);
   };
 
+  const handleOnChainSuccess = async (txHash: string) => {
+    setIsSuccessAnimation(true);
+    try {
+      const campaignRef = doc(db, "campaigns", selectedCampaign!.id!);
+      await updateDoc(campaignRef, {
+        raisedAmount: Math.min(selectedCampaign!.targetAmount, selectedCampaign!.raisedAmount + donationAmount)
+      });
+
+      const newDonor: Donor = {
+        name: donorName || "Web3 Donor",
+        amount: donationAmount,
+        campaignId: selectedCampaign!.id!,
+        campaignTitle: selectedCampaign!.title,
+        timestamp: new Date().toISOString()
+      };
+      await addDoc(collection(db, "donors"), newDonor);
+
+      await addDoc(collection(db, "logs"), {
+        type: "donation",
+        message: `PHILANTHROPIST DEPOSIT: ${donorName || "Web3 Donor"} donated ₹${donationAmount.toLocaleString()} to ${selectedCampaign!.patientName} via BLOCKCHAIN. Transaction Hash: ${txHash.slice(0, 10)}...`,
+        timestamp: new Date().toISOString()
+      });
+
+      setLatestTxHash(txHash);
+      setTimeout(() => {
+        setIsSuccessAnimation(false);
+        setIsReceiptView(true);
+      }, 2000);
+    } catch (err) {
+      console.error("Donation database update failed:", err);
+      alert("Cloud sync failed. Transaction hash: " + txHash);
+      setIsSuccessAnimation(false);
+    }
+  };
+
   const processMockDonation = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (paymentMethod === "blockchain") return;
     if (!donorName) {
       alert("Please enter your name!");
       return;
@@ -708,66 +746,69 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Navigation tabs */}
-          <nav className="flex space-x-1 bg-slate-100 p-1 rounded-xl">
-            <button
-              onClick={() => setActiveTab("donor")}
-              className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
-                activeTab === "donor" 
-                  ? "bg-white text-teal-700 shadow-sm" 
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <HeartIcon className="w-4 h-4" />
-              <span>Browse Cases</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("patient")}
-              className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
-                activeTab === "patient" 
-                  ? "bg-white text-teal-700 shadow-sm" 
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <PlusIcon className="w-4 h-4" />
-              <span>Create Appeal</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("admin")}
-              className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
-                activeTab === "admin" 
-                  ? "bg-white text-teal-700 shadow-sm" 
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <ShieldCheckIcon className="w-4 h-4" />
-              <span>Verification Hub</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("leaderboard")}
-              className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
-                activeTab === "leaderboard" 
-                  ? "bg-white text-teal-700 shadow-sm" 
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <TrophyIcon className="w-4 h-4" />
-              <span>Leaderboard</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("ambulance")}
-              className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
-                activeTab === "ambulance" 
-                  ? "bg-white text-teal-700 shadow-sm" 
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25v11.25m0-11.25H8.25m0 0a9.003 9.003 0 0 1 7.5 7.5M8.25 7.5v11.25" />
-              </svg>
-              <span>Ambulance Tracker</span>
-            </button>
-          </nav>
+          {/* Navigation tabs & Wallet Connect */}
+          <div className="flex items-center space-x-4">
+            <nav className="flex space-x-1 bg-slate-100 p-1 rounded-xl">
+              <button
+                onClick={() => setActiveTab("donor")}
+                className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
+                  activeTab === "donor" 
+                    ? "bg-white text-teal-700 shadow-sm" 
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <HeartIcon className="w-4 h-4" />
+                <span>Browse Cases</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("patient")}
+                className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
+                  activeTab === "patient" 
+                    ? "bg-white text-teal-700 shadow-sm" 
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <PlusIcon className="w-4 h-4" />
+                <span>Create Appeal</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("admin")}
+                className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
+                  activeTab === "admin" 
+                    ? "bg-white text-teal-700 shadow-sm" 
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <ShieldCheckIcon className="w-4 h-4" />
+                <span>Verification Hub</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("leaderboard")}
+                className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
+                  activeTab === "leaderboard" 
+                    ? "bg-white text-teal-700 shadow-sm" 
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <TrophyIcon className="w-4 h-4" />
+                <span>Leaderboard</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("ambulance")}
+                className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
+                  activeTab === "ambulance" 
+                    ? "bg-white text-teal-700 shadow-sm" 
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25v11.25m0-11.25H8.25m0 0a9.003 9.003 0 0 1 7.5 7.5M8.25 7.5v11.25" />
+                </svg>
+                <span>Ambulance Tracker</span>
+              </button>
+            </nav>
+            <ConnectButton label="Connect Wallet" />
+          </div>
         </div>
       </header>
 
@@ -2281,7 +2322,7 @@ export default function Home() {
                 {/* Payment Option Selector Tabs */}
                 <div className="border-t border-slate-100 pt-4">
                   <span className="text-[10px] font-black text-slate-500 block mb-2.5 uppercase tracking-wide">Escrow Settle Channel</span>
-                  <div className="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-xl">
+                  <div className="grid grid-cols-3 gap-2 bg-slate-100 p-1 rounded-xl">
                     <button
                       type="button"
                       onClick={() => setPaymentMethod("upi")}
@@ -2292,7 +2333,7 @@ export default function Home() {
                       }`}
                     >
                       <span>⚡</span>
-                      <span>UPI Instant Transfer</span>
+                      <span>UPI</span>
                     </button>
                     <button
                       type="button"
@@ -2304,13 +2345,31 @@ export default function Home() {
                       }`}
                     >
                       <span>💳</span>
-                      <span>Credit / Debit Card</span>
+                      <span>Card</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPaymentMethod("blockchain")}
+                      className={`py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center space-x-1.5 cursor-pointer ${
+                        paymentMethod === "blockchain"
+                          ? "bg-white text-teal-700 shadow-sm"
+                          : "text-slate-600 hover:text-slate-800"
+                      }`}
+                    >
+                      <span>🔗</span>
+                      <span>Blockchain</span>
                     </button>
                   </div>
                 </div>
 
                 {/* Payment Fields according to Selected Tab */}
-                {paymentMethod === "upi" ? (
+                {paymentMethod === "blockchain" ? (
+                  <DonateOnChain
+                    campaignId={campaigns.findIndex(c => c.id === selectedCampaign.id) + 1}
+                    onSuccess={handleOnChainSuccess}
+                    donationAmountInInr={donationAmount}
+                  />
+                ) : paymentMethod === "upi" ? (
                   <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4.5 space-y-4">
                     
                     {/* Simulated Dynamic Escrow QR Code */}
@@ -2440,14 +2499,16 @@ export default function Home() {
                 )}
 
                 {/* Settle Escrow Trigger Button */}
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-teal-700 to-emerald-600 text-white hover:from-teal-800 hover:to-emerald-700 py-3 rounded-xl text-xs font-black tracking-widest uppercase shadow-md shadow-teal-600/10 hover:shadow-lg transition-all cursor-pointer"
-                  >
-                    🔐 Secure Escrow Deposit
-                  </button>
-                </div>
+                {paymentMethod !== "blockchain" && (
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-teal-700 to-emerald-600 text-white hover:from-teal-800 hover:to-emerald-700 py-3 rounded-xl text-xs font-black tracking-widest uppercase shadow-md shadow-teal-600/10 hover:shadow-lg transition-all cursor-pointer"
+                    >
+                      🔐 Secure Escrow Deposit
+                    </button>
+                  </div>
+                )}
               </form>
             )}
 

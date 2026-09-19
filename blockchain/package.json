@@ -1,0 +1,15 @@
+{
+  "name": "meditrust-blockchain",
+  "version": "1.0.0",
+  "description": "Smart contracts for MediTrust AI",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.3"
+  }
+}

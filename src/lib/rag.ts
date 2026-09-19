@@ -4,6 +4,7 @@ export interface MedicalGuideline {
   id: string;
   disease: string;
   category: string;
+  icdCode: string;
   guidelineText: string;
   averageCostRange: string;
   verifiableCriteria: string[];
@@ -17,41 +18,64 @@ export const medicalGuidelines: MedicalGuideline[] = [
     id: "guide_leukemia",
     disease: "Acute Lymphoblastic Leukemia",
     category: "Oncology",
+    icdCode: "ICD-10 C91.0",
     guidelineText: "Leukemia standard chemotherapy requires induction, consolidation, and maintenance phases. Essential medications include Vincristine, Daunorubicin, L-asparaginase, and Prednisone. Frequent complete blood counts (CBC), bone marrow aspirations, and supportive blood product transfusions are clinically mandatory. Costs typically center around oncology ward deposits, chemo-infusion supplies, and sterile isolation rooms.",
     averageCostRange: "₹5,00,000 - ₹9,00,000",
-    verifiableCriteria: ["chemotherapy", "bone marrow", "vincristine", "oncology", "cbc"]
+    verifiableCriteria: ["chemotherapy", "bone marrow", "vincristine", "oncology", "cbc", "asparaginase"]
   },
   {
     id: "guide_cardiac",
     disease: "Cardiac Bypass",
     category: "Cardiology",
+    icdCode: "ICD-10 Z95.1",
     guidelineText: "Coronary Artery Bypass Grafting (CABG) requires sternotomy, cardiopulmonary bypass (heart-lung machine), and vessel harvesting (saphenous vein or internal mammary artery). Mandatory items in invoices include cardiologist consultations, ICU recovery ventilator support (1-2 days), cardiac monitors, bypass tubing packs, and post-op anti-platelet therapy (Aspirin, Clopidogrel).",
     averageCostRange: "₹3,50,000 - ₹6,00,000",
-    verifiableCriteria: ["cabg", "sternotomy", "bypass", "icu", "ventilator", "aspirin"]
+    verifiableCriteria: ["cabg", "sternotomy", "bypass", "icu", "ventilator", "aspirin", "clopidogrel"]
   },
   {
     id: "guide_spinal",
     disease: "Spinal Reconstructive Surgery",
     category: "Orthopedics",
+    icdCode: "ICD-10 M43.1",
     guidelineText: "Spinal reconstructive surgeries or spinal fusion (lumbar/thoracic) require orthopedic pedicle screws, rods, bone grafts (autograft/allograft), fluoroscopy imaging guides, and neurological monitoring. Invoices must list implant costs, surgical theatre charges, post-op physiotherapy cycles, and pain-management anesthetics.",
     averageCostRange: "₹6,00,000 - ₹10,00,000",
-    verifiableCriteria: ["pedicle screws", "spinal fusion", "implant", "graft", "physiotherapy"]
+    verifiableCriteria: ["pedicle screws", "spinal fusion", "implant", "graft", "physiotherapy", "orthopedic"]
   },
   {
     id: "guide_brain_tumor",
     disease: "Brain Tumor",
     category: "Neurosurgery",
+    icdCode: "ICD-10 C71.9",
     guidelineText: "Craniotomy for brain tumor resection requires neuro-navigation guides, surgical microscopes, intensive care (ICU) telemetry, histopathology biopsy reports, and corticosteroid therapies (Dexamethasone) to control cerebral edema. Post-op MRIs are clinically required to verify resection borders.",
     averageCostRange: "₹7,00,000 - ₹12,00,000",
-    verifiableCriteria: ["craniotomy", "resection", "dexamethasone", "biopsy", "mri", "neurology"]
+    verifiableCriteria: ["craniotomy", "resection", "dexamethasone", "biopsy", "mri", "neurology", "edema"]
   },
   {
     id: "guide_kidney",
     disease: "Kidney Transplant",
     category: "Nephrology",
+    icdCode: "ICD-10 N18.6",
     guidelineText: "Renal transplantation requires pre-op crossmatching, donor nephrectomy, recipient vascular anastomosis, and strict lifelong immunosuppressant induction (Tacrolimus, Mycophenolate, Cyclosporine). Hospital invoice sheets must cover operating room hours, donor recovery charges, and nephrology-specific lab panels.",
     averageCostRange: "₹7,00,000 - ₹11,00,000",
-    verifiableCriteria: ["transplant", "nephrectomy", "tacrolimus", "immunosuppressant", "renal"]
+    verifiableCriteria: ["transplant", "nephrectomy", "tacrolimus", "immunosuppressant", "renal", "dialysis"]
+  },
+  {
+    id: "guide_liver",
+    disease: "Liver Transplant",
+    category: "Hepatology",
+    icdCode: "ICD-10 K70.4",
+    guidelineText: "Living or deceased donor liver transplantation involves extensive hepatectomy, vascular reconstruction, biliary anastomosis, and intensive post-operative liver function panel monitoring. Invoices must reflect ICU mechanical ventilation, blood product transfusions, and anti-rejection immunosuppression.",
+    averageCostRange: "₹18,00,000 - ₹25,00,000",
+    verifiableCriteria: ["hepatectomy", "transplant", "tacrolimus", "biliary", "icu", "hepatology"]
+  },
+  {
+    id: "guide_burn_trauma",
+    disease: "Severe Burn Trauma & Reconstruction",
+    category: "Trauma & Plastic Surgery",
+    icdCode: "ICD-10 T31.4",
+    guidelineText: "Management of third-degree burn trauma spanning over 30% body surface area requires sterile burn ICU isolation, fluid resuscitation protocols (Parkland formula), daily enzymatic debridement, split-thickness skin grafts, and systemic broad-spectrum antibiotics.",
+    averageCostRange: "₹4,00,000 - ₹8,00,000",
+    verifiableCriteria: ["debridement", "skin graft", "burn icu", "fluid resuscitation", "antibiotic", "plastic surgery"]
   }
 ];
 
