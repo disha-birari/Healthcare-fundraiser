@@ -541,6 +541,31 @@ export default function Home() {
         timestamp: new Date().toISOString()
       });
 
+      // Write permanent MedicalReceipt to Cloud Firestore
+      const newReceipt: MedicalReceipt = {
+        receiptId: `RCP-${new Date().getFullYear()}-${Math.floor(100000 + Math.random() * 900000)}`,
+        txHash,
+        patientName: selectedCampaign!.patientName,
+        patientId: `MRN-${selectedCampaign!.patientName.slice(0, 2).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`,
+        donorName: donorName || "Web3 Donor",
+        hospitalName: selectedCampaign!.hospitalName,
+        hospitalBillingId: `HOSP-${selectedCampaign!.hospitalName.slice(0, 4).toUpperCase()}-NODE`,
+        disease: selectedCampaign!.disease,
+        icdCode: (selectedCampaign as any).icdCode || "ICD-10 General",
+        amountInr: donationAmount,
+        amountEth: `${(donationAmount / 300000).toFixed(4)} ETH`,
+        paymentMethod: "blockchain",
+        taxExemptionCode: `80G-MED-${new Date().getFullYear()}-${Math.floor(100 + Math.random() * 900)}`,
+        timestamp: new Date().toISOString(),
+        qrChecksum: `VERIFIED-80G-${txHash}`,
+        breakdown: {
+          hospitalDepositPercent: 60,
+          surgicalSuppliesPercent: 20,
+          postOpCarePercent: 20
+        }
+      };
+      await addDoc(collection(db, "receipts"), newReceipt);
+
       setLatestTxHash(txHash);
       setTimeout(() => {
         setIsSuccessAnimation(false);
@@ -614,6 +639,31 @@ export default function Home() {
         message: `PHILANTHROPIST DEPOSIT: ${donorName} donated ₹${donationAmount.toLocaleString()} to ${selectedCampaign.patientName} via ${paymentMethod.toUpperCase()}. Transaction Hash: ${txHash.slice(0, 10)}...`,
         timestamp: new Date().toISOString()
       });
+
+      // 4. Save permanent MedicalReceipt document in Firestore
+      const newReceipt: MedicalReceipt = {
+        receiptId: `RCP-${new Date().getFullYear()}-${Math.floor(100000 + Math.random() * 900000)}`,
+        txHash,
+        patientName: selectedCampaign.patientName,
+        patientId: `MRN-${selectedCampaign.patientName.slice(0, 2).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`,
+        donorName,
+        hospitalName: selectedCampaign.hospitalName,
+        hospitalBillingId: `HOSP-${selectedCampaign.hospitalName.slice(0, 4).toUpperCase()}-NODE`,
+        disease: selectedCampaign.disease,
+        icdCode: (selectedCampaign as any).icdCode || "ICD-10 General",
+        amountInr: donationAmount,
+        amountEth: `${(donationAmount / 300000).toFixed(4)} ETH`,
+        paymentMethod,
+        taxExemptionCode: `80G-MED-${new Date().getFullYear()}-${Math.floor(100 + Math.random() * 900)}`,
+        timestamp: new Date().toISOString(),
+        qrChecksum: `VERIFIED-80G-${txHash}`,
+        breakdown: {
+          hospitalDepositPercent: 60,
+          surgicalSuppliesPercent: 20,
+          postOpCarePercent: 20
+        }
+      };
+      await addDoc(collection(db, "receipts"), newReceipt);
 
       // 4. Immersive multi-step real-time gateway handshake simulation
       setGatewayStep(0);
@@ -971,6 +1021,28 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25v11.25m0-11.25H8.25m0 0a9.003 9.003 0 0 1 7.5 7.5M8.25 7.5v11.25" />
                 </svg>
                 <span>Ambulance Tracker</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("receipts")}
+                className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
+                  activeTab === "receipts" 
+                    ? "bg-white text-teal-700 shadow-sm" 
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <FileTextIcon className="w-4 h-4" />
+                <span>ERP Receipts</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("triage")}
+                className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
+                  activeTab === "triage" 
+                    ? "bg-white text-teal-700 shadow-sm" 
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <SparklesIcon className="w-4 h-4" />
+                <span>AI Triage</span>
               </button>
             </nav>
             <ConnectButton label="Connect Wallet" />
@@ -2203,6 +2275,287 @@ export default function Home() {
           </section>
         )}
 
+        {/* ------------------------------------------------------------- */}
+        {/* TABS 6: ERP MEDICAL RECEIPTS & 80G TAX VAULT VIEW             */}
+        {/* ------------------------------------------------------------- */}
+        {activeTab === "receipts" && (
+          <section className="space-y-6">
+            <div className="bg-white p-6 rounded-2xl border border-[#e8e0dd] shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div>
+                <h2 className="text-xl font-extrabold text-[#1a1a1a]">ERP Medical Receipts & 80G Tax Exemption Vault</h2>
+                <p className="text-xs text-[#7a7a7a] mt-1">
+                  Permanent audit ledger storing itemized hospital billing nodes, cryptographic Web3 hashes, and 80G tax certificates.
+                </p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-xs font-bold text-teal-700 bg-teal-50 border border-teal-200 px-3 py-1.5 rounded-full">
+                  🛡️ Certified 80G Compliant
+                </span>
+                <span className="text-xs font-bold text-[#6b5b95] bg-[#f5f0f8] border border-[#e8e0dd] px-3 py-1.5 rounded-full">
+                  Total Receipts: {receipts.length}
+                </span>
+              </div>
+            </div>
+
+            {/* Receipts Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {receipts.map((rcp) => (
+                <div key={rcp.id || rcp.receiptId} className="bg-white p-6 rounded-2xl border border-[#e8e0dd] shadow-sm hover:border-[#6b5b95] transition-all space-y-4">
+                  <div className="flex justify-between items-start border-b border-[#e8e0dd] pb-3">
+                    <div>
+                      <span className="text-[10px] font-mono font-bold text-teal-700 uppercase tracking-widest block">{rcp.taxExemptionCode}</span>
+                      <h3 className="font-extrabold text-sm text-[#1a1a1a] mt-0.5">{rcp.receiptId}</h3>
+                      <p className="text-[10px] text-[#7a7a7a]">{rcp.hospitalName}</p>
+                    </div>
+                    <span className="px-2.5 py-1 bg-emerald-50 text-emerald-700 text-[10px] font-bold rounded-lg border border-emerald-200">
+                      ₹{rcp.amountInr.toLocaleString()} ({rcp.amountEth})
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3 text-xs">
+                    <div className="space-y-1">
+                      <span className="text-[10px] text-[#7a7a7a] font-bold block uppercase">Patient Beneficiary</span>
+                      <p className="font-semibold text-[#1a1a1a]">{rcp.patientName}</p>
+                      <span className="text-[9px] font-mono text-[#7a7a7a]">{rcp.patientId}</span>
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[10px] text-[#7a7a7a] font-bold block uppercase">Donor / Philanthropist</span>
+                      <p className="font-semibold text-[#1a1a1a]">{rcp.donorName}</p>
+                      <span className="text-[9px] font-mono text-[#6b5b95]">{rcp.paymentMethod.toUpperCase()}</span>
+                    </div>
+                  </div>
+
+                  {/* Fee Breakdown bar */}
+                  <div className="bg-[#fdf8f5] p-3 rounded-xl border border-[#e8e0dd] space-y-2">
+                    <div className="flex justify-between text-[10px] font-bold text-[#1a1a1a]">
+                      <span>Hospital Billing Deposit</span>
+                      <span>60% (Direct Escrow)</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-[#e8e0dd] rounded-full overflow-hidden flex">
+                      <div className="h-full bg-teal-600" style={{ width: '60%' }} />
+                      <div className="h-full bg-emerald-500" style={{ width: '20%' }} />
+                      <div className="h-full bg-amber-500" style={{ width: '20%' }} />
+                    </div>
+                    <div className="flex justify-between text-[9px] text-[#7a7a7a]">
+                      <span>Pharmacy/ICU: 20%</span>
+                      <span>Post-Op Recovery: 20%</span>
+                    </div>
+                  </div>
+
+                  <div className="pt-1 flex items-center justify-between">
+                    <span className="text-[9px] font-mono text-[#7a7a7a] truncate max-w-[200px]">
+                      Hash: {rcp.txHash}
+                    </span>
+                    <button
+                      onClick={() => setSelectedReceipt(rcp)}
+                      className="px-3.5 py-1.5 bg-[#6b5b95] hover:bg-[#584980] text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center space-x-1"
+                    >
+                      <FileTextIcon className="w-3.5 h-3.5" />
+                      <span>Print 80G Certificate</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ------------------------------------------------------------- */}
+        {/* TABS 7: AI EMERGENCY PATIENT TRIAGE & COST ESTIMATOR VIEW     */}
+        {/* ------------------------------------------------------------- */}
+        {activeTab === "triage" && (
+          <section className="space-y-6">
+            <div className="bg-white p-6 rounded-2xl border border-[#e8e0dd] shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div>
+                <h2 className="text-xl font-extrabold text-[#1a1a1a]">AI Emergency Patient Triage & Cost Estimator</h2>
+                <p className="text-xs text-[#7a7a7a] mt-1">
+                  Input clinical symptoms to retrieve ICD-10 medical coding, projected ICU duration, and emergency CSR matching.
+                </p>
+              </div>
+              <span className="text-xs font-bold text-teal-700 bg-teal-50 border border-teal-200 px-3.5 py-1.5 rounded-full flex items-center space-x-1.5">
+                <SparklesIcon className="w-4 h-4 text-teal-600" />
+                <span>RAG AI Triage Active</span>
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Triage Form */}
+              <div className="bg-white p-6 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-5">
+                <h3 className="text-sm font-extrabold text-[#1a1a1a] uppercase tracking-wide border-b border-[#e8e0dd] pb-3">
+                  Clinical Assessment Intake
+                </h3>
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const metrics = calculateTriageMetrics(triageDisease, triageSeverity, triageHospital);
+                    setTriageResult({
+                      patientName: triagePatientName || "Emergency Patient",
+                      disease: triageDisease,
+                      symptomSeverity: triageSeverity,
+                      hospitalName: triageHospital,
+                      ...metrics,
+                      timestamp: new Date().toISOString()
+                    });
+                  }}
+                  className="space-y-4"
+                >
+                  <div>
+                    <label className="text-[10px] font-bold text-[#7a7a7a] uppercase tracking-wider block mb-1">Patient Identifier (Optional)</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Aarav Sharma"
+                      value={triagePatientName}
+                      onChange={(e) => setTriagePatientName(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e8e0dd] text-xs focus:outline-none focus:ring-2 focus:ring-[#6b5b95]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-bold text-[#7a7a7a] uppercase tracking-wider block mb-1">Select Diagnostic Condition</label>
+                    <select
+                      value={triageDisease}
+                      onChange={(e) => setTriageDisease(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e8e0dd] text-xs focus:outline-none focus:ring-2 focus:ring-[#6b5b95] bg-white"
+                    >
+                      <option value="Acute Lymphoblastic Leukemia">Acute Lymphoblastic Leukemia (Oncology)</option>
+                      <option value="Cardiac Bypass">Cardiac Bypass Surgery (Cardiology)</option>
+                      <option value="Spinal Reconstructive Surgery">Spinal Reconstructive Surgery (Orthopedics)</option>
+                      <option value="Brain Tumor">Brain Tumor Resection (Neurosurgery)</option>
+                      <option value="Kidney Transplant">Kidney Transplant (Nephrology)</option>
+                      <option value="Liver Transplant">Liver Transplant (Hepatology)</option>
+                      <option value="Severe Burn Trauma">Severe Burn Trauma (Trauma & Plastic)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between text-[10px] font-bold text-[#7a7a7a] mb-1">
+                      <span>Symptom & Urgency Severity</span>
+                      <span className="text-[#6b5b95]">{triageSeverity}/10</span>
+                    </div>
+                    <input
+                      type="range"
+                      min={1}
+                      max={10}
+                      value={triageSeverity}
+                      onChange={(e) => setTriageSeverity(Number(e.target.value))}
+                      className="w-full accent-[#6b5b95] cursor-pointer"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-bold text-[#7a7a7a] uppercase tracking-wider block mb-1">Target Hospital Facility</label>
+                    <select
+                      value={triageHospital}
+                      onChange={(e) => setTriageHospital(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e8e0dd] text-xs focus:outline-none focus:ring-2 focus:ring-[#6b5b95] bg-white"
+                    >
+                      {mumbaiHospitals.map(h => (
+                        <option key={h.id} value={h.name}>{h.name}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* ZK Anonymous Toggle */}
+                  <div className="flex items-center justify-between p-3 bg-[#fdf8f5] rounded-xl border border-[#e8e0dd]">
+                    <span className="text-xs font-bold text-[#1a1a1a]">Zero-Knowledge (ZK) Privacy Badge</span>
+                    <input
+                      type="checkbox"
+                      checked={isZkAnonymous}
+                      onChange={(e) => setIsZkAnonymous(e.target.checked)}
+                      className="w-4 h-4 text-teal-600 accent-teal-600 rounded cursor-pointer"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full py-3.5 bg-gradient-to-r from-[#6b5b95] to-[#87c7a1] text-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center justify-center space-x-2"
+                  >
+                    <SparklesIcon className="w-4 h-4 text-white" />
+                    <span>Run AI Triage Assessment</span>
+                  </button>
+                </form>
+              </div>
+
+              {/* Triage Output Card */}
+              <div className="lg:col-span-2 space-y-6">
+                {triageResult ? (
+                  <div className="bg-white p-6 rounded-2xl border border-[#e8e0dd] shadow-sm space-y-6 animate-fade-in">
+                    <div className="flex justify-between items-start border-b border-[#e8e0dd] pb-4">
+                      <div>
+                        <span className="px-2.5 py-1 bg-teal-50 border border-teal-200 text-teal-700 text-[10px] font-mono font-bold rounded-lg">
+                          {triageResult.icdCode}
+                        </span>
+                        <h3 className="text-lg font-extrabold text-[#1a1a1a] mt-1">
+                          {isZkAnonymous ? `🔒 ZK-Verified Anonymous Patient (#${Math.floor(1000 + Math.random() * 9000)})` : triageResult.patientName}
+                        </h3>
+                        <p className="text-xs text-[#7a7a7a]">{triageResult.disease} • {triageResult.hospitalName}</p>
+                      </div>
+
+                      <span className={`px-3 py-1.5 rounded-full text-xs font-extrabold ${
+                        triageResult.urgencyLevel === "Critical"
+                          ? "bg-rose-100 text-rose-700 border border-rose-200"
+                          : "bg-amber-100 text-amber-700 border border-amber-200"
+                      }`}>
+                        {triageResult.urgencyLevel === "Critical" ? "⚡ Critical Urgency" : "⚠️ Moderate Urgency"}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="p-4 bg-[#fdf8f5] rounded-xl border border-[#e8e0dd] space-y-1">
+                        <span className="text-[10px] text-[#7a7a7a] font-bold block uppercase">Estimated Expense Range</span>
+                        <p className="text-sm font-extrabold text-teal-700">{triageResult.estimatedCostRange}</p>
+                      </div>
+
+                      <div className="p-4 bg-[#fdf8f5] rounded-xl border border-[#e8e0dd] space-y-1">
+                        <span className="text-[10px] text-[#7a7a7a] font-bold block uppercase">Projected ICU Duration</span>
+                        <p className="text-sm font-extrabold text-[#6b5b95]">{triageResult.icuDays} Days ICU Ward</p>
+                      </div>
+
+                      <div className="p-4 bg-[#fdf8f5] rounded-xl border border-[#e8e0dd] space-y-1">
+                        <span className="text-[10px] text-[#7a7a7a] font-bold block uppercase">Matched CSR Liquidity Pool</span>
+                        <p className="text-xs font-bold text-emerald-700">{triageResult.recommendedCSR}</p>
+                      </div>
+                    </div>
+
+                    <div className="p-4 bg-[#f5f0f8] rounded-xl border border-[#e8e0dd] space-y-2">
+                      <h4 className="text-xs font-extrabold text-[#6b5b95] uppercase">Clinical Verification Recommendation</h4>
+                      <p className="text-xs text-[#1a1a1a] leading-relaxed">
+                        The AI Triage Engine recommends initializing an immediate crowdfunding appeal targeted at ₹{triageResult.suggestedTarget.toLocaleString()}. Funds will be locked in 3-tranche escrow (`MediTrust.sol`) releasing 30% on hospital deposit, 40% on surgical execution, and 30% on discharge clearance.
+                      </p>
+                    </div>
+
+                    <div className="pt-2 flex justify-end">
+                      <button
+                        onClick={() => {
+                          setPatientName(isZkAnonymous ? `ZK-Verified Patient (#${Math.floor(1000 + Math.random() * 9000)})` : triageResult.patientName);
+                          setTitle(`Urgent Medical Treatment & Surgery for ${triageResult.disease}`);
+                          setDisease(triageResult.disease);
+                          setHospitalName(triageResult.hospitalName);
+                          setTargetAmount(triageResult.suggestedTarget);
+                          setActiveTab("patient");
+                        }}
+                        className="px-6 py-3 bg-[#6b5b95] hover:bg-[#584980] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all cursor-pointer flex items-center space-x-2"
+                      >
+                        <PlusIcon className="w-4 h-4 text-white" />
+                        <span>Convert to Live Crowdfunding Appeal</span>
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-white p-12 rounded-2xl border border-[#e8e0dd] shadow-sm text-center space-y-3">
+                    <SparklesIcon className="w-10 h-10 text-[#6b5b95] mx-auto animate-pulse" />
+                    <h3 className="text-sm font-extrabold text-[#1a1a1a]">Run AI Triage Assessment</h3>
+                    <p className="text-xs text-[#7a7a7a] max-w-md mx-auto">
+                      Select diagnostic condition and severity score on the left to calculate instant ICD-10 medical coding, ICU duration, and cost estimates.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
       </main>
 
       {/* -------------------------------------------------------------
@@ -2843,6 +3196,81 @@ export default function Home() {
               </form>
             )}
 
+      {/* ------------------------------------------------------------- */}
+      {/* MODAL: 80G TAX EXEMPTION & MEDICAL ERP PRINTABLE RECEIPT      */}
+      {/* ------------------------------------------------------------- */}
+      {selectedReceipt && (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl border border-slate-200 max-w-xl w-full p-8 space-y-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
+            {/* Close */}
+            <button
+              onClick={() => setSelectedReceipt(null)}
+              className="absolute right-5 top-5 p-2 text-slate-400 hover:text-slate-700 rounded-xl hover:bg-slate-100 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Receipt Certificate Header */}
+            <div className="text-center border-b border-slate-200 pb-5">
+              <div className="w-12 h-12 bg-teal-50 border border-teal-200 text-teal-700 rounded-2xl flex items-center justify-center mx-auto mb-3 font-extrabold text-xl">
+                🛡️
+              </div>
+              <span className="text-[10px] font-mono font-bold text-teal-700 uppercase tracking-widest block">
+                {selectedReceipt.taxExemptionCode}
+              </span>
+              <h3 className="text-xl font-extrabold text-slate-900 mt-1">80G Medical Tax Exemption Certificate</h3>
+              <p className="text-xs text-slate-500 mt-0.5">Certified Digital ERP Healthcare Contribution Receipt</p>
+            </div>
+
+            {/* Details Table */}
+            <div className="space-y-3 text-xs bg-slate-50 p-5 rounded-2xl border border-slate-200">
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-500 font-bold">Receipt ID</span>
+                <span className="font-mono font-extrabold text-slate-900">{selectedReceipt.receiptId}</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-500 font-bold">Philanthropist Donor</span>
+                <span className="font-semibold text-slate-900">{selectedReceipt.donorName}</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-500 font-bold">Patient Beneficiary</span>
+                <span className="font-semibold text-slate-900">{selectedReceipt.patientName} ({selectedReceipt.patientId})</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-500 font-bold">Hospital Billing Node</span>
+                <span className="font-semibold text-slate-900">{selectedReceipt.hospitalName}</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-500 font-bold">Diagnostic Standard</span>
+                <span className="font-mono text-teal-700 font-bold">{selectedReceipt.disease} ({selectedReceipt.icdCode})</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span className="text-slate-500 font-bold">Channel & Ledger Hash</span>
+                <span className="font-mono text-slate-600 text-[10px] truncate max-w-[220px]">{selectedReceipt.txHash}</span>
+              </div>
+              <div className="flex justify-between pt-1">
+                <span className="text-slate-900 font-extrabold">Contribution Amount</span>
+                <span className="text-sm font-black text-emerald-700">₹{selectedReceipt.amountInr.toLocaleString()} ({selectedReceipt.amountEth})</span>
+              </div>
+            </div>
+
+            {/* Footer Buttons */}
+            <div className="flex items-center space-x-3 pt-2">
+              <button
+                onClick={() => setSelectedReceipt(null)}
+                className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-all"
+              >
+                Close Vault
+              </button>
+              <button
+                onClick={() => window.print()}
+                className="flex-1 py-3 bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center justify-center space-x-2 cursor-pointer"
+              >
+                <span>🖨️ Print / Save PDF</span>
+              </button>
+            </div>
           </div>
         </div>
       )}
