@@ -75,22 +75,22 @@ export function getUrgencyCategory(score: number): {
   if (score >= 80) {
     return {
       label: "Critical",
-      color: "text-rose-600 dark:text-rose-400",
-      bgColor: "bg-rose-50 dark:bg-rose-950/30",
+      color: "text-[#e66465] dark:text-[#f8a0a1]",
+      bgColor: "bg-[#fdecec] dark:bg-[#3a1a1a]/30",
       icon: "⚡",
     };
   } else if (score >= 40) {
     return {
       label: "Moderate",
-      color: "text-amber-600 dark:text-amber-400",
-      bgColor: "bg-amber-50 dark:bg-amber-950/30",
+      color: "text-[#6b5b95] dark:text-[#b8a4d4]",
+      bgColor: "bg-[#f5f0f8] dark:bg-[#2a1f3a]/30",
       icon: "⚠️",
     };
   } else {
     return {
       label: "Stable",
-      color: "text-emerald-600 dark:text-emerald-400",
-      bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
+      color: "text-[#87c7a1] dark:text-[#a8d8b9]",
+      bgColor: "bg-[#f0faf5] dark:bg-[#1a3328]/30",
       icon: "🟢",
     };
   }

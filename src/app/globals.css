@@ -49,72 +49,72 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --background: #fdf8f5;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #6b5b95;
+  --primary-foreground: #ffffff;
+  --secondary: #f8e0d9;
+  --secondary-foreground: #6b5b95;
+  --muted: #f4f0ed;
+  --muted-foreground: #7a7a7a;
+  --accent: #87c7a1;
+  --accent-foreground: #ffffff;
+  --destructive: #e66465;
+  --border: #e8e0dd;
+  --input: #e8e0dd;
+  --ring: #6b5b95;
+  --chart-1: #6b5b95;
+  --chart-2: #87c7a1;
+  --chart-3: #f8e0d9;
+  --chart-4: #b8a4d4;
+  --chart-5: #a8d8b9;
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #6b5b95;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f4f0ed;
+  --sidebar-accent-foreground: #1a1a1a;
+  --sidebar-border: #e8e0dd;
+  --sidebar-ring: #6b5b95;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #1a1a1a;
+  --foreground: #fdf8f5;
+  --card: #2d2d2d;
+  --card-foreground: #fdf8f5;
+  --popover: #2d2d2d;
+  --popover-foreground: #fdf8f5;
+  --primary: #b8a4d4;
+  --primary-foreground: #1a1a1a;
+  --secondary: #4a4a4a;
+  --secondary-foreground: #fdf8f5;
+  --muted: #333333;
+  --muted-foreground: #a0a0a0;
+  --accent: #87c7a1;
+  --accent-foreground: #1a1a1a;
+  --destructive: #e66465;
+  --border: #3d3d3d;
+  --input: #3d3d3d;
+  --ring: #b8a4d4;
+  --chart-1: #b8a4d4;
+  --chart-2: #87c7a1;
+  --chart-3: #f8e0d9;
+  --chart-4: #6b5b95;
+  --chart-5: #a8d8b9;
+  --sidebar: #2d2d2d;
+  --sidebar-foreground: #fdf8f5;
+  --sidebar-primary: #b8a4d4;
+  --sidebar-primary-foreground: #1a1a1a;
+  --sidebar-accent: #333333;
+  --sidebar-accent-foreground: #fdf8f5;
+  --sidebar-border: #3d3d3d;
+  --sidebar-ring: #b8a4d4;
 }
 
 @layer base {
@@ -156,11 +156,11 @@
 
 /* Premium Medical Glassmorphism Panels */
 .glass-panel {
-  background: rgba(10, 20, 30, 0.45);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(107, 91, 149, 0.15);
+  box-shadow: 0 10px 40px -10px rgba(107, 91, 149, 0.25);
 }
 
 .glass-panel-hover {
@@ -168,9 +168,9 @@
 }
 
 .glass-panel-hover:hover {
-  background: rgba(15, 28, 48, 0.6);
-  border-color: rgba(6, 182, 212, 0.25);
-  box-shadow: 0 15px 50px -10px rgba(6, 182, 212, 0.15);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(107, 91, 149, 0.35);
+  box-shadow: 0 15px 50px -10px rgba(107, 91, 149, 0.25);
   transform: translateY(-2px);
 }
 
@@ -178,8 +178,8 @@
 .bg-grid-medical {
   background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(6, 182, 212, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(6, 182, 212, 0.015) 1px, transparent 1px);
+    linear-gradient(to right, rgba(107, 91, 149, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(107, 91, 149, 0.1) 1px, transparent 1px);
 }
 
 /* ECG Line Animation Simulation */
@@ -191,8 +191,8 @@
 .ecg-grid {
   position: relative;
   background-image: 
-    linear-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(135, 199, 161, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(135, 199, 161, 0.15) 1px, transparent 1px);
   background-size: 10px 10px;
 }
 
