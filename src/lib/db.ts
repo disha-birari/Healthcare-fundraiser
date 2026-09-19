@@ -54,6 +54,98 @@ export interface MedicalReceipt {
   };
 }
 
+export interface TriageAssessment {
+  patientName: string;
+  disease: string;
+  symptomSeverity: number; // 1 to 10
+  hospitalName: string;
+  icdCode: string;
+  estimatedCostRange: string;
+  suggestedTarget: number;
+  icuDays: number;
+  urgencyLevel: "Critical" | "Moderate" | "Stable";
+  recommendedCSR: string;
+  timestamp: string;
+}
+
+export function calculateTriageMetrics(
+  disease: string,
+  severity: number,
+  hospitalName: string
+): {
+  icdCode: string;
+  estimatedCostRange: string;
+  suggestedTarget: number;
+  icuDays: number;
+  urgencyLevel: "Critical" | "Moderate" | "Stable";
+  recommendedCSR: string;
+} {
+  const cleanDisease = disease.toLowerCase();
+  
+  let icdCode = "ICD-10 General";
+  let baseCost = 500000;
+  let icuDays = 3;
+  
+  if (cleanDisease.includes("leukemia")) {
+    icdCode = "ICD-10 C91.0";
+    baseCost = 650000;
+    icuDays = 7;
+  } else if (cleanDisease.includes("bypass") || cleanDisease.includes("heart") || cleanDisease.includes("cardiac")) {
+    icdCode = "ICD-10 Z95.1";
+    baseCost = 450000;
+    icuDays = 4;
+  } else if (cleanDisease.includes("spinal") || cleanDisease.includes("spine")) {
+    icdCode = "ICD-10 M43.1";
+    baseCost = 800000;
+    icuDays = 5;
+  } else if (cleanDisease.includes("brain") || cleanDisease.includes("tumor")) {
+    icdCode = "ICD-10 C71.9";
+    baseCost = 900000;
+    icuDays = 8;
+  } else if (cleanDisease.includes("kidney") || cleanDisease.includes("renal")) {
+    icdCode = "ICD-10 N18.6";
+    baseCost = 750000;
+    icuDays = 6;
+  } else if (cleanDisease.includes("liver")) {
+    icdCode = "ICD-10 K70.4";
+    baseCost = 1800000;
+    icuDays = 12;
+  } else if (cleanDisease.includes("burn") || cleanDisease.includes("trauma")) {
+    icdCode = "ICD-10 T31.4";
+    baseCost = 550000;
+    icuDays = 6;
+  }
+
+  const multiplier = 1 + (severity - 5) * 0.1;
+  const suggestedTarget = Math.round(baseCost * Math.max(0.7, multiplier));
+  const estimatedMin = Math.round(suggestedTarget * 0.85);
+  const estimatedMax = Math.round(suggestedTarget * 1.25);
+
+  let urgencyLevel: "Critical" | "Moderate" | "Stable" = "Moderate";
+  if (severity >= 8 || suggestedTarget >= 750000) {
+    urgencyLevel = "Critical";
+  } else if (severity <= 4) {
+    urgencyLevel = "Stable";
+  }
+
+  const csrFunds = [
+    "Tata Trusts Emergency Healthcare Fund",
+    "Reliance Foundation Medical Relief Pool",
+    "Apollo Care Philanthropic Escrow",
+    "PM National Relief Healthcare Reserve"
+  ];
+  const recommendedCSR = csrFunds[Math.floor(Math.random() * csrFunds.length)];
+
+  return {
+    icdCode,
+    estimatedCostRange: `₹${estimatedMin.toLocaleString()} - ₹${estimatedMax.toLocaleString()}`,
+    suggestedTarget,
+    icuDays: Math.max(1, Math.round(icuDays * (severity / 5))),
+    urgencyLevel,
+    recommendedCSR
+  };
+}
+
 // ---------------------------------------------------------
 // Score Calculations (Pure Functions)
 // ---------------------------------------------------------

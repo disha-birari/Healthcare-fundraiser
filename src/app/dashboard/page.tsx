@@ -10,13 +10,17 @@ import {
   Campaign, 
   Donor, 
   ActivityLog, 
+  MedicalReceipt,
+  TriageAssessment,
   calculateUrgencyScore, 
   getUrgencyCategory, 
   calculateTrustScore, 
   getPredictiveIndicator,
+  calculateTriageMetrics,
   defaultCampaigns,
   defaultDonors,
-  defaultLogs
+  defaultLogs,
+  defaultReceipts
 } from "@/lib/db";
 
 // Dynamic import of Leaflet map component to prevent Next.js SSR build errors
@@ -129,7 +133,7 @@ function SparklesIcon({ className = "w-5 h-5" }) {
 
 export default function Home() {
   // Navigation Tabs state
-  const [activeTab, setActiveTab] = useState<"donor" | "patient" | "admin" | "leaderboard" | "ambulance">("donor");
+  const [activeTab, setActiveTab] = useState<"donor" | "patient" | "admin" | "leaderboard" | "ambulance" | "receipts" | "triage">("donor");
 
   // Ambulance States
   const [ambulances, setAmbulances] = useState<any[]>([]);
@@ -148,6 +152,16 @@ export default function Home() {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [donors, setDonors] = useState<Donor[]>([]);
   const [logs, setLogs] = useState<ActivityLog[]>([]);
+  const [receipts, setReceipts] = useState<MedicalReceipt[]>([]);
+  const [selectedReceipt, setSelectedReceipt] = useState<MedicalReceipt | null>(null);
+
+  // AI Triage Form States
+  const [triagePatientName, setTriagePatientName] = useState("");
+  const [triageDisease, setTriageDisease] = useState("Acute Lymphoblastic Leukemia");
+  const [triageSeverity, setTriageSeverity] = useState<number>(7);
+  const [triageHospital, setTriageHospital] = useState("Apollo Health City, Hyderabad");
+  const [triageResult, setTriageResult] = useState<any | null>(null);
+  const [isZkAnonymous, setIsZkAnonymous] = useState(false);
 
   // Search and Filter States
   const [searchQuery, setSearchQuery] = useState("");
@@ -286,11 +300,27 @@ export default function Home() {
       }
     );
 
+    // 5. Subscribe to receipts and auto-seed if empty
+    const unsubscribeReceipts = onSnapshot(
+      query(collection(db, "receipts"), orderBy("timestamp", "desc")),
+      (snapshot) => {
+        const receiptList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as MedicalReceipt));
+        if (receiptList.length === 0) {
+          defaultReceipts.forEach(async (r) => {
+            await addDoc(collection(db, "receipts"), r);
+          });
+        } else {
+          setReceipts(receiptList);
+        }
+      }
+    );
+
     return () => {
       unsubscribeCampaigns();
       unsubscribeDonors();
       unsubscribeLogs();
       unsubscribeAmbulances();
+      unsubscribeReceipts();
     };
   }, []);
 
